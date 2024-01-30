@@ -10,8 +10,10 @@ spring:
   flyway:
     enabled: true
     locations: classpath:migrations
-  mvc:
-    log-request-details: true
+  security:
+    user:
+      name: nosithouss
+      password: nosithouss
 
 debug: true
 

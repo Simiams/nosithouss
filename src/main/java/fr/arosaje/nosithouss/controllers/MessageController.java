@@ -4,6 +4,7 @@ import fr.arosaje.nosithouss.dtos.requests.MessageReq;
 import fr.arosaje.nosithouss.dtos.responses.MessageRes;
 import fr.arosaje.nosithouss.models.Message;
 import fr.arosaje.nosithouss.services.MessageService;
+import org.instancio.Instancio;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

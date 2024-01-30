@@ -1,7 +1,8 @@
 package fr.arosaje.nosithouss.controllers;
 
+import fr.arosaje.nosithouss.errors.NosithoussException;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,13 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/test")
 public class Test {
 
-//    @GetMapping(value = "/exception")
-//    public String exception() {
-//        throw new NosithoussException("ErrorMESSAGETEST");
-//    }
+    @GetMapping(value = "/exception")
+    public String exception() {
+        throw new NosithoussException();
+    }
 
-    @GetMapping(value = "/auth")
-    public String auth() {
-        return "authentificate";
+    @GetMapping(value = "/{word}")
+    public String auth(@PathVariable String word) {
+        return word;
+    }
+
+    @GetMapping(value = "/hello")
+    public String helloWord() {
+        return "Hello World!";
     }
 }

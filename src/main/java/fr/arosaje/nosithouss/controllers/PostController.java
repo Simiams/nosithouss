@@ -3,6 +3,7 @@ package fr.arosaje.nosithouss.controllers;
 import fr.arosaje.nosithouss.dtos.requests.PostReq;
 import fr.arosaje.nosithouss.dtos.requests.SeePostsReq;
 import fr.arosaje.nosithouss.dtos.responses.PostRes;
+import fr.arosaje.nosithouss.errors.ErrorRes;
 import fr.arosaje.nosithouss.models.Post;
 import fr.arosaje.nosithouss.services.PostService;
 import org.springframework.http.HttpStatus;
@@ -27,11 +28,11 @@ public class PostController {
 
     @PostMapping(value = "/create")
     public ResponseEntity createPost(@RequestBody PostReq postReq) {
-//        List<ErrorRes> errorResponses = new ArrayList<>();
-//        if (!isValidType(postReq.getType()))
-//            errorResponses.add(ErrorRes.builder().httpStatus(HttpStatus.BAD_REQUEST).message("Invalid type").build());
-//        if (!errorResponses.isEmpty())
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponses);
+        List<ErrorRes> errorResponses = new ArrayList<>();
+        if (!isValidType(postReq.getType()))
+            errorResponses.add(ErrorRes.builder().httpStatus(HttpStatus.BAD_REQUEST).message("Invalid type").build());
+        if (!errorResponses.isEmpty())
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponses);
         Post post = postService.createPost(postReq);
         PostRes postRes = createPostResponseByPost(post);
         return ResponseEntity.ok(postRes);
