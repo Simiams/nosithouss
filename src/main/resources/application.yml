@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/arosaje
+    username: nosithouss
+    password: nosithouss
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  flyway:
+    enabled: true
+    locations: classpath:migrations
+  mvc:
+    log-request-details: true
+
+debug: true
+
+logging:
+  level:
+    web: DEBUG
