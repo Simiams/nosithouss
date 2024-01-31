@@ -26,4 +26,12 @@ public class PostUtils {
         };
     }
 
+    public static <T extends Post> T getPostInstance(T post) {
+        if (post instanceof CatalogPost)
+            return (T) new CatalogPost();
+        else if (post instanceof GuardingPost)
+            return (T) new GuardingPost();
+        else
+            return post;
+    }
 }

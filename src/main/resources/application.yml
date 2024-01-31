@@ -9,6 +9,7 @@ spring:
     show-sql: true
   flyway:
     enabled: true
+    baselineOnMigrate: true
     locations: classpath:migrations
   security:
     user:
@@ -22,4 +23,4 @@ logging:
     web: DEBUG
 
 upload:
-  path: "here"
+  path: "upload"
