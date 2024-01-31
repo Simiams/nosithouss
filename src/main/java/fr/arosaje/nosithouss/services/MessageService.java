@@ -3,6 +3,7 @@ package fr.arosaje.nosithouss.services;
 import fr.arosaje.nosithouss.dtos.requests.MessageReq;
 import fr.arosaje.nosithouss.models.Message;
 import fr.arosaje.nosithouss.repositories.MessageRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -22,7 +23,7 @@ public class MessageService {
     public Message createMessage(MessageReq messageReq) {
         Message message = messageReq.toMessage();
         message.setCreatedAt(new Date());
-        message.setSender(authService.getUser(messageReq.getSender()));
+        message.setSender(authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName())); //todo global method
         message.setReceiver(authService.getUser(messageReq.getReceiver()));
         return messageRepository.save(message);
     }
