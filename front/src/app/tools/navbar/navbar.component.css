@@ -48,6 +48,8 @@ body {
 }
 
 .navbar {
+    background-color: #4E5E45;
+    z-index: 9;
     position: fixed;
     display: flex;
     bottom: 0;
@@ -74,3 +76,12 @@ body {
     background-color: #000000;
     color: white;
 }
+
+.navbar button .icon {
+    color: white !important; 
+}
+
+.white {
+    color: white;
+}
+

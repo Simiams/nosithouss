@@ -11,6 +11,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCardModule} from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NavbarComponent } from './tools/navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -18,7 +19,8 @@ import { NavbarComponent } from './tools/navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomeComponent
   ],
   imports: [
     MatGridListModule,
