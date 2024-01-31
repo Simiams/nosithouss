@@ -37,9 +37,14 @@ public class UserService implements UserDetailsService {
         user.setRoles(Set.of(ERole.USER));
         userRepository.save(user);
     }
+    public User findByUsername(String username) {
+        return userRepository.findByUserName(username).orElse(null);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUserName(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
     }
+
+
 }

@@ -9,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 
 import java.util.Map;
@@ -43,5 +40,10 @@ public class UserController {
 
         log.info("Authentication state {}", authenticate.isAuthenticated());
         return Map.of("yes", "man");
+    }
+    @GetMapping("/user/{username}")
+    public User getUserByUsername(@PathVariable String username) {
+        log.info("Search for user with username: {}", username);
+        return userService.findByUsername(username);
     }
 }
