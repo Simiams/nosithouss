@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+
+<div class="container-nav">
+    <mat-card-title class="pseudo" style="font-family: 'Playfair Display', serif;">Gauthier</mat-card-title>
+    <button mat-mini-fab class="message">
+      <mat-icon>message</mat-icon>
+    </button>
+  </div>
+  
+
+<div class="container responsive-grid">
+    <mat-card *ngFor="let card of cards">
+      <mat-card-header>
+        <mat-card-title>{{ card.title }} </mat-card-title>
+      </mat-card-header>
+      <br />
+      <img mat-card-image [src]="card.imageUrl" />
+      <mat-card-content>
+        <br />
+        <p>{{ card.description }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
