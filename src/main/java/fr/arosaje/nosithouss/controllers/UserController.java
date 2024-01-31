@@ -17,7 +17,7 @@ import java.util.Map;
 @Slf4j
 @AllArgsConstructor
 @RestController
-@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE, value = "/api/auth")
+@RequestMapping(value = "/api/auth")
 public class UserController {
     private AuthenticationManager authenticationManager;
     private UserService userService;
