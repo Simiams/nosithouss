@@ -29,15 +29,14 @@ public class PostController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity createPost(@RequestBody PostReq postReq,
-            @RequestPart("file") MultipartFile file) {
+    public ResponseEntity createPost(@RequestBody PostReq postReq) {
         List<ErrorRes> errorResponses = new ArrayList<>();
         if (!isValidType(postReq.getType()))
             errorResponses.add(ErrorRes.builder().httpStatus(HttpStatus.BAD_REQUEST).message("Invalid type").build());
         if (!errorResponses.isEmpty())
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponses);
 
-        return ResponseEntity.ok(postService.createPost(postReq, file));
+        return ResponseEntity.ok(postService.createPost(postReq));
     }
 
     @PostMapping(value = "/posts")

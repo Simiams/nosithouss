@@ -10,7 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MessageReq {
 
-    private String sender;
     private String receiver;
     private String content;
 

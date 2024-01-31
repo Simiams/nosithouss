@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class CommentReq {
-    private String identifierAuthor;
     private Long postId;
     private String content;
 

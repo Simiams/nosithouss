@@ -35,8 +35,7 @@ public class PostService {
         this.authService = authService;
     }
 
-    public PostRes createPost(PostReq postReq, MultipartFile file) {
-        FileManager.saveImage(file);
+    public PostRes createPost(PostReq postReq) {
         User author = authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
         Post post = createPostByPostReq(postReq);
         post.setAuthor(author);
