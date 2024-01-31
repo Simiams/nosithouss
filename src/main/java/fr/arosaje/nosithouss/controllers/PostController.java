@@ -29,7 +29,8 @@ public class PostController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity createPost(@RequestBody PostReq postReq, @RequestPart("file") MultipartFile file) {
+    public ResponseEntity createPost(@RequestBody PostReq postReq,
+            @RequestPart("file") MultipartFile file) {
         List<ErrorRes> errorResponses = new ArrayList<>();
         if (!isValidType(postReq.getType()))
             errorResponses.add(ErrorRes.builder().httpStatus(HttpStatus.BAD_REQUEST).message("Invalid type").build());
@@ -49,5 +50,12 @@ public class PostController {
         Post post = postService.updatePost(postReq, id);
         PostRes postRes = createPostResponseByPost(post);
         return ResponseEntity.ok(postRes);
+    }
+
+    @PostMapping("/upload/{postId}")
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, @PathVariable String postId) {
+        Long id = Long.parseLong(postId);
+        postService.upload(file, id);
+        return ResponseEntity.ok("File Uploaded");
     }
 }

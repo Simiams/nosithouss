@@ -11,9 +11,8 @@ import java.util.UUID;
 
 @Component
 public class FileManager {
-    private static String uploadPath = "here"; //todo properties file
+    private static String uploadPath = "uploads"; //todo properties file
 
-    //todo: https://www.bezkoder.com/spring-boot-file-upload/
     public static String saveImage(MultipartFile file) {
         try {
             if (!Files.exists(Path.of(uploadPath))) {
