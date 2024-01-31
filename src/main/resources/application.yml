@@ -20,3 +20,6 @@ debug: true
 logging:
   level:
     web: DEBUG
+
+upload:
+  path: "here"

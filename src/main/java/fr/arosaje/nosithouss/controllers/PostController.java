@@ -6,9 +6,11 @@ import fr.arosaje.nosithouss.dtos.responses.PostRes;
 import fr.arosaje.nosithouss.errors.ErrorRes;
 import fr.arosaje.nosithouss.models.Post;
 import fr.arosaje.nosithouss.services.PostService;
+import fr.arosaje.nosithouss.utils.PostUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,25 +29,19 @@ public class PostController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity createPost(@RequestBody PostReq postReq) {
+    public ResponseEntity createPost(@RequestBody PostReq postReq, @RequestPart("file") MultipartFile file) {
         List<ErrorRes> errorResponses = new ArrayList<>();
         if (!isValidType(postReq.getType()))
             errorResponses.add(ErrorRes.builder().httpStatus(HttpStatus.BAD_REQUEST).message("Invalid type").build());
         if (!errorResponses.isEmpty())
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponses);
-        Post post = postService.createPost(postReq);
-        PostRes postRes = createPostResponseByPost(post);
-        return ResponseEntity.ok(postRes);
+
+        return ResponseEntity.ok(postService.createPost(postReq, file));
     }
 
     @PostMapping(value = "/posts")
     public ResponseEntity getPosts(@RequestBody SeePostsReq seePostsReq) {
-        List<Post> posts = postService.getPosts(seePostsReq);
-        List<PostRes> postRes = new ArrayList<>();
-        for (Post post : posts) {
-            postRes.add(createPostResponseByPost(post));
-        }
-        return ResponseEntity.ok(postRes);
+        return ResponseEntity.ok(postService.getPosts(seePostsReq).stream().map(PostUtils::createPostResponseByPost));
     }
 
     @PutMapping(value = "/{id}")
@@ -53,7 +49,5 @@ public class PostController {
         Post post = postService.updatePost(postReq, id);
         PostRes postRes = createPostResponseByPost(post);
         return ResponseEntity.ok(postRes);
-
     }
-
 }

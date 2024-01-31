@@ -8,5 +8,4 @@ import java.util.Date;
 public class SeePostsReq {
     private int number;
     private Date createdAt;
-
 }

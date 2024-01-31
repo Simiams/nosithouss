@@ -1,6 +1,7 @@
 package fr.arosaje.nosithouss.controllers;
 
 import fr.arosaje.nosithouss.errors.NosithoussException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +25,9 @@ public class Test {
     @GetMapping(value = "/hello")
     public String helloWord() {
         return "Hello World!";
+    }
+    @GetMapping(value = "/user")
+    public String getUser() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }

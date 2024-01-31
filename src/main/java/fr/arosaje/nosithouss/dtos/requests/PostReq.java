@@ -12,7 +12,6 @@ import java.util.Date;
 public class PostReq {
 
     private String type;
-    private String identifierAuthor;
     private String content;
     private String title;
     private Post lastVersion;
