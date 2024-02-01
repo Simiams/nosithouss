@@ -29,7 +29,6 @@ public class Post {
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date createdAt;
-    @Column(nullable = false)
     private String content;
     @Column(nullable = false)
     private String title;

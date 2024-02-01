@@ -23,4 +23,4 @@ logging:
     web: DEBUG
 
 upload:
-  path: "upload"
+  path: "uploads"
