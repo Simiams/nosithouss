@@ -13,6 +13,7 @@ type CardContent = {
 })
 
 export class HomeComponent {
+
   cards: CardContent[] = [];
     images = [
       "nature",

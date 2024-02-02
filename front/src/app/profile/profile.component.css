@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 
-* {
+*:not(mat-icon) {
     font-family: 'Playfair Display', serif;
 
 }
