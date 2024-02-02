@@ -1,0 +1,31 @@
+<button mat-mini-fab class="message">
+    <mat-icon>message</mat-icon>
+  </button>
+<div class="profile-container">
+    <label for="fileInput">
+      <img [src]="currentImage" alt="Photo de profil" class="profile-image" />
+      <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none" />
+    </label>
+</div>
+<div class="name">
+    <p>Pseudo</p>
+</div>
+
+<mat-tab-group>
+    <mat-tab label="Posts">
+        <div class="posts-grid">
+        <mat-card *ngFor="let post of posts" class="post-card">
+          <img mat-card-image [src]="post.imageUrl" alt="Post Image">
+          <mat-card-content>
+            <h3 mat-card-title>{{ post.title }}</h3>
+            <p mat-card-subtitle>{{ post.description }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      
+      </mat-tab>
+    <mat-tab label="Favoris"> Content 2 </mat-tab>
+    <mat-tab label="Mes plantes"> Content 3 </mat-tab>
+  </mat-tab-group>
+  
+  
