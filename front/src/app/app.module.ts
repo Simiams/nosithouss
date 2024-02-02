@@ -9,9 +9,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatTabsModule} from '@angular/material/tabs';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NavbarComponent } from './tools/navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -20,7 +23,8 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    ProfileComponent
   ],
   imports: [
     MatGridListModule,
@@ -29,6 +33,8 @@ import { HomeComponent } from './home/home.component';
     MatToolbarModule, 
     MatButtonModule, 
     MatIconModule,
+    MatFormFieldModule,
+    MatTabsModule,  
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule
