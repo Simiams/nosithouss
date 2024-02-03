@@ -12,14 +12,12 @@ import java.util.Date;
 @AllArgsConstructor
 public class MessageRes {
 
-    private RegisterRes sender;
-    private RegisterRes receiver;
+    private String senderIdentifier;
     private String content;
     private Date createdAt;
 
     public MessageRes(Message message) {
-        this.sender = new RegisterRes(message.getSender());
-        this.receiver = new RegisterRes(message.getReceiver());
+        this.senderIdentifier = message.getSender().getUsername();
         this.content = message.getContent();
         this.createdAt = message.getCreatedAt();
     }

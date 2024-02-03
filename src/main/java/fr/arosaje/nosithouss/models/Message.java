@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Message {
+public class Message implements Comparable<Message> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,5 +25,10 @@ public class Message {
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private java.util.Date createdAt;
+
+    @Override
+    public int compareTo(Message m) {
+        return this.getCreatedAt().compareTo(m.getCreatedAt());
+    }
 
 }

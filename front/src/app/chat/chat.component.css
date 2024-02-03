@@ -24,14 +24,26 @@
 }
 
 .messages {
+  z-index: -1;
   display: flex;
-  flex-direction: column-reverse;
-  max-height: 85vh;
+  flex-direction: column;
+  max-height: calc(100% - 120px);
+  bottom: 120px;
+  width: 98%;
+  padding: 0 25px 0 25px;
+  left: 0;
+  position: fixed;
   overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.messages * {
+  overflow-anchor: none;
 }
 
 .message-inner {
-  margin: 10px 0;
+  overflow-anchor: auto;
+  margin: 5px 0;
   display: flex;
 }
 

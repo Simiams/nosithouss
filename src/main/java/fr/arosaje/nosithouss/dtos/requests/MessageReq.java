@@ -7,12 +7,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class MessageReq {
 
-    private String receiver;
     private String content;
-
     public Message toMessage() {
         return Message.builder().content(content).build();
     }
