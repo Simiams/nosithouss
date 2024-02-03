@@ -3,6 +3,7 @@ package fr.arosaje.nosithouss.dtos.requests;
 import fr.arosaje.nosithouss.models.CatalogPost;
 import fr.arosaje.nosithouss.models.GuardingPost;
 import fr.arosaje.nosithouss.models.Post;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.awt.*;

@@ -26,5 +26,4 @@ public class GuardingPost extends Post {
     @Temporal(TemporalType.DATE)
     private Date endGuardingAt;
     private String img;
-
 }
