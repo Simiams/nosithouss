@@ -15,6 +15,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { NavbarComponent } from './tools/navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './login/login.component';
+import {FormsModule} from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
+import {TokenInterceptorProvider} from "./_helpers/token.interceptor";
 
 
 
@@ -24,22 +28,27 @@ import { ProfileComponent } from './profile/profile.component';
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    LoginComponent
   ],
   imports: [
     MatGridListModule,
     MatCardModule,
     MatSidenavModule,
-    MatToolbarModule, 
-    MatButtonModule, 
+    MatToolbarModule,
+    MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatTabsModule,  
+    MatTabsModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    TokenInterceptorProvider,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
