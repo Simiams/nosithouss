@@ -39,5 +39,5 @@ export class HomeComponent {
 
     this.cards = cards;
   }
-  
+
 }
