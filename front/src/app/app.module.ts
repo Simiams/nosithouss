@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import {FormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import {TokenInterceptorProvider} from "./_helpers/token.interceptor";
+import { NewPostComponent } from './new-post/new-post.component';
 
 
 
@@ -29,7 +30,8 @@ import {TokenInterceptorProvider} from "./_helpers/token.interceptor";
     NavbarComponent,
     HomeComponent,
     ProfileComponent,
-    LoginComponent
+    LoginComponent,
+    NewPostComponent,
   ],
   imports: [
     MatGridListModule,

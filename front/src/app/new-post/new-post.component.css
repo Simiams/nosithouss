@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+.nav-container p{
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 2.3vh;
+    margin-top: 4vh;
+}

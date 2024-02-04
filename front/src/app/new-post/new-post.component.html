@@ -1,0 +1,12 @@
+<div class="nav-container">
+    <p> Create a new post</p>
+</div>
+<p>
+    <input type="file" accept="image/*" name="image" id="file" (change)="loadFile($event)" style="display: none;">
+</p>
+<p>
+    <label for="file" style="cursor: pointer;">Upload Image</label>
+</p>
+<p>
+    <img id="output" width="200" />
+</p>
