@@ -25,3 +25,7 @@ export interface ITokenUser{
   iap?: number,
   exp?: number
 }
+
+export interface IUsernameGet{
+  userName:string
+}

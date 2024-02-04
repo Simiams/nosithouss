@@ -1,0 +1,34 @@
+<div class="search">
+  <mat-form-field class="mat-input">
+    <div class="input-search">
+      <input matInput placeholder="Rechercer" [value]="inputValue" (input)="onSearchInputChange($event)">
+      <button class="input-search-glass">
+        <mat-icon>searchIcon</mat-icon>
+      </button>
+    </div>
+  </mat-form-field>
+
+  <mat-chip-listbox class="" aria-label="Search Choice" [(ngModel)]="selectedChip"
+                    (ngModelChange)="onChipSelectionChange()">
+    <div class="select-chips">
+      <mat-chip-option color="accent" selected *ngFor="let choice of Object.values(choiceSearch)" [value]="choice">
+        {{ choice }}
+      </mat-chip-option>
+    </div>
+  </mat-chip-listbox>
+
+
+  <div class="display-values">
+    <mat-list>
+      <mat-list-item matRipple [matRippleColor]=green class="display-value-item"
+                     *ngFor="let possibleValue of possibleValues" (click)="redirectToProfile(possibleValue.userName)">
+        <div class="top-item">
+          <img matListItemAvatar class="contact-icon" src="favicon.ico" alt="...">
+          <div class="contact-username">{{ possibleValue.userName }}</div>
+        </div>
+        <div class="contacts-list-item-bottom"></div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+</div>

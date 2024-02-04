@@ -1,0 +1,25 @@
+<div class="contacts">
+  <div class="header">
+    <a href="/" class="message-return">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </a>
+    <div class="header-title">
+      <p>Messagerie</p>
+    </div>
+  </div>
+
+  <div class="contacts-list">
+    <mat-list>
+      <mat-list-item matRipple [matRippleColor]=green class="contacts-list-item" *ngFor="let contact of contacts" (click)="redirectToChat(contact.userName)">
+        <div class="top-item">
+          <img matListItemAvatar class="contact-icon" src="favicon.ico" alt="...">
+          <div class="contact-username">{{ contact.userName }}</div>
+            <div class="contact-lastChat">
+            {{ contact.lastChat }}
+          </div>
+        </div>
+        <div class="contacts-list-item-bottom"></div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>
