@@ -11,6 +11,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NavbarComponent } from './tools/navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
@@ -40,6 +41,7 @@ import {TokenInterceptorProvider} from "./_helpers/token.interceptor";
     MatIconModule,
     MatFormFieldModule,
     MatTabsModule,
+    MatButtonToggleModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

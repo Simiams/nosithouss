@@ -1,6 +1,15 @@
-<button mat-mini-fab class="message">
-    <mat-icon>message</mat-icon>
-  </button>
+<div class="container-nav">
+    <a href="/login">
+      <button mat-icon-button class="exit_to_app">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+  </a>
+  <a href="/chat">
+    <button mat-mini-fab class="message">
+        <mat-icon>message</mat-icon>
+      </button>
+  </a>
+</div>
 <div class="profile-container">
     <label for="fileInput">
       <img [src]="currentImage" alt="Photo de profil" class="profile-image" />
@@ -24,7 +33,21 @@
       </div>
       
       </mat-tab>
-    <mat-tab label="Favoris"> Content 2 </mat-tab>
+    <mat-tab label="Favoris">
+      <div class="posts-grid">
+        <mat-card *ngFor="let post of favorites" class="post-card">
+          <img mat-card-image [src]="post.imageUrl" alt="Post Image">
+          <mat-card-content>
+            <h3 mat-card-title>{{ post.title }}</h3>
+            <p mat-card-subtitle>{{ post.description }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <mat-button-toggle [checked]="true" (click)="toggleLike(post)">LIKE</mat-button-toggle>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </mat-tab>
     <mat-tab label="Mes plantes"> Content 3 </mat-tab>
   </mat-tab-group>
   
