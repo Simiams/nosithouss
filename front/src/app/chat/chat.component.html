@@ -1,6 +1,7 @@
 <div class="chats">
+
   <div class="header">
-    <a href="/" class="message-return">
+    <a href="/contact" class="message-return">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
     <div class="message-avatar">
@@ -10,7 +11,6 @@
       <p>{{ user }}</p>
     </div>
   </div>
-
   <div class="messages" #scrollContainer>
     <div class="message-inner"
          [ngClass]="{'inner-right': message.senderIdentifier !== user, 'inner-left': message.senderIdentifier === user}"
@@ -21,6 +21,10 @@
       <div
         [ngClass]="{'message': true, 'message-right': message.senderIdentifier !== user, 'message-left': message.senderIdentifier === user}">
         {{ message.content }}
+      </div>
+
+      <div class="message-date">
+        {{ message.createdAt }}
       </div>
     </div>
   </div>

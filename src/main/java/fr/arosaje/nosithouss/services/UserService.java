@@ -21,13 +21,6 @@ public class UserService implements UserDetailsService {
 
     public void register(User user) {
         //todo validator
-        if (!user.getEmail().contains("@")) {
-            throw new RuntimeException("Votre mail invalide");
-        }
-        if (!user.getEmail().contains(".")) {
-            throw new RuntimeException("Votre mail invalide");
-        }
-
         Optional<User> optionalUser = this.userRepository.findByUserName(user.getUsername());
         if (optionalUser.isPresent()) {
             throw new RuntimeException("Votre username est déjà utilisé");
@@ -37,6 +30,7 @@ public class UserService implements UserDetailsService {
         user.setRoles(Set.of(ERole.USER));
         userRepository.save(user);
     }
+
     public User findByUsername(String username) {
         return userRepository.findByUserName(username).orElse(null);
     }
@@ -45,6 +39,4 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUserName(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
     }
-
-
 }

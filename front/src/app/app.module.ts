@@ -20,6 +20,10 @@ import { LoginComponent } from './login/login.component';
 import {FormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import {TokenInterceptorProvider} from "./_helpers/token.interceptor";
+import { ContactComponent } from './contact/contact.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatListModule} from "@angular/material/list";
+import {MatRippleModule} from "@angular/material/core";
 
 
 
@@ -30,7 +34,8 @@ import {TokenInterceptorProvider} from "./_helpers/token.interceptor";
     NavbarComponent,
     HomeComponent,
     ProfileComponent,
-    LoginComponent
+    LoginComponent,
+    ContactComponent
   ],
   imports: [
     MatGridListModule,
@@ -46,7 +51,10 @@ import {TokenInterceptorProvider} from "./_helpers/token.interceptor";
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatListModule,
+    MatRippleModule
   ],
   providers: [
     TokenInterceptorProvider,

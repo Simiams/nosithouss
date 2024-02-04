@@ -23,6 +23,7 @@ import java.util.List;
 
 import static fr.arosaje.nosithouss.utils.PostUtils.createPostByPostReq;
 import static fr.arosaje.nosithouss.utils.PostUtils.createPostResponseByPost;
+import static fr.arosaje.nosithouss.utils.Utils.now;
 
 @Service
 public class PostService {
@@ -39,7 +40,7 @@ public class PostService {
         User author = authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
         Post post = createPostByPostReq(postReq);
         post.setAuthor(author);
-        post.setCreatedAt(new Date());
+        post.setCreatedAt(now());
         return createPostResponseByPost(postRepository.save(post));
     }
 
@@ -51,10 +52,9 @@ public class PostService {
     public Post updatePost(PostReq postReq, Long id) {
         //todo in postReq get Author/creatxedAt
         User author = authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
-        Date createdAt = new Date();
         Post newPost = createPostByPostReq(postReq);
         newPost.setAuthor(author);
-        newPost.setCreatedAt(createdAt);
+        newPost.setCreatedAt(now());
         newPost.setId(id);
         return postRepository.save(newPost);
     }

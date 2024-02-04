@@ -27,7 +27,7 @@ public class FileManager {
             return uniqueFileName;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new NosithoussException();
+            throw new NosithoussException("Can't uplaod file");
         }
     }
 }

@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
+import static fr.arosaje.nosithouss.utils.Utils.now;
+
 @Service
 public class TrefleService {
     private final TrefleClient trefleClient;
@@ -38,7 +40,7 @@ public class TrefleService {
             flagRepository.save(Flag.builder()
                                         .key(EFlag.LASTPAGE.getKey())
                                         .value(nextPage)
-                                        .date(new Date())
+                                        .date(now())
                                         .build());
         }
     }
@@ -47,7 +49,7 @@ public class TrefleService {
         return CatalogPost.builder()
                 .title(trefleReq.getCommonName())
                 .img(trefleReq.getImageUrl())
-                .createdAt(new Date())
+                .createdAt(now())
                 .build();
     }
 

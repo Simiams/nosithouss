@@ -1,8 +1,11 @@
 package fr.arosaje.nosithouss.services;
 
+import fr.arosaje.nosithouss.errors.NosithoussException;
 import fr.arosaje.nosithouss.models.User;
 import fr.arosaje.nosithouss.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AuthService {
@@ -17,6 +20,10 @@ public class AuthService {
     }
 
     public User getUser(String identifier) {
-        return userRepository.findByEmailOrUserName(identifier, identifier);
+        Optional<User> user= userRepository.findByUserName(identifier);
+        if (user.isEmpty()) {
+            throw new NosithoussException("Username not found");
+        }
+        return user.get();
     }
 }

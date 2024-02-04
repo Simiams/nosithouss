@@ -3,6 +3,7 @@ package fr.arosaje.nosithouss.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -16,8 +17,7 @@ public class Flag {
     @Id
     private String key;
     private String value;
-    @Temporal(TemporalType.DATE)
-    private Date date;
+    private Timestamp date;
 }
 
 
