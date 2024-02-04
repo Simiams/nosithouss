@@ -3,6 +3,7 @@ package fr.arosaje.nosithouss.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -24,8 +25,7 @@ public class Comment {
     @JoinColumn(name = "post_id")
     private Post post;
     private String content;
-    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date createdAt;
+    private Timestamp createdAt;
 
 }

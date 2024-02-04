@@ -40,12 +40,12 @@ export class HomeComponent {
       liked: this.favoriteService.isPostLiked(`post_${index}`)
     }));
   }
-  
+
   likePost(post: Post) {
     post.liked = !post.liked;
     this.favoriteService.addFavorite(post);
   }
-  
+
   toggleLike(post: Post) {
     post.liked = !post.liked;
   }

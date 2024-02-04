@@ -13,8 +13,6 @@ import java.util.stream.Collectors;
 @Setter
 @AllArgsConstructor
 public class RegisterReq {
-
-    private String email;
     private String userName;
     private String password;
     private String firstName;
@@ -22,7 +20,7 @@ public class RegisterReq {
     private Set<String> roles;
 
     public User toUser() {
-        return User.builder().email(email).userName(userName).password(password).firstName(firstName).lastName(lastName).roles(roles.stream().map(ERole::fromString).collect(Collectors.toSet())).build();
+        return User.builder().userName(userName).password(password).firstName(firstName).lastName(lastName).roles(roles.stream().map(ERole::fromString).collect(Collectors.toSet())).build();
     }
 
 }

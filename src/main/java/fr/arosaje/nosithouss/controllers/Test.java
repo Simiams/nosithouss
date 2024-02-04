@@ -26,7 +26,7 @@ public class Test {
 
     @GetMapping(value = "/exception")
     public String exception() {
-        throw new NosithoussException();
+        throw new NosithoussException("test Exception");
     }
 
     @GetMapping(value = "/{word}")

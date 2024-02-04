@@ -3,6 +3,7 @@ package fr.arosaje.nosithouss.controllers;
 import fr.arosaje.nosithouss.dtos.requests.MessageReq;
 import fr.arosaje.nosithouss.dtos.responses.MessageRes;
 import fr.arosaje.nosithouss.models.Message;
+import fr.arosaje.nosithouss.models.User;
 import fr.arosaje.nosithouss.services.MessageService;
 import org.instancio.Instancio;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +32,4 @@ public class MessageController {
         List<Message> messages = messageService.getMessagesByReceiver(userIdentifier);
         return ResponseEntity.ok(messages.stream().map(MessageRes::new).toList());
     }
-
 }

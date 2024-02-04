@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -26,9 +27,8 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "author_id")
     private User author;
-    @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date createdAt;
+    private Timestamp createdAt;
     private String content;
     @Column(nullable = false)
     private String title;

@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.awt.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Getter
@@ -20,8 +21,8 @@ public class PostReq {
     private int nbDislike;
     private String img;
     private Point coordinates;
-    private Date guardingAt;
-    private Date endGuardingAt;
+    private Timestamp guardingAt;
+    private Timestamp endGuardingAt;
 
     public Post toPost() {
         return Post.builder().content(content).title(title).lastVersion(lastVersion).nbLike(nbLike).nbDislike(nbDislike).build();

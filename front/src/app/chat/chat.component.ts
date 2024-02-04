@@ -5,6 +5,8 @@ import {ChatService} from "../_service/chat.service";
 import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {IMessageRes} from "../_interfaces/chat/message";
+import {ActivatedRoute} from "@angular/router";
+import {printTimestamp} from "../_utils/utils";
 
 @Component({
   selector: 'app-chat',
@@ -29,11 +31,12 @@ export class ChatComponent implements OnInit, AfterViewInit {
   messages: IMessageRes[] = []
   messageContent: string = "";
 
-  constructor(chatService: ChatService) {
+  constructor(chatService: ChatService,private route: ActivatedRoute) {
     this.chatService = chatService
   }
 
   ngOnInit(): void {
+    this.user = this.route.snapshot.params['username'];
     this.getMessages()
   }
 
@@ -52,9 +55,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   getMessages() {
     this.chatService.getMessages(this.user).subscribe(
-      data => {
-        this.messages = data
-      },
+      data => this.messages = data.map(d => ({...d, createdAt: printTimestamp(d.createdAt)})),
       err => console.error(err)
     )
   }
