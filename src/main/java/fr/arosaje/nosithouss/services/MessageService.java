@@ -2,12 +2,14 @@ package fr.arosaje.nosithouss.services;
 
 import fr.arosaje.nosithouss.dtos.requests.MessageReq;
 import fr.arosaje.nosithouss.models.Message;
+import fr.arosaje.nosithouss.models.User;
 import fr.arosaje.nosithouss.repositories.MessageRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 public class MessageService {
@@ -20,16 +22,19 @@ public class MessageService {
         this.authService = authService;
     }
 
-    public Message createMessage(MessageReq messageReq) {
+    public Message createMessage(MessageReq messageReq, String userIdentifier) {
         Message message = messageReq.toMessage();
         message.setCreatedAt(new Date());
         message.setSender(authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName())); //todo global method
-        message.setReceiver(authService.getUser(messageReq.getReceiver()));
+        message.setReceiver(authService.getUser(userIdentifier));
         return messageRepository.save(message);
     }
 
-    public List<Message> getMessagesByReceiver(Long id) {
-        return messageRepository.findAllByReceiverId(id);
+    public List<Message> getMessagesByReceiver(String userIdentifier) {
+        User currentUser =authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        return Stream.concat(
+                        messageRepository.findAllByReceiverAndSender(currentUser, authService.getUser(userIdentifier)).stream(),
+                        messageRepository.findAllBySender(currentUser).stream())
+                .sorted().toList();
     }
-
 }

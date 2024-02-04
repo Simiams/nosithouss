@@ -4,91 +4,30 @@
       <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
     <div class="message-avatar">
-      <img class="avatar" src="favicon.ico" alt="Photo of Ahmad Shadeed"/>
+      <img class="avatar" src="favicon.ico" alt="Pdp"/>
     </div>
     <div class="message-username">
-      <p>USERNAME</p>
+      <p>{{ user }}</p>
     </div>
   </div>
 
-  <div class="messages">
-    <div class="message-inner inner-left">
+  <div class="messages" #scrollContainer>
+    <div class="message-inner"
+         [ngClass]="{'inner-right': message.senderIdentifier !== user, 'inner-left': message.senderIdentifier === user}"
+         *ngFor="let message of messages">
       <div class="message-avatar">
-        <img class="avatar" src="favicon.ico" alt="Photo of Ahmad Shadeed"/>
+        <img class="avatar" src="favicon.ico" alt="Photo of Ahmad Shadeed" *ngIf="message.senderIdentifier === user" />
       </div>
-      <div class="message message-left">
-        message leftmessage leftmessage leftmessage leftmessage leftmessage left
-      </div>
-    </div>
-    <div class="message-inner inner-left">
-      <div class="message-avatar">
-        <img class="avatar" src="favicon.ico" alt="Photo of Ahmad Shadeed"/>
-      </div>
-      <div class="message message-left">
-        message leftmessage leftmessage leftmessage leftmessage leftmessage left
-      </div>
-    </div>
-    <div class="message-inner inner-left">
-      <div class="message-avatar">
-        <img class="avatar" src="favicon.ico" alt="Photo of Ahmad Shadeed"/>
-      </div>
-      <div class="message message-left">
-        message leftmessage leftmessage leftmessage leftmessage leftmessage left
-      </div>
-    </div>
-    <div class="message-inner inner-left">
-      <div class="message-avatar">
-        <img class="avatar" src="favicon.ico" alt="Photo of Ahmad Shadeed"/>
-      </div>
-      <div class="message message-left">
-        message leftmessage leftmessage leftmessage leftmessage leftmessage left
-      </div>
-    </div>
-    <div class="message-inner inner-left">
-      <div class="message-avatar">
-        <img class="avatar" src="favicon.ico" alt="Photo of Ahmad Shadeed"/>
-      </div>
-      <div class="message message-left">
-        message leftmessage leftmessage leftmessage leftmessage leftmessage left
-      </div>
-    </div>
-    <div class="message-inner inner-right">
-      <div class="message message-right">
-        message rightmessage rightmessage rightmessage rightmessage rightmessage rightmessage rightmessage rightmessage
-        right
-      </div>
-    </div>
-    <div class="message-inner inner-right">
-      <div class="message message-right">
-        message rightmessage rightmessage rightmessage rightmessage rightmessage rightmessage rightmessage rightmessage
-        right
-      </div>
-    </div>
-    <div class="message-inner inner-right">
-      <div class="message message-right">
-        message rightmessage rightmessage rightmessage rightmessage rightmessage rightmessage rightmessage rightmessage
-        right
-      </div>
-    </div>
-    <div class="message-inner inner-right">
-      <div class="message message-right">
-        message rightmessage rightmessage rightmessage rightmessage rightmessage rightmessage rightmessage rightmessage
-        right
-      </div>
-    </div>
-
-    <div class="message-inner inner-left">
-      <div class="message-avatar">
-        <img class="avatar" src="favicon.ico" alt="Photo of Ahmad Shadeed"/>
-      </div>
-      <div class="message message-left">
-        message leftmessage leftmessage leftmessage leftmessage leftmessage left
+      <div
+        [ngClass]="{'message': true, 'message-right': message.senderIdentifier !== user, 'message-left': message.senderIdentifier === user}">
+        {{ message.content }}
       </div>
     </div>
   </div>
+
   <div class="message-input">
-    <input type="text" id="message-input" placeholder="Dites salam">
-    <button class="message-submit">
+    <input type="text" id="message-input" [(ngModel)]="messageContent" placeholder="Dites salam">
+    <button class="message-submit" (click)="sendMessage()">
       <mat-icon>send</mat-icon>
     </button>
   </div>

@@ -20,15 +20,15 @@ public class MessageController {
         this.messageService = messageService;
     }
 
-    @PostMapping(value = "/create")
-    public ResponseEntity createMessage(@RequestBody MessageReq messageReq) {
-        Message newMessage = messageService.createMessage(messageReq);
+    @PostMapping(value = "/{userIdentifier}")
+    public ResponseEntity createMessage(@RequestBody MessageReq messageReq, @PathVariable String userIdentifier) {
+        Message newMessage = messageService.createMessage(messageReq, userIdentifier);
         return ResponseEntity.ok(new MessageRes(newMessage));
     }
 
-    @GetMapping(value = "/receiver/{id}")
-    public ResponseEntity getMessagesByUser(@PathVariable Long id) {
-        List<Message> messages = messageService.getMessagesByReceiver(id);
+    @GetMapping(value = "/{userIdentifier}")
+    public ResponseEntity getMessagesByUser(@PathVariable String userIdentifier) {
+        List<Message> messages = messageService.getMessagesByReceiver(userIdentifier);
         return ResponseEntity.ok(messages.stream().map(MessageRes::new).toList());
     }
 
