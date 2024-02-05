@@ -28,7 +28,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public void register(@RequestBody User user) {
-        log.info("Register for {}", user.getUsername());
+        log.info("[NOSITHOUS] [auth] Post api/auth/register");
         userService.register(user);
     }
 
@@ -40,8 +40,6 @@ public class AuthController {
         if (authenticate.isAuthenticated()) {
             return jwtService.generate(authenticationReq.userName());
         }
-
-        log.info("Authentication state {}", authenticate.isAuthenticated());
         return Map.of("yes", "man");
     }
 }

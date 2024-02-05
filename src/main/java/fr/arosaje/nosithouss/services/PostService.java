@@ -1,5 +1,6 @@
 package fr.arosaje.nosithouss.services;
 
+import fr.arosaje.nosithouss.client.ApacheClient;
 import fr.arosaje.nosithouss.dtos.requests.PostReq;
 import fr.arosaje.nosithouss.dtos.requests.SeePostsReq;
 import fr.arosaje.nosithouss.dtos.responses.PostRes;
@@ -17,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Guard;
 import java.util.Date;
 import java.util.List;
@@ -63,8 +65,9 @@ public class PostService {
         return postRepository.findById(postId).orElseThrow(() -> new RuntimeException("Post not found"));
     }
 
-    public void upload(MultipartFile file, Long postId) {
+    public void upload(MultipartFile file, Long postId) throws IOException {
         String newFileName = FileManager.saveImage(file);
+        ApacheClient.uploadImage(file);
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + postId));
         if (post instanceof GuardingPost guardingPost) {

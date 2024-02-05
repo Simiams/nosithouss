@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class PostController {
     }
 
     @PostMapping("/upload/{postId}")
-    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, @PathVariable String postId) {
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, @PathVariable String postId) throws IOException {
         Long id = Long.parseLong(postId);
         postService.upload(file, id);
         return ResponseEntity.ok("File Uploaded");
