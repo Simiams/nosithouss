@@ -26,6 +26,14 @@ public class PostUtils {
         };
     }
 
+    public static EPostType getEPostByPost(Post post) {
+        return switch (post) {
+            case CatalogPost catalogPost -> EPostType.CATALOG;
+            case GuardingPost guardingPost -> EPostType.GUARDING;
+            default -> EPostType.POST;
+        };
+    }
+
     public static <T extends Post> T getPostInstance(T post) {
         if (post instanceof CatalogPost)
             return (T) new CatalogPost();

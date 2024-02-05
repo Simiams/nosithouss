@@ -28,6 +28,7 @@ import { SearchComponent } from './search/search.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatInputModule} from "@angular/material/input";
 import {MatChipsModule} from "@angular/material/chips";
+import {NgOptimizedImage} from "@angular/common";
 
 
 
@@ -42,29 +43,30 @@ import {MatChipsModule} from "@angular/material/chips";
     ContactComponent,
     SearchComponent
   ],
-  imports: [
-    MatGridListModule,
-    MatCardModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatTabsModule,
-    MatButtonToggleModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    MatTableModule,
-    MatListModule,
-    MatRippleModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatChipsModule
-  ],
+    imports: [
+        MatGridListModule,
+        MatCardModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatTabsModule,
+        MatButtonToggleModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        MatTableModule,
+        MatListModule,
+        MatRippleModule,
+        MatAutocompleteModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatChipsModule,
+        NgOptimizedImage
+    ],
   providers: [
     TokenInterceptorProvider,
   ],

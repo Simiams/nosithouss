@@ -24,22 +24,22 @@
     <mat-tab label="Posts">
         <div class="posts-grid">
         <mat-card *ngFor="let post of posts" class="post-card">
-          <img mat-card-image [src]="post.imageUrl" alt="Post Image">
+          <img mat-card-image [src]="assetsBaseUrl + post.img" alt="Post Image">
           <mat-card-content>
             <h3 mat-card-title>{{ post.title }}</h3>
-            <p mat-card-subtitle>{{ post.description }}</p>
+            <p mat-card-subtitle>{{ post.content }}</p>
           </mat-card-content>
         </mat-card>
       </div>
-      
+
       </mat-tab>
     <mat-tab label="Favoris">
       <div class="posts-grid">
         <mat-card *ngFor="let post of favorites" class="post-card">
-          <img mat-card-image [src]="post.imageUrl" alt="Post Image">
+          <img mat-card-image [src]="assetsBaseUrl + post.img" alt="Post Image">
           <mat-card-content>
             <h3 mat-card-title>{{ post.title }}</h3>
-            <p mat-card-subtitle>{{ post.description }}</p>
+            <p mat-card-subtitle>{{ post.content }}</p>
           </mat-card-content>
           <mat-card-actions>
             <mat-button-toggle [checked]="true" (click)="toggleLike(post)">LIKE</mat-button-toggle>
@@ -50,5 +50,4 @@
     </mat-tab>
     <mat-tab label="Mes plantes"> Content 3 </mat-tab>
   </mat-tab-group>
-  
-  
+

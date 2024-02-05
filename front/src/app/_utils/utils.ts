@@ -1,4 +1,6 @@
-export const printTimestamp = (timeStamp: number): string  => {
+import {DatePipe} from "@angular/common";
+
+export const printTimestamp = (timeStamp: number): string => {
   const currentDate = new Date();
   const inputDate = new Date(timeStamp);
   if (
@@ -16,3 +18,9 @@ export const printTimestamp = (timeStamp: number): string  => {
     return `${day}/${month}/${year}`;
   }
 }
+
+
+export const now = (): string => {
+  return new Date().getTime().toString();
+};
+
