@@ -80,8 +80,4 @@ public class PostService {
         }
         postRepository.save(post);
     }
-
-    public byte[] getImage(String imageUUID) throws IOException {
-        return FileManager.getImage(imageUUID);
-    }
 }

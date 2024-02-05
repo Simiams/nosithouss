@@ -5,10 +5,9 @@ import fr.arosaje.nosithouss.models.User;
 import fr.arosaje.nosithouss.services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -26,5 +25,10 @@ public class UserController {
     @GetMapping("/autocomplete/{usernamePrefix}")
     public List<UserNameRes> getAutocompleteUsername(@PathVariable String usernamePrefix) {
         return userService.getAutocompleteUsername(usernamePrefix);
+    }
+
+    @PostMapping("/pdp/{username}")
+    public void saveUserPdp(@RequestParam("file") MultipartFile file, @PathVariable String username) {
+        userService.saveUserPdp(username, file);
     }
 }
