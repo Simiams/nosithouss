@@ -17,13 +17,17 @@ import { NavbarComponent } from './tools/navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import {TokenInterceptorProvider} from "./_helpers/token.interceptor";
 import { ContactComponent } from './contact/contact.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatListModule} from "@angular/material/list";
 import {MatRippleModule} from "@angular/material/core";
+import { SearchComponent } from './search/search.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatInputModule} from "@angular/material/input";
+import {MatChipsModule} from "@angular/material/chips";
 
 
 
@@ -35,7 +39,8 @@ import {MatRippleModule} from "@angular/material/core";
     HomeComponent,
     ProfileComponent,
     LoginComponent,
-    ContactComponent
+    ContactComponent,
+    SearchComponent
   ],
   imports: [
     MatGridListModule,
@@ -54,7 +59,11 @@ import {MatRippleModule} from "@angular/material/core";
     HttpClientModule,
     MatTableModule,
     MatListModule,
-    MatRippleModule
+    MatRippleModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatChipsModule
   ],
   providers: [
     TokenInterceptorProvider,

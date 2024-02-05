@@ -1,49 +1,30 @@
 package fr.arosaje.nosithouss.controllers;
 
-import fr.arosaje.nosithouss.dtos.requests.AuthenticationReq;
+import fr.arosaje.nosithouss.dtos.responses.UserNameRes;
 import fr.arosaje.nosithouss.models.User;
-import fr.arosaje.nosithouss.services.JwtService;
 import fr.arosaje.nosithouss.services.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import java.util.List;
 
 @Slf4j
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/api/auth")
+@RequestMapping(value = "/api/user")
 public class UserController {
-    private AuthenticationManager authenticationManager;
     private UserService userService;
-    private JwtService jwtService;
 
-    @PostMapping("/register")
-    public void register(@RequestBody User user) {
-        log.info("Register for {}", user.getUsername());
-        userService.register(user);
-    }
-
-    //todo: refacto to dto
-    @PostMapping("/login")
-    public Map<String, String> login(@RequestBody AuthenticationReq authenticationReq) {
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationReq.userName(), authenticationReq.password()));
-
-        if (authenticate.isAuthenticated()) {
-            return jwtService.generate(authenticationReq.userName());
-        }
-
-        log.info("Authentication state {}", authenticate.isAuthenticated());
-        return Map.of("yes", "man");
-    }
-    @GetMapping("/user/{username}")
+    @GetMapping("/{username}")
     public User getUserByUsername(@PathVariable String username) {
-        log.info("Search for user with username: {}", username);
         return userService.findByUsername(username);
+    }
+    @GetMapping("/autocomplete/{usernamePrefix}")
+    public List<UserNameRes> getAutocompleteUsername(@PathVariable String usernamePrefix) {
+        return userService.getAutocompleteUsername(usernamePrefix);
     }
 }

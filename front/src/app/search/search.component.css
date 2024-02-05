@@ -1,0 +1,70 @@
+.mat-input {
+  width: 100%;
+}
+
+.input-search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.input-search-glass {
+  border: none;
+  background-color: transparent;
+  color: #4e5e45;
+}
+
+.input-search-glass:hover {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.select-chips {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.display-values {
+  max-height: calc(100% - 25px);
+}
+
+.contacts-list-item-bottom {
+  margin-top: 5px;
+  height: 1px;
+  background-color: rgba(78, 94, 69, 0.32);
+}
+
+.display-value-item {
+  padding-top: 35px;
+  color: #4E5E45;
+  padding-bottom: 28px;
+}
+
+.display-value-item:hover{
+  cursor: pointer;
+}
+
+.top-item {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+}
+
+.top-item .contact-username {
+  font-weight: bold;
+  margin-left: 25px;
+}
+
+.top-item * {
+  margin: auto 0;
+}
+
+.contact-icon {
+  margin-bottom: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  overflow: hidden;
+}

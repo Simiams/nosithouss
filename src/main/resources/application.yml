@@ -8,7 +8,7 @@ spring:
       ddl-auto: update
     show-sql: true
   flyway:
-    enabled: false
+    enabled: true
     baselineOnMigrate: true
     locations: classpath:migrations
   security:
@@ -24,3 +24,7 @@ logging:
 
 upload:
   path: "uploads"
+
+apache:
+  url: "http://localhost:80"
+  uploadUrl: "http://localhost:80/assets"

@@ -4,8 +4,10 @@ import fr.arosaje.nosithouss.errors.NosithoussException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
@@ -30,4 +32,8 @@ public class FileManager {
             throw new NosithoussException("Can't uplaod file");
         }
     }
+
+    public static byte[] getImage(String imageUUID) throws IOException {
+        Path imagePath = Paths.get(uploadPath, imageUUID);
+        return Files.readAllBytes(imagePath);}
 }
