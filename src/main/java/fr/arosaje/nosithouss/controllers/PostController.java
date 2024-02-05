@@ -8,6 +8,7 @@ import fr.arosaje.nosithouss.models.Post;
 import fr.arosaje.nosithouss.services.PostService;
 import fr.arosaje.nosithouss.utils.PostUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,5 +58,16 @@ public class PostController {
         Long id = Long.parseLong(postId);
         postService.upload(file, id);
         return ResponseEntity.ok("File Uploaded");
+    }
+
+    @GetMapping("/assets/{imageUUID}")
+    public ResponseEntity<byte[]> getImage(@PathVariable String imageUUID) {
+        try {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.IMAGE_JPEG)
+                    .body(postService.getImage(imageUUID));
+        } catch (IOException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

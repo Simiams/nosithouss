@@ -1,6 +1,5 @@
 package fr.arosaje.nosithouss.services;
 
-import fr.arosaje.nosithouss.client.ApacheClient;
 import fr.arosaje.nosithouss.dtos.requests.PostReq;
 import fr.arosaje.nosithouss.dtos.requests.SeePostsReq;
 import fr.arosaje.nosithouss.dtos.responses.PostRes;
@@ -11,16 +10,19 @@ import fr.arosaje.nosithouss.models.User;
 import fr.arosaje.nosithouss.repositories.PostRepository;
 import fr.arosaje.nosithouss.utils.FileManager;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.cache.annotation.CacheAnnotationParser;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.*;
 import java.io.IOException;
-import java.security.Guard;
-import java.util.Date;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import static fr.arosaje.nosithouss.utils.PostUtils.createPostByPostReq;
@@ -65,16 +67,21 @@ public class PostService {
         return postRepository.findById(postId).orElseThrow(() -> new RuntimeException("Post not found"));
     }
 
-    public void upload(MultipartFile file, Long postId) throws IOException {
+    public void upload(MultipartFile file, Long postId) {
         String newFileName = FileManager.saveImage(file);
-        ApacheClient.uploadImage(file);
+        //        ApacheClient.uploadImage(file);
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + postId));
         if (post instanceof GuardingPost guardingPost) {
             guardingPost.setImg(newFileName);
-        } else if (post instanceof CatalogPost catalogPost) {
+        }
+        else if (post instanceof CatalogPost catalogPost) {
             catalogPost.setImg(newFileName);
         }
         postRepository.save(post);
+    }
+
+    public byte[] getImage(String imageUUID) throws IOException {
+        return FileManager.getImage(imageUUID);
     }
 }

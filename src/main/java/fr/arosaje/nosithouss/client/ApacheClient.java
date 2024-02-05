@@ -18,16 +18,16 @@ public class ApacheClient {
     private static String apacheUrl;
 
     public static void uploadImage(MultipartFile file) throws IOException {
-        URL url = new URL("http://localhost/upload");
+        URL url = new URL("http://localhost");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setDoOutput(true);
         connection.setRequestMethod("POST");
-        try (OutputStream outputStream = connection.getOutputStream()) {
-            byte[] fileBytes = file.getBytes();
-            outputStream.write(fileBytes);
-        }
+        byte[] fileBytes = file.getBytes();
+        OutputStream outputStream = connection.getOutputStream();
+        outputStream.write(fileBytes);
+        outputStream.close();
+        outputStream.close();
         int responseCode = connection.getResponseCode();
-        System.out.println("Response Code: " + responseCode);
         connection.disconnect();
     }
 }
