@@ -59,15 +59,4 @@ public class PostController {
         postService.upload(file, id);
         return ResponseEntity.ok("File Uploaded");
     }
-
-    @GetMapping("/assets/{imageUUID}")
-    public ResponseEntity<byte[]> getImage(@PathVariable String imageUUID) {
-        try {
-            return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_JPEG)
-                    .body(postService.getImage(imageUUID));
-        } catch (IOException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
 }

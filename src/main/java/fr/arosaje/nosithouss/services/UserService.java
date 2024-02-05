@@ -4,12 +4,14 @@ import fr.arosaje.nosithouss.dtos.responses.UserNameRes;
 import fr.arosaje.nosithouss.enums.ERole;
 import fr.arosaje.nosithouss.models.User;
 import fr.arosaje.nosithouss.repositories.UserRepository;
+import fr.arosaje.nosithouss.utils.FileManager;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -44,5 +46,11 @@ public class UserService implements UserDetailsService {
 
     public List<UserNameRes> getAutocompleteUsername(String usernamePrefix) {
         return userRepository.findByUserNameStartingWith(usernamePrefix).stream().map(user -> new UserNameRes(user.getUsername())).toList();
+    }
+
+    public void saveUserPdp(String username, MultipartFile file) {
+        String imageUUID = FileManager.saveImage(file);
+        Optional<User> user = userRepository.findByUserName(username);
+        user.ifPresent(value -> userRepository.save(value.bImage(imageUUID)));
     }
 }
