@@ -29,7 +29,7 @@ public class User implements UserDetails {
     private String lastName;
     private Set<ERole> roles;
     private boolean active = true;
-    private String image;
+    private String pdp;
 
     public String[] getRolesStr() {
         return roles.stream().map(ERole::toString).toArray(String[]::new);
@@ -41,8 +41,8 @@ public class User implements UserDetails {
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role)).toList();
     }
 
-    public User bImage(String image) {
-        this.image = image;
+    public User bPdp(String image) {
+        this.pdp = image;
         return this;
     }
 

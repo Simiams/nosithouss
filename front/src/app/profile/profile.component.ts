@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import { FavoriteService } from '../_service/favorite.service';
 import {IPostRes} from "../_interfaces/post";
+import {UserService} from "../_service/user.service";
+import {defaultIProfileGet, IProfileGet} from "../_interfaces/user";
 
 // export interface Post {
 //   title: string;
@@ -17,10 +19,11 @@ import {IPostRes} from "../_interfaces/post";
   styleUrls: ['./profile.component.css'],
 })
 
-export class ProfileComponent {
+export class ProfileComponent implements OnInit{
   assetsBaseUrl = "http://localhost:8080/api/assets/" //todo global
   favorites: IPostRes[] = [];
   posts: IPostRes[] = [];
+  currentProfile: IProfileGet = defaultIProfileGet;
 
   currentImage: string | ArrayBuffer | null = 'https://via.placeholder.com/150';
 
@@ -37,7 +40,7 @@ export class ProfileComponent {
   //   "clouds",
   // ];
 
-  constructor(private favoriteService: FavoriteService, private route: ActivatedRoute) {
+  constructor(private favoriteService: FavoriteService, private route: ActivatedRoute, private userService: UserService) {
     // for (let i = 0; i < 10; i++) {
     //   const postId = `post_${i}`;
     //   this.posts.push({
@@ -49,6 +52,18 @@ export class ProfileComponent {
     //  });
     // }
     this.favorites = this.favoriteService.getFavorites();
+  }
+
+  ngOnInit(): void {
+    this.getCurrentProfile();
+  }
+
+
+  getCurrentProfile() {
+    this.userService.getCurrentProfile().subscribe(
+      data => this.currentProfile = data,
+      err => console.error(err)
+    )
   }
 
 

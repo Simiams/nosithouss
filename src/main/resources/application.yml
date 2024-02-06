@@ -16,7 +16,7 @@ spring:
       name: nosithouss
       password: nosithouss
 
-debug: true
+debug: false
 
 logging:
   level:

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.tools.JavaCompiler;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +21,10 @@ import java.util.Map;
 @RequestMapping("/api/test")
 public class Test {
     private final TrefleService trefleService;
-    public Test(TrefleService trefleService) {
+    private final FileManager fileManager;
+    public Test(TrefleService trefleService, FileManager fileManager) {
         this.trefleService = trefleService;
+        this.fileManager = fileManager;
     }
 
     @GetMapping(value = "/exception")
@@ -45,8 +48,8 @@ public class Test {
     }
 
     @PostMapping("/upload")
-    public String uploadFile(@RequestParam("file") MultipartFile file) {
-        FileManager.saveImage(file);
+    public String uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        fileManager.saveImage(file);
         return "word";
     }
 

@@ -34,10 +34,12 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final AuthService authService;
+    private final FileManager fileManager;
 
-    public PostService(PostRepository postRepository, AuthService authService) {
+    public PostService(PostRepository postRepository, AuthService authService, FileManager fileManager) {
         this.postRepository = postRepository;
         this.authService = authService;
+        this.fileManager = fileManager;
     }
 
     public PostRes createPost(PostReq postReq) {
@@ -67,8 +69,8 @@ public class PostService {
         return postRepository.findById(postId).orElseThrow(() -> new RuntimeException("Post not found"));
     }
 
-    public void upload(MultipartFile file, Long postId) {
-        String newFileName = FileManager.saveImage(file);
+    public void upload(MultipartFile file, Long postId) throws IOException {
+        String newFileName = fileManager.saveImage(file);
         //        ApacheClient.uploadImage(file);
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + postId));

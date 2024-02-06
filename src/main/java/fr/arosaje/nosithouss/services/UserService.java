@@ -1,11 +1,15 @@
 package fr.arosaje.nosithouss.services;
 
 import fr.arosaje.nosithouss.dtos.responses.UserNameRes;
+import fr.arosaje.nosithouss.dtos.responses.UserRes;
 import fr.arosaje.nosithouss.enums.ERole;
+import fr.arosaje.nosithouss.errors.NosithoussException;
 import fr.arosaje.nosithouss.models.User;
 import fr.arosaje.nosithouss.repositories.UserRepository;
 import fr.arosaje.nosithouss.utils.FileManager;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,15 +17,24 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-@AllArgsConstructor
 @Service
 public class UserService implements UserDetailsService {
-    private UserRepository userRepository;
-    private BCryptPasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
+    private final FileManager fileManager;
+
+    @Autowired
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, FileManager fileManager) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.fileManager = fileManager;
+    }
 
     public void register(User user) {
         //todo validator
@@ -48,9 +61,23 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUserNameStartingWith(usernamePrefix).stream().map(user -> new UserNameRes(user.getUsername())).toList();
     }
 
-    public void saveUserPdp(String username, MultipartFile file) {
-        String imageUUID = FileManager.saveImage(file);
+    public void saveUserPdp(String username, MultipartFile file) throws IOException {
+        String imageUUID = fileManager.saveImage(file);
         Optional<User> user = userRepository.findByUserName(username);
-        user.ifPresent(value -> userRepository.save(value.bImage(imageUUID)));
+        user.ifPresent(value -> userRepository.save(value.bPdp(imageUUID)));
+    }
+
+    public UserRes getUser() {
+        Optional<User> user = userRepository.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        if (user.isPresent()) {
+            User currentUser = user.get();
+            return UserRes.builder()
+                    .userName(currentUser.getUsername())
+                    .roles(currentUser.getRoles())
+                    .pdp(currentUser.getPdp())
+                    .lastName(currentUser.getLastName())
+                    .build();
+        }
+        throw new UsernameNotFoundException("User not found");
     }
 }

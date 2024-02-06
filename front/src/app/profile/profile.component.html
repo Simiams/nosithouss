@@ -11,13 +11,13 @@
   </a>
 </div>
 <div class="profile-container">
-    <label for="fileInput">
-      <img [src]="currentImage" alt="Photo de profil" class="profile-image" />
-      <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none" />
-    </label>
+<!--    <label for="fileInput">-->
+      <img [src]="assetsBaseUrl + currentProfile.pdp" alt="Photo de profil" class="profile-image" />
+<!--      <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none" />-->
+<!--    </label>-->
 </div>
 <div class="name">
-    <p>Pseudo</p>
+    <p>{{currentProfile.userName}}</p>
 </div>
 
 <mat-tab-group>
