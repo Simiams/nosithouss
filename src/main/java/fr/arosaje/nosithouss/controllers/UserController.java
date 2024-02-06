@@ -1,6 +1,7 @@
 package fr.arosaje.nosithouss.controllers;
 
 import fr.arosaje.nosithouss.dtos.responses.UserNameRes;
+import fr.arosaje.nosithouss.dtos.responses.UserRes;
 import fr.arosaje.nosithouss.models.User;
 import fr.arosaje.nosithouss.services.UserService;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -22,13 +24,16 @@ public class UserController {
     public User getUserByUsername(@PathVariable String username) {
         return userService.findByUsername(username);
     }
+    @GetMapping("")
+    public UserRes getUser() {
+        return userService.getUser();
+    }
     @GetMapping("/autocomplete/{usernamePrefix}")
     public List<UserNameRes> getAutocompleteUsername(@PathVariable String usernamePrefix) {
         return userService.getAutocompleteUsername(usernamePrefix);
     }
-
     @PostMapping("/pdp/{username}")
-    public void saveUserPdp(@RequestParam("file") MultipartFile file, @PathVariable String username) {
+    public void saveUserPdp(@RequestParam("file") MultipartFile file, @PathVariable String username) throws IOException {
         userService.saveUserPdp(username, file);
     }
 }
