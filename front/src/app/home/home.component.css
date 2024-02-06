@@ -1,30 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 
-@media screen and (max-width: 576px) {
+.container-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
 
-    .container-nav {
-        display: flex;
-        justify-content: space-between; /* Place les éléments à chaque extrémité du conteneur */
-        align-items: center;
-        padding: 0 10px; /* Ajoutez un peu de padding pour l'espace */
-    }
+.message {
+  margin: 2vh 0;
+  background-color: #4E5E45;
+}
 
-    .message {
-        margin: 2vh 0;
-        background-color: #4E5E45;
-    }
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: 'Playfair Display', serif;
+}
 
-    .container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        font-family: 'Playfair Display', serif;
-    }
+.mat-card {
+  width: 100%;
+  margin-bottom: 20px;
+}
 
-    .mat-card {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-  
+.card-container {
 
+}
+
+.img-container {
+  display: block;
+  margin: 0 auto;
+  width: 350px;
+}
+
+.post-image {
+  display: block;
+  position: initial!important;
 }

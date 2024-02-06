@@ -1,18 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Post } from '../profile/profile.component'; 
+import {Injectable} from '@angular/core';
+import {IPostRes} from "../_interfaces/post";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoriteService {
-  favorites: Post[] = [];
+  favorites: IPostRes[] = [];
   private localStorageKey = 'favorites';
 
-  constructor() { 
+  constructor() {
     this.loadFavorites();
   }
 
-  addFavorite(post: Post) {
+  addFavorite(post: IPostRes) {
     this.favorites.push(post);
     this.saveFavorites();
   }
@@ -25,7 +25,7 @@ export class FavoriteService {
     localStorage.setItem(this.localStorageKey, JSON.stringify(this.favorites));
   }
 
-  isPostLiked(postId: string): boolean {
+  isPostLiked(postId: number): boolean {
     return this.favorites.some(post => post.id === postId);
   }
 
