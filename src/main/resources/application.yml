@@ -1,4 +1,7 @@
 spring:
+  main:
+    web-application-type: servlet
+    etl: true
   datasource:
     url: jdbc:postgresql://localhost:5432/arosaje
     username: nosithouss
@@ -22,9 +25,9 @@ logging:
   level:
     web: DEBUG
 
-upload:
-  path: "uploads"
-
-apache:
-  url: "http://localhost:80"
-  uploadUrl: "http://localhost:80/assets"
+#upload:
+#  path: "uploads"
+#
+#apache:
+#  url: "http://localhost:80"
+#  uploadUrl: "http://localhost:80/assets"

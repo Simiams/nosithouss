@@ -62,7 +62,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void saveUserPdp(String username, MultipartFile file) throws IOException {
-        String imageUUID = fileManager.saveImage(file);
+        String imageUUID = fileManager.saveImage(file).getName();
         Optional<User> user = userRepository.findByUserName(username);
         user.ifPresent(value -> userRepository.save(value.bPdp(imageUUID)));
     }

@@ -27,7 +27,7 @@ public class PostRes {
     public PostRes(Post post) {
         this.type = PostUtils.getEPostByPost(post);
         this.id = post.getId();
-        this.authorUserName = post.getAuthor().getUsername();
+        this.authorUserName = post.getAuthor() != null ? post.getAuthor().getUsername(): "";
         this.createdAt = post.getCreatedAt();
         this.content = post.getContent();
         this.title = post.getTitle();
