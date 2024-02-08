@@ -22,7 +22,7 @@ export class ChatService {
       );
   }
 
-  getMessages(userIdentifier: String): Observable<IMessageGet[]> {
+  getMessages(userIdentifier: string): Observable<IMessageGet[]> {
     const url = `${this.url}${userIdentifier}`;
     return this.http.get<IMessageGet[]>(url)
       .pipe(
