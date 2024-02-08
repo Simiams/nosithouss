@@ -24,10 +24,6 @@
   margin-bottom: 20px;
 }
 
-.card-container {
-
-}
-
 .img-container {
   display: block;
   margin: 0 auto;
@@ -36,5 +32,9 @@
 
 .post-image {
   display: block;
-  position: initial!important;
+  position: initial !important;
+}
+
+.button-get-more {
+  margin-bottom: 100px;
 }

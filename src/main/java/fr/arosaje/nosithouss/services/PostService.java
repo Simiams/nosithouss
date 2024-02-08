@@ -3,10 +3,7 @@ package fr.arosaje.nosithouss.services;
 import fr.arosaje.nosithouss.dtos.requests.PostReq;
 import fr.arosaje.nosithouss.dtos.requests.SeePostsReq;
 import fr.arosaje.nosithouss.dtos.responses.PostRes;
-import fr.arosaje.nosithouss.models.CatalogPost;
-import fr.arosaje.nosithouss.models.GuardingPost;
-import fr.arosaje.nosithouss.models.Post;
-import fr.arosaje.nosithouss.models.User;
+import fr.arosaje.nosithouss.models.*;
 import fr.arosaje.nosithouss.repositories.PostRepository;
 import fr.arosaje.nosithouss.utils.FileManager;
 import jakarta.persistence.EntityNotFoundException;
@@ -70,15 +67,14 @@ public class PostService {
     }
 
     public void upload(MultipartFile file, Long postId) throws IOException {
-        String newFileName = fileManager.saveImage(file);
-        //        ApacheClient.uploadImage(file);
+        Image newImage = fileManager.saveImage(file);
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new EntityNotFoundException("Entity not found with id: " + postId));
         if (post instanceof GuardingPost guardingPost) {
-            guardingPost.setImg(newFileName);
+            guardingPost.setImages(List.of(newImage.getName()));
         }
         else if (post instanceof CatalogPost catalogPost) {
-            catalogPost.setImg(newFileName);
+            catalogPost.setImages(List.of(newImage.getName()));
         }
         postRepository.save(post);
     }

@@ -1,9 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
-import { FavoriteService } from '../_service/favorite.service';
-import {IPostGet, IPostReq, IPostRes} from "../_interfaces/post";
+import {Component, OnInit, Renderer2} from '@angular/core';
+import {Router} from '@angular/router';
+import {FavoriteService} from '../_service/favorite.service';
+import {IPostReq, IPostRes} from "../_interfaces/post";
 import {PostService} from "../_service/post.service";
-import {logMessages} from "@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild";
 import {now} from "../_utils/utils";
 
 type Post = {
@@ -20,7 +19,7 @@ type Post = {
   styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   posts: IPostRes[] = [];
   assetsBaseUrl = "http://localhost:8080/api/assets/" //todo global
   currentPost: IPostReq = {
@@ -28,31 +27,18 @@ export class HomeComponent implements OnInit{
     createdAt: now(),
   }
 
-  // images = [
-  //   "nature",
-  //   "sky",
-  //   "grass",
-  //   "mountains",
-  //   "rivers",
-  //   "glacier",
-  //   "forest",
-  //   "streams",
-  //   "rain",
-  //   "clouds",
-  // ];
-
-  constructor(private favoriteService: FavoriteService, private router: Router, private postService: PostService) {
-    // this.posts = this.images.map((image, index) => ({
-    //   id: `post_${index}`,
-    //   title: `Card ${index + 1}`,
-    //   description: `Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.`,
-    //   imageUrl: `https://source.unsplash.com/random/500X500?${image}`,
-    //   liked: this.favoriteService.isPostLiked(`post_${index}`)
-    // }));
+  constructor(private favoriteService: FavoriteService, private router: Router, private postService: PostService, private renderer: Renderer2) {
   }
 
   ngOnInit() {
     this.getPosts(this.currentPost)
+  }
+
+  getMore() {
+    this.getPosts({
+      number: 5,
+      createdAt: this.posts[this.posts.length - 1].createdAt.toString(),
+    })
   }
 
   likePost(post: IPostRes) {
@@ -66,7 +52,7 @@ export class HomeComponent implements OnInit{
 
   getPosts(post: IPostReq) {
     this.postService.getPosts(post).subscribe(
-      data => this.posts = data,
+      data => this.posts.push(...data),
       error => console.log(error)
     )
   }
