@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+* {
+    font-family: 'Playfair Display', serif;
+}
+
+h3 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10vh;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+}
+
+.button button {
+    background-color: #4E5E45;
+}
+
+.group {
+    display: flex;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+
+.login a {
+    color: #4E5E45;
+}
+
+.login p {
+    text-align: center;
+    margin-top: 4vh;
+}

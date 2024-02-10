@@ -5,7 +5,7 @@ services:
     image: postgres:latest
     container_name: mspr_java
     environment:
-      POSTGRES_DB: arosaje_ib
+      POSTGRES_DB: arosaje
       POSTGRES_USER: nosithouss
       POSTGRES_PASSWORD: nosithouss
     ports:
