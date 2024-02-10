@@ -29,7 +29,6 @@ import {MatInputModule} from "@angular/material/input";
 import {MatChipsModule} from "@angular/material/chips";
 import {NgOptimizedImage} from "@angular/common";
 import { ContactComponent } from './page/contact/contact.component';
-
 @NgModule({
   declarations: [
     AppComponent,
