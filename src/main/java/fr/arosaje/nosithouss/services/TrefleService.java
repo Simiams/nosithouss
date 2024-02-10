@@ -6,7 +6,6 @@ import fr.arosaje.nosithouss.enums.EFlag;
 import fr.arosaje.nosithouss.models.CatalogPost;
 import fr.arosaje.nosithouss.models.Flag;
 import fr.arosaje.nosithouss.repositories.FlagRepository;
-import fr.arosaje.nosithouss.repositories.ImageRepository;
 import fr.arosaje.nosithouss.repositories.PostRepository;
 import fr.arosaje.nosithouss.utils.FileManager;
 import org.springframework.data.util.Pair;
@@ -21,31 +20,26 @@ public class TrefleService {
     private final TrefleClient trefleClient;
     private final PostRepository postRepository;
     private final FlagRepository flagRepository;
-    private final ImageRepository imageRepository;
     private final FileManager fileManager;
+    private int currentNumber = 0;
+    private String lastCommonName;
 
-    public TrefleService(TrefleClient trefleClient, PostRepository postRepository, FlagRepository flagRepository, ImageRepository imageRepository, FileManager fileManager) {
+    public TrefleService(TrefleClient trefleClient, PostRepository postRepository, FlagRepository flagRepository, FileManager fileManager) {
         this.trefleClient = trefleClient;
         this.postRepository = postRepository;
         this.flagRepository = flagRepository;
-        this.imageRepository = imageRepository;
         this.fileManager = fileManager;
     }
 
-    public void savePlants() {
-        Flag flagPage = flagRepository.findByKey(EFlag.LASTPAGE.getKey());
+    public void savePlants(int limit) {
+        Flag flagPage = flagRepository.findByKey(EFlag.LAST_PAGE.getKey());
         String nextPage = flagPage == null ? "/api/v1/plants?page=1" : flagPage.getValue(); //todo aplication.yml
-        while (!nextPage.isEmpty()) {
+        while (!nextPage.isEmpty() && (limit != 0 && limit > currentNumber)) {
             Pair<List<TrefleReq>, String> res = trefleClient.getPlants(nextPage);
-            nextPage = res.getSecond();
             res.getFirst().stream()
                     .map(this::convertToCatalogPost)
-                    .forEach(this::secureSave);
-            flagRepository.save(Flag.builder()
-                                        .key(EFlag.LASTPAGE.getKey())
-                                        .value(nextPage)
-                                        .date(now())
-                                        .build());
+                    .map(catalogPost -> limit != 0 && limit > currentNumber ? secureSave(catalogPost) : null).toList().getLast();
+            secureSaveFlags(res.getSecond());
         }
     }
 
@@ -58,9 +52,24 @@ public class TrefleService {
                 .build();
     }
 
-    private void secureSave(CatalogPost post) {
-        if (post.getTitle() != null && post.getImages() != null) {
-            postRepository.save(post);
+    private CatalogPost secureSave(CatalogPost post) {
+        if (post != null && post.getTitle() != null && post.getImages() != null) {
+            currentNumber += 1;
+            lastCommonName = post.getTitle();
+            return postRepository.save(post);
         }
+        return null;
+    }
+
+    private void secureSaveFlags(String nextPage) {
+        flagRepository.save(Flag.builder().key(EFlag.LAST_PAGE.getKey())
+                                    .value(nextPage)
+                                    .date(now()).build());
+        flagRepository.save(Flag.builder().key(EFlag.LAST_COMMON_NAME.getKey())
+                                    .value(lastCommonName)
+                                    .date(now()).build());
+        flagRepository.save(Flag.builder().key(EFlag.LAST_EXTRACTED_NUMBER.getKey())
+                                    .value(Integer.toString(currentNumber))
+                                    .date(now()).build());
     }
 }

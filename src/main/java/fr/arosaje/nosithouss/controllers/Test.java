@@ -55,7 +55,7 @@ public class Test {
 
     @GetMapping("/etl")
     public String savePlants() {
-        trefleService.savePlants();
+        trefleService.savePlants(10);
         return "Ok";
     }
 }
