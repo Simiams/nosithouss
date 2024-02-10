@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICredential } from 'src/app/_interfaces/credential';
-import {AuthService} from "../_service/auth.service";
-import {TokenService} from "../_service/token.service";
-
+import { AuthService } from 'src/app/_service/auth.service';
+import { TokenService } from 'src/app/_service/token.service';
 
 @Component({
   selector: 'app-login',

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {IContactGet, IContactRes} from "../_interfaces/chat/contact";
-import {ContactService} from "../_service/contact.service";
 import {Router} from "@angular/router";
-import {printTimestamp} from "../_utils/utils";
+import { IContactRes } from 'src/app/_interfaces/chat/contact';
+import { ContactService } from 'src/app/_service/contact.service';
+import { printTimestamp } from 'src/app/_utils/utils';
 
 @Component({
   selector: 'app-contact',

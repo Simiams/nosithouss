@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { FavoriteService } from '../_service/favorite.service';
-import {IPostRes} from "../_interfaces/post";
-import {UserService} from "../_service/user.service";
-import {defaultIProfileGet, IProfileGet} from "../_interfaces/user";
+import { IPostRes } from 'src/app/_interfaces/post';
+import { IProfileGet, defaultIProfileGet } from 'src/app/_interfaces/user';
+import { FavoriteService } from 'src/app/_service/favorite.service';
+import { UserService } from 'src/app/_service/user.service';
 
 @Component({
   selector: 'app-profile',

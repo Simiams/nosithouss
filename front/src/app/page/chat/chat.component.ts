@@ -1,12 +1,12 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
-import {ChatService} from "../_service/chat.service";
 import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {IMessageRes} from "../_interfaces/chat/message";
 import {ActivatedRoute} from "@angular/router";
-import {printTimestamp} from "../_utils/utils";
+import { ChatService } from "src/app/_service/chat.service";
+import { IMessageRes } from "src/app/_interfaces/chat/message";
+import { printTimestamp } from "src/app/_utils/utils";
 
 @Component({
   selector: 'app-chat',

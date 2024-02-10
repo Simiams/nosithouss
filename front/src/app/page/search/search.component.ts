@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {UserService} from "../_service/user.service";
-import {IUsernameGet} from "../_interfaces/user";
-import {choiceSearch} from "../_interfaces/ennums";
+import {UserService} from "../../_service/user.service";
+import {IUsernameGet} from "../../_interfaces/user";
+import {choiceSearch} from "../../_interfaces/ennums";
 
 @Component({
   selector: 'app-search',
