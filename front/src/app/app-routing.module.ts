@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'chat/:username', component: ChatComponent },
   { path: 'profile', component: ProfileComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'add', component: NewPostComponent}
+  { path: 'add', component: NewPostComponent},
   { path: 'contact', component: ContactComponent},
   { path: 'search', component: SearchComponent}
 ];
