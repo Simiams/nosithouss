@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { FavoriteService } from '../_service/favorite.service';
-import {IPostGet, IPostReq, IPostRes} from "../_interfaces/post";
-import {PostService} from "../_service/post.service";
 import {logMessages} from "@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild";
-import {now} from "../_utils/utils";
+import { FavoriteService } from 'src/app/_service/favorite.service';
+import { PostService } from 'src/app/_service/post.service';
+import { now } from 'src/app/_utils/utils';
+import { IPostReq, IPostRes } from 'src/app/_interfaces/post';
 
 type Post = {
   id: string;
