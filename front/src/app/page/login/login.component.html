@@ -1,33 +1,38 @@
-<div class="form_container">
-  <div>
+<h3 mat-card-title>Login</h3>
+  <div class="me">
       <div>Email : {{ form.userName }}</div>
       <div>Passw : {{ form.password }}</div>
       <div>testest@.</div>
   </div>
   <br>
+  <div class="form_container">
   <form
     name="form"
     #f="ngForm"
     (ngSubmit)="f.form.valid && onSubmit()"
   >
-    <div class="group">
-      <label for="email">Email</label>
-      <input type="text" name="email" id="email" [(ngModel)]="form.userName" #email="ngModel" required>
-      <div class="form_error" *ngIf="email.errors && f.submitted">
-        Email is required !
-      </div>
-    </div>
-    <div class="group">
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" [(ngModel)]="form.password" #password="ngModel">
+  <mat-form-field class="group">
+    <mat-label>Email</mat-label>
+    <input matInput type="text" name="email" id="email" [(ngModel)]="form.userName" #email="ngModel" required>
+    <mat-error *ngIf="email.errors && f.submitted">Email is required !</mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="group">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" name="password" id="password" [(ngModel)]="form.password" #password="ngModel">
+  <!--  <div class="form_error" *ngIf="f.submitted">-->
+  <!--    <div *ngIf="password.errors['required']">Password is required</div>-->
+  <!--    <div *ngIf="password.errors['minlength']">Password must be at least 5 charracters</div>-->
+  <!--  </div>-->
+  </mat-form-field>
+</form>
+  </div>
+  <div class="button">
+    <a href="/home"><button mat-raised-button color="primary">Login</button></a>
+  </div>
+  <div class="signup">
+      <p>I don't have account. <a href="#">Sign Up</a></p>
+  </div>
+  
+  
 
-<!--      <div class="form_error" *ngIf="f.submitted">-->
-<!--        <div *ngIf="password.errors['required']">Password is required</div>-->
-<!--        <div *ngIf="password.errors['minlength']">Password must be at least 5 charracters</div>-->
-<!--      </div>-->
-    </div>
-    <div class="group">
-      <button>Login</button>
-    </div>
-  </form>
-</div>
