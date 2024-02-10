@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import {TokenInterceptorProvider} from "./_helpers/token.interceptor";
+import { NewPostComponent } from './new-post/new-post.component';
 import { ContactComponent } from './contact/contact.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatListModule} from "@angular/material/list";
@@ -30,9 +31,6 @@ import {MatInputModule} from "@angular/material/input";
 import {MatChipsModule} from "@angular/material/chips";
 import {NgOptimizedImage} from "@angular/common";
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +38,22 @@ import {NgOptimizedImage} from "@angular/common";
     HomeComponent,
     ProfileComponent,
     LoginComponent,
+    NewPostComponent,
+  ],
+  imports: [
+    MatGridListModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatTabsModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule
     ContactComponent,
     SearchComponent
   ],

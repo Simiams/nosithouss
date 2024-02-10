@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+.nav-container p{
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 2.3vh;
+    margin-top: 4vh;
+}
+
+
+
+.img-container img{
+    max-width: 40%;
+    max-height: auto;
+    margin-top: 3vh;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+}
+
+.upload-button {
+    display: flex;
+    justify-content: center;
+}
+
+.upload-button button {
+    color: #4E5E45;
+}
+
+.description {
+    display: flex;
+    margin-top: 10vh;
+    justify-content: center;
+}
+
+.description input {
+    padding-bottom: 7vh;
+    padding-right: 30vw;
+    border-radius: 8px;
+    border-width: 0.5px;
+}
+
+.post-button button {
+    background-color: #4E5E45;
+    color: aliceblue;
+    font-family: 'Playfair Display', serif;
+    position: fixed; /* Position fixe par rapport à la fenêtre du navigateur */
+    bottom: 10vh; /* Distance par rapport au bas de la fenêtre */
+    z-index: 3;
+}
+
+.post-button a{
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    display: flex;
+    margin-top: 10vh;
+    margin-bottom: 2vh;
+    justify-content: center;
+}
+
+.title input {
+    padding-right: 30vw;
+    border-radius: 4px;
+    border-width: 0.5px;
+}

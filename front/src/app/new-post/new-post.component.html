@@ -1,0 +1,23 @@
+<div class="nav-container">
+    <p> Create a new post</p>
+</div>
+<div class="title">
+    <input type="text" placeholder="Title">
+</div>
+<div class="upload-button">
+    <button mat-button (click)="fileInput.click()">Upload Image</button>
+</div>
+<input type="file" accept="image/*" #fileInput style="display: none;" (change)="loadFile($event)">
+<div class="img-container">
+    <img id="output"/>
+</div>
+
+<div class="description">
+    <input placeholder="Description..." type="text">
+</div>
+
+<div class="post-button">
+    <a href="/">
+        <button mat-raised-button>Create a new post</button>
+    </a>
+</div>
