@@ -56,8 +56,7 @@ public class JwtService {
         final String bearer = Jwts.builder()
                 .setIssuedAt(new Date(currentTime))
                 .setExpiration(new Date(expirationTime))
-                .setSubject(user.getEmail())
-                .setClaims(Map.of("username", user.getUsername(), "roles", user.getRoles(), Claims.EXPIRATION, new Date(expirationTime), Claims.SUBJECT, user.getEmail()))
+                .setClaims(Map.of("roles", user.getRoles(), Claims.EXPIRATION, new Date(expirationTime), Claims.SUBJECT, user.getUsername()))
                 .signWith(SignatureAlgorithm.HS256, getKey())
                 .compact();
 

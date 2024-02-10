@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-
-export interface Post {
-  title: string;
-  description: string;
-  imageUrl: string;
-}
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import { FavoriteService } from '../_service/favorite.service';
+import {IPostRes} from "../_interfaces/post";
+import {UserService} from "../_service/user.service";
+import {defaultIProfileGet, IProfileGet} from "../_interfaces/user";
 
 @Component({
   selector: 'app-profile',
@@ -12,10 +11,30 @@ export interface Post {
   styleUrls: ['./profile.component.css'],
 })
 
+export class ProfileComponent implements OnInit{
+  assetsBaseUrl = "http://localhost:8080/api/assets/" //todo global
+  favorites: IPostRes[] = [];
+  posts: IPostRes[] = [];
+  currentProfile: IProfileGet = defaultIProfileGet;
+
+  currentImage: string | ArrayBuffer | null = 'https://via.placeholder.com/150';
+
+  constructor(private favoriteService: FavoriteService, private route: ActivatedRoute, private userService: UserService) {
+    this.favorites = this.favoriteService.getFavorites();
+  }
+
+  ngOnInit(): void {
+    this.getCurrentProfile();
+  }
 
 
-export class ProfileComponent {
-  currentImage: string | ArrayBuffer | null = 'https://via.placeholder.com/150'; // Image de profil par défaut
+  getCurrentProfile() {
+    this.userService.getCurrentProfile().subscribe(
+      data => this.currentProfile = data,
+      err => console.error(err)
+    )
+  }
+
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -28,27 +47,12 @@ export class ProfileComponent {
     }
   }
 
-  posts: Post[] = [];
-  images = [
-    "nature",
-    "sky",
-    "grass",
-    "mountains",
-    "rivers",
-    "glacier",
-    "forest",
-    "streams",
-    "rain",
-    "clouds",
-  ];
-  constructor() {
-    // Générer des faux posts
-    for (let i = 0; i < 10; i++) {
-      this.posts.push({
-        title: `Post ${i + 1}`,
-        description: `Description du post ${i + 1}`,
-        imageUrl: `https://source.unsplash.com/random/500X500?${this.images[i]}`,
-      });
+  toggleLike(post: IPostRes) {
+    const index = this.favorites.findIndex(p => p.id === post.id);
+    if (index !== -1) {
+      this.favorites.splice(index, 1);
+      this.favoriteService.saveFavorites();
     }
   }
+
 }

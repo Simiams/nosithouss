@@ -10,7 +10,7 @@
     align-items: center;
     margin-top: 10vh;
   }
-  
+
 .profile-image {
     width: 90px;
     height: 90px;
@@ -39,14 +39,14 @@
 
 .posts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Utilisation de la fonction auto-fill pour ajuster le nombre de colonnes en fonction de l'espace disponible */
-  gap: 10px; 
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
 
 }
 
 .post-item {
   border: 1px solid #ccc;
-  overflow: hidden; 
+  overflow: hidden;
 
 }
 
@@ -55,7 +55,22 @@ img {
     height: 25vh;
 }
 
+.container-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.exit_to_app {
+  position: absolute;
+  background-color: transparent;
+  color: #4E5E45;
+  margin-top: 1vh;
+
+}
 
 
 
-  
+
+

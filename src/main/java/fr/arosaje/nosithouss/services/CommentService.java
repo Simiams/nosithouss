@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
+import static fr.arosaje.nosithouss.utils.Utils.now;
+
 @Service
 public class CommentService {
 
@@ -27,7 +29,7 @@ public class CommentService {
         Comment comment = commentReq.toComment();
         comment.setAuthor(authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName())); //todo global method
         comment.setPost(postService.getPost(commentReq.getPostId()));
-        comment.setCreatedAt(new Date());
+        comment.setCreatedAt(now());
         return commentRepository.save(comment);
     }
 

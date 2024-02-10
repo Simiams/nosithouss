@@ -1,9 +1,17 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
+import { FavoriteService } from '../_service/favorite.service';
+import {IPostGet, IPostReq, IPostRes} from "../_interfaces/post";
+import {PostService} from "../_service/post.service";
+import {logMessages} from "@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild";
+import {now} from "../_utils/utils";
 
-type CardContent = {
+type Post = {
+  id: string;
   title: string;
   description: string;
   imageUrl: string;
+  liked: boolean;
 };
 
 @Component({
@@ -12,30 +20,54 @@ type CardContent = {
   styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent {
-  cards: CardContent[] = [];
-  images = [
-    "nature",
-    "sky",
-    "grass",
-    "mountains",
-    "rivers",
-    "glacier",
-    "forest",
-    "streams",
-    "rain",
-    "clouds",
-  ];
+export class HomeComponent implements OnInit{
+  posts: IPostRes[] = [];
+  assetsBaseUrl = "http://localhost:8080/api/assets/" //todo global
+  currentPost: IPostReq = {
+    number: 25,
+    createdAt: now(),
+  }
 
-  constructor() {
-    const cards: CardContent[] = [];
-    for (let i = 0; i < this.images.length; i++) {
-      cards.push({
-        title: `Card ${i + 1}`,
-        description: `Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. `,
-        imageUrl: `https://source.unsplash.com/random/500X500?${this.images[i]}`,
-      });
-    }
-    this.cards = cards;
+  // images = [
+  //   "nature",
+  //   "sky",
+  //   "grass",
+  //   "mountains",
+  //   "rivers",
+  //   "glacier",
+  //   "forest",
+  //   "streams",
+  //   "rain",
+  //   "clouds",
+  // ];
+
+  constructor(private favoriteService: FavoriteService, private router: Router, private postService: PostService) {
+    // this.posts = this.images.map((image, index) => ({
+    //   id: `post_${index}`,
+    //   title: `Card ${index + 1}`,
+    //   description: `Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.`,
+    //   imageUrl: `https://source.unsplash.com/random/500X500?${image}`,
+    //   liked: this.favoriteService.isPostLiked(`post_${index}`)
+    // }));
+  }
+
+  ngOnInit() {
+    this.getPosts(this.currentPost)
+  }
+
+  likePost(post: IPostRes) {
+    post.liked = !post.liked;
+    this.favoriteService.addFavorite(post);
+  }
+
+  toggleLike(post: Post) {
+    post.liked = !post.liked;
+  }
+
+  getPosts(post: IPostReq) {
+    this.postService.getPosts(post).subscribe(
+      data => this.posts = data,
+      error => console.log(error)
+    )
   }
 }

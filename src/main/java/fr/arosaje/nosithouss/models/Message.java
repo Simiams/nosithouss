@@ -3,6 +3,8 @@ package fr.arosaje.nosithouss.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "messages")
 @Getter
@@ -22,9 +24,8 @@ public class Message implements Comparable<Message> {
     @JoinColumn(name = "receiver_id")
     private User receiver;
     private String content;
-    @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
-    private java.util.Date createdAt;
+    @Column(nullable = false, name = "created_at")
+    private Timestamp createdAt;
 
     @Override
     public int compareTo(Message m) {

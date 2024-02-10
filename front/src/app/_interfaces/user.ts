@@ -25,3 +25,24 @@ export interface ITokenUser{
   iap?: number,
   exp?: number
 }
+
+export interface IUsernameGet{
+  userName:string
+}
+
+export interface IProfileGet {
+  userName: string,
+  firstName: string,
+  lastName: string,
+  roles: any, //todo
+  pdp: string
+}
+
+
+export const defaultIProfileGet : IProfileGet  = {
+  userName: "userName",
+  firstName: "firstName",
+  lastName: "lastName",
+  roles: "roles", //todo
+  pdp: "42de9a00-1830-4f56-bea1-12216a0d1477"
+}

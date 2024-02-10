@@ -19,12 +19,12 @@
     </div>
     <div class="group">
       <label for="password">Password</label>
-      <input type="password" name="password" id="password" [(ngModel)]="form.password" #password="ngModel" required minlength="5">
+      <input type="password" name="password" id="password" [(ngModel)]="form.password" #password="ngModel">
 
-      <div class="form_error" *ngIf="password.errors && f.submitted">
-        <div *ngIf="password.errors['required']">Password is required</div>
-        <div *ngIf="password.errors['minlength']">Password must be at least 5 charracters</div>
-      </div>
+<!--      <div class="form_error" *ngIf="f.submitted">-->
+<!--        <div *ngIf="password.errors['required']">Password is required</div>-->
+<!--        <div *ngIf="password.errors['minlength']">Password must be at least 5 charracters</div>-->
+<!--      </div>-->
     </div>
     <div class="group">
       <button>Login</button>

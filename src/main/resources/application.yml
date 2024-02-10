@@ -16,7 +16,7 @@ spring:
       name: nosithouss
       password: nosithouss
 
-debug: true
+debug: false
 
 logging:
   level:
@@ -24,3 +24,7 @@ logging:
 
 upload:
   path: "uploads"
+
+apache:
+  url: "http://localhost:80"
+  uploadUrl: "http://localhost:80/assets"

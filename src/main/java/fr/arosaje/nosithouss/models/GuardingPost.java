@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -21,9 +22,7 @@ public class GuardingPost extends Post {
 
     private int coordinateX;
     private int coordinateY;
-    @Temporal(TemporalType.DATE)
-    private Date guardingAt;
-    @Temporal(TemporalType.DATE)
-    private Date endGuardingAt;
+    private Timestamp guardingAt;
+    private Timestamp endGuardingAt;
     private String img;
 }

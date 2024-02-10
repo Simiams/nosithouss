@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {IMessageReq, IMessageRes} from "../_interfaces/chat/message";
+import {IMessageGet, IMessageReq, IMessageRes} from "../_interfaces/chat/message";
 import {catchError, Observable} from "rxjs";
 
 @Injectable({
@@ -11,10 +11,8 @@ export class ChatService {
 
   constructor(private http: HttpClient) { }
 
-  sendMessage(messsage: IMessageReq): Observable<IMessageRes> {
+  sendMessage(messsage: IMessageReq): Observable<IMessageGet> {
     const url = `${this.url}${messsage.userIdentifier}`;
-    console.log(url)
-    console.log({content: messsage.content})
     return this.http.post<any>(url, {content: messsage.content})
       .pipe(
         catchError((error) => {
@@ -24,9 +22,9 @@ export class ChatService {
       );
   }
 
-  getMessages(userIdentifier: String): Observable<IMessageRes[]> {
+  getMessages(userIdentifier: string): Observable<IMessageGet[]> {
     const url = `${this.url}${userIdentifier}`;
-    return this.http.get<IMessageRes[]>(url)
+    return this.http.get<IMessageGet[]>(url)
       .pipe(
         catchError((error) => {
           console.error('Erreur lors de la requête de connexion', error);

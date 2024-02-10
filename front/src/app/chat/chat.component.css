@@ -18,7 +18,6 @@
   margin: auto 5px;
 }
 
-
 .header .message-username {
   margin: auto 10px;
 }
@@ -105,6 +104,12 @@
   padding: 10px;
   border:2px solid #c2c2c2;
   margin: 0 10px;
+}
+
+.message-date {
+  margin: auto 5px auto 5px;
+  font-size: 0.7rem;
+  opacity: 0.35;
 }
 
 #message-input {
