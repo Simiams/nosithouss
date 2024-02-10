@@ -19,7 +19,6 @@ import { LoginComponent } from './page/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import {TokenInterceptorProvider} from "./_helpers/token.interceptor";
-import { NewPostComponent } from './new-post/new-post.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatListModule} from "@angular/material/list";
 import {MatRippleModule} from "@angular/material/core";
@@ -29,6 +28,9 @@ import {MatInputModule} from "@angular/material/input";
 import {MatChipsModule} from "@angular/material/chips";
 import {NgOptimizedImage} from "@angular/common";
 import { ContactComponent } from './page/contact/contact.component';
+import { NewPostComponent } from './page/new-post/new-post.component';
+import { SignUpComponent } from './page/sign-up/sign-up.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +41,7 @@ import { ContactComponent } from './page/contact/contact.component';
     NewPostComponent,
     ContactComponent,
     SearchComponent,
+    SignUpComponent,
   ],
   imports: [
     MatGridListModule,

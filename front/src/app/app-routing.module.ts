@@ -6,7 +6,8 @@ import { ProfileComponent } from './page/profile/profile.component';
 import {LoginComponent} from "./page/login/login.component";
 import {SearchComponent} from "./page/search/search.component";
 import { ContactComponent } from './page/contact/contact.component';
-import { NewPostComponent } from './new-post/new-post.component';
+import { NewPostComponent } from './page/new-post/new-post.component';
+import { SignUpComponent } from './page/sign-up/sign-up.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'chat/:username', component: ChatComponent },
   { path: 'profile', component: ProfileComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'signup', component: SignUpComponent},
   { path: 'add', component: NewPostComponent},
   { path: 'contact', component: ContactComponent},
   { path: 'search', component: SearchComponent}
