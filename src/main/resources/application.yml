@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: default
   main:
     web-application-type: servlet
     etl: true
@@ -6,8 +8,6 @@ spring:
     url: jdbc:postgresql://localhost/arosaje
     username: nosithouss
     password: nosithouss
-  profiles:
-    active: default
   jpa:
     hibernate:
       ddl-auto: update
@@ -20,6 +20,10 @@ spring:
     user:
       name: nosithouss
       password: nosithouss
+
+springdoc:
+  swagger-ui:
+    path=/swagger-ui.html
 
 debug: false
 

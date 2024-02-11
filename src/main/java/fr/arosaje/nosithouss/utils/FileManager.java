@@ -20,24 +20,6 @@ public class FileManager {
 
     public FileManager(ImageRepository imageRepository) {this.imageRepository = imageRepository;}
 
-    public static String saveLocallyImage(MultipartFile file) {
-        try {
-            if (!Files.exists(Path.of(uploadPath))) {
-                Files.createDirectories(Path.of(uploadPath));
-            }
-
-            String uniqueFileName = UUID.randomUUID().toString();
-
-            Path targetLocation = Path.of(uploadPath, uniqueFileName);
-            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-
-            return uniqueFileName;
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new NosithoussException("Can't uplaod file");
-        }
-    }
-
     public static byte[] getLocallyImage(String imageUUID) throws IOException {
         Path imagePath = Paths.get(uploadPath, imageUUID);
         return Files.readAllBytes(imagePath);
