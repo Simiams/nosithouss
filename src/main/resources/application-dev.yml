@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    active: dev
   main:
     web-application-type: servlet
     etl: true

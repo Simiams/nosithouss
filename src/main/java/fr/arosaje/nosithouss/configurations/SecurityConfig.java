@@ -44,8 +44,6 @@ public class SecurityConfig {
                                 authorize
                                         .requestMatchers(POST, "/api/auth/login").permitAll()
                                         .requestMatchers(POST, "/api/auth/register").permitAll()
-                                        .requestMatchers(POST, "/api/**").permitAll()
-                                        .requestMatchers(GET, "/api/**").permitAll()
                                         .anyRequest().authenticated()
                 )
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
