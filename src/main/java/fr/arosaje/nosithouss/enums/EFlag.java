@@ -6,6 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum EFlag {
-    LASTPAGE("last_page");
-    private String key;
+    LAST_PAGE("last_page"),
+    LAST_COMMON_NAME("last_common_name"),
+    LAST_EXTRACTED_NUMBER("last_extracted_number");
+    private final String key;
 }

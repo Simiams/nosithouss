@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "plant_entries")
@@ -24,5 +25,5 @@ public class GuardingPost extends Post {
     private int coordinateY;
     private Timestamp guardingAt;
     private Timestamp endGuardingAt;
-    private String img;
+    private List<String> images;
 }

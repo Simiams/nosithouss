@@ -51,9 +51,12 @@ public class FileManager {
         }
     }
 
-    public String saveImage(MultipartFile file) throws IOException {
+    public Image saveImage(MultipartFile file) throws IOException {
         String uniqueFileName = UUID.randomUUID().toString();
-        imageRepository.save(Image.builder().data(file.getBytes()).name(uniqueFileName).build());
-        return uniqueFileName;
+        return imageRepository.save(Image.builder().data(file.getBytes()).name(uniqueFileName).build());
+    }
+    public Image saveImage(byte[] file) {
+        String uniqueFileName = UUID.randomUUID().toString();
+        return imageRepository.save(Image.builder().data(file).name(uniqueFileName).build());
     }
 }
