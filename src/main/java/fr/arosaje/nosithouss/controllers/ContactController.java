@@ -7,6 +7,7 @@ import fr.arosaje.nosithouss.models.Message;
 import fr.arosaje.nosithouss.models.User;
 import fr.arosaje.nosithouss.services.ContactService;
 import fr.arosaje.nosithouss.services.MessageService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,7 @@ public class ContactController {
     }
 
     @GetMapping(value = "")
+    @Operation(summary = "Get all the user you send a message or who have sent you message, base on your token")
     public ResponseEntity getAllContact() {
         return ResponseEntity.ok(contactService.getAllContact());
     }

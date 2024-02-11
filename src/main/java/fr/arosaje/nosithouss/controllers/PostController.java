@@ -7,6 +7,7 @@ import fr.arosaje.nosithouss.errors.ErrorRes;
 import fr.arosaje.nosithouss.models.Post;
 import fr.arosaje.nosithouss.services.PostService;
 import fr.arosaje.nosithouss.utils.PostUtils;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,7 @@ public class PostController {
     }
 
     @PostMapping(value = "/create")
+    @Operation(summary = "Create a new post, catalog or guarding post (just specify the type)")
     public ResponseEntity createPost(@RequestBody PostReq postReq) {
         List<ErrorRes> errorResponses = new ArrayList<>();
         if (!isValidType(postReq.getType()))
@@ -42,11 +44,13 @@ public class PostController {
     }
 
     @PostMapping(value = "/posts")
+    @Operation(summary = "Get x posts prior to a date")
     public ResponseEntity getPosts(@RequestBody SeePostsReq seePostsReq) {
         return ResponseEntity.ok(postService.getPosts(seePostsReq).stream().map(PostUtils::createPostResponseByPost));
     }
 
     @PutMapping(value = "/{id}")
+    @Operation(summary = "Update a post by his id")
     public ResponseEntity updatePostById(@RequestBody PostReq postReq, @PathVariable Long id) {
         Post post = postService.updatePost(postReq, id);
         PostRes postRes = createPostResponseByPost(post);
@@ -54,6 +58,7 @@ public class PostController {
     }
 
     @PostMapping("/upload/{postId}")
+    @Operation(summary = "Upload relative image to a post...")
     public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, @PathVariable String postId) throws IOException {
         Long id = Long.parseLong(postId);
         postService.upload(file, id);
