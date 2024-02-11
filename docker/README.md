@@ -1,5 +1,12 @@
 # Docker
 
+En théorie, en aillant la derniére version du git, vous devriez avoir les fichier docker-compos necessaire et utiliser les commande:
+- ``docker-compose -f docker-compose-pg.yml up -d``
+- ``docker-compose -f docker-compose-nosithouss.yml up -d``
+- ``docker-compose -f docker-compose-etl.yml up -d``
+
+Cependant, si ça ne marche pas, suivez la procédure ci-dessous
+
 # BDD - postgres
 
 Lancer la base de donnée postgres avec docker-compose:
@@ -59,7 +66,7 @@ Vous devriez avoir ce resultat, si vous n'avez pas lancé le back, le nombre de 
 
 # Nosithouss - app java servlet
 
-Lancer l'application java nosithouss en mode serveur web
+Lancer l'application java nosithouss en mode serveur web.
 
 ### Prérequis
 
@@ -85,3 +92,7 @@ Lancer l'application java nosithouss en mode serveur web
 - Analyser les logs du conaitner: ``docker logs nosithouss``
 - Vérifier que le port n'est pas déjà utilisé pas un autre process si c'est le cas, on stop: ``lsof -i :8080``
 - Vérifiez les profile: ``./ressources/application.ym``, ``./ressources/application-dev.ym``, ``./ressources/application-prod.ym``
+
+# Nosithouss - ETL
+
+``docker-compose -f docker-compose-etl.yml up -d``
