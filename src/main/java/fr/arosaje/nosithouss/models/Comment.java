@@ -24,6 +24,7 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
+    @Column(columnDefinition = "TEXT")
     private String content;
     @Column(nullable = false)
     private Timestamp createdAt;
