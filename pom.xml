@@ -10,7 +10,7 @@
     </parent>
     <groupId>fr.arosaje</groupId>
     <artifactId>nosithouss</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>nosithouss</name>
     <description>nosithouss</description>
     <properties>
@@ -153,5 +153,18 @@
             </plugin>
         </plugins>
     </build>
-
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <activatedProperties>dev</activatedProperties>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <activatedProperties>prod</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
 </project>

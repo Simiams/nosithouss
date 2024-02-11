@@ -1,17 +1,19 @@
 spring:
   main:
-    web-application-type: none
+    web-application-type: servlet
     etl: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/arosaje
+    url: jdbc:postgresql://localhost/arosaje
     username: nosithouss
     password: nosithouss
+  profiles:
+    active: default
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
   flyway:
-    enabled: true
+    enabled: false
     baselineOnMigrate: true
     locations: classpath:migrations
   security:
@@ -19,7 +21,7 @@ spring:
       name: nosithouss
       password: nosithouss
 
-debug: false
+debug: true
 
 logging:
   level:
