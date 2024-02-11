@@ -44,6 +44,8 @@ public class SecurityConfig {
                                 authorize
                                         .requestMatchers(POST, "/api/auth/login").permitAll()
                                         .requestMatchers(POST, "/api/auth/register").permitAll()
+                                        .requestMatchers(GET, "/swagger-ui/**").permitAll()
+                                        .requestMatchers(GET, "/v3/api-docs/**").permitAll()
                                         .anyRequest().authenticated()
                 )
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
