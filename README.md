@@ -11,6 +11,17 @@ au préalable soit via le container soit via votre IDE): [Swagger](http://localh
 
 Vous y trouverai les schemas de réponse, les attendu en paramétre, une description de l'endpoint
 
+### Migrations
+
+FlyWay est un outil de gestion de migrations, vous trouvez toutes les requete sql dans le
+dossier ``ressources/migrations`` elle serons jouées dans l'ordre, ``V1 -> V6``. Comme vous le remarquez, le
+fichier ``V1_Init.sql`` génere toute nos table avec les index et les foerign key associée. Néanmoins, la configuration
+de nos orm tel que spring boot le permet est coorect, ce fichier est enfaite un ddl que nous avons extrait une fois que
+spring ai créer nos table. Nous l'avons créer pour garder la main sur nos relation et conserver une logique (orde,
+nommage, etc...)
+
+Vous trouverez donc un jeu de donnée assez interessant prouvant les different reltino entre les tables...
+
 ## Toolbox - DEV
 
 ---
