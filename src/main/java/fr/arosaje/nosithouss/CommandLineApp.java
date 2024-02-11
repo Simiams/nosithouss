@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnNotWebAppli
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 @ConditionalOnNotWebApplication
@@ -22,12 +23,10 @@ public class CommandLineApp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        int limit = Arrays.stream(args)
-                .filter(arg -> arg.startsWith("-limit="))
-                .findFirst()
-                .map(arg -> Integer.parseInt(arg.substring("-limit=".length())))
-                .orElse(defaultEtlLimit);
-        if (ETL)
-            trefleService.savePlants(limit);
+        if (ETL) {
+            AtomicInteger limit = new AtomicInteger(defaultEtlLimit);
+            Arrays.stream(args).filter(arg -> arg.matches("-limit=\\d*$")).findFirst().ifPresent(arg -> limit.set(Integer.parseInt(arg.substring("-limit=".length()))));
+            trefleService.savePlants(limit.get() < 0 ? defaultEtlLimit : limit.get());
+        }
     }
 }

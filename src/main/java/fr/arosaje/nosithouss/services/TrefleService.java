@@ -34,12 +34,11 @@ public class TrefleService {
     public void savePlants(int limit) {
         Flag flagPage = flagRepository.findByKey(EFlag.LAST_PAGE.getKey());
         String nextPage = flagPage == null ? "/api/v1/plants?page=1" : flagPage.getValue(); //todo aplication.yml
-        while (!nextPage.isEmpty() && (limit != 0 && limit > currentNumber)) {
+        while (!nextPage.isEmpty() && (limit == 0 || limit > currentNumber)) {
             Pair<List<TrefleReq>, String> res = trefleClient.getPlants(nextPage);
             res.getFirst().stream()
                     .map(this::convertToCatalogPost)
-                    .map(catalogPost -> limit != 0 && limit > currentNumber ? secureSave(catalogPost) : null).toList().getLast();
-            secureSaveFlags(res.getSecond());
+                    .map(catalogPost -> (limit == 0 || limit > currentNumber) ? secureSave(catalogPost, res.getSecond()) : null).toList().getLast();
         }
     }
 
@@ -52,10 +51,11 @@ public class TrefleService {
                 .build();
     }
 
-    private CatalogPost secureSave(CatalogPost post) {
+    private CatalogPost secureSave(CatalogPost post, String nextPage) {
         if (post != null && post.getTitle() != null && post.getImages() != null) {
             currentNumber += 1;
             lastCommonName = post.getTitle();
+            secureSaveFlags(nextPage);
             return postRepository.save(post);
         }
         return null;
