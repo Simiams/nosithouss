@@ -5,6 +5,7 @@ import fr.arosaje.nosithouss.dtos.responses.MessageRes;
 import fr.arosaje.nosithouss.models.Message;
 import fr.arosaje.nosithouss.models.User;
 import fr.arosaje.nosithouss.services.MessageService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.instancio.Instancio;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,12 +23,14 @@ public class MessageController {
     }
 
     @PostMapping(value = "/{userIdentifier}")
+    @Operation(summary = "Send a message to the given user (base on his userName and your token)")
     public ResponseEntity createMessage(@RequestBody MessageReq messageReq, @PathVariable String userIdentifier) {
         Message newMessage = messageService.createMessage(messageReq, userIdentifier);
         return ResponseEntity.ok(new MessageRes(newMessage));
     }
 
     @GetMapping(value = "/{userIdentifier}")
+    @Operation(summary = "Get all message you have with the given user")
     public ResponseEntity getMessagesByUser(@PathVariable String userIdentifier) {
         List<Message> messages = messageService.getMessagesByReceiver(userIdentifier);
         return ResponseEntity.ok(messages.stream().map(MessageRes::new).toList());

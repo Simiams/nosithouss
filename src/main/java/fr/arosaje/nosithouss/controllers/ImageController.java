@@ -1,6 +1,7 @@
 package fr.arosaje.nosithouss.controllers;
 
 import fr.arosaje.nosithouss.utils.FileManager;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -19,6 +20,7 @@ public class ImageController {
     private final FileManager fileManager;
 
     @GetMapping("/{imageUUID}")
+    @Operation(summary = "Get an image by the uuid, no authentication needed")
     public ResponseEntity<byte[]> getImage(@PathVariable String imageUUID) {
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_JPEG)
