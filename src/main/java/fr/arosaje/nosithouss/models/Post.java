@@ -8,8 +8,6 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -30,6 +28,7 @@ public class Post {
     private User author;
     @Column(nullable = false)
     private Timestamp createdAt;
+    @Column(columnDefinition = "TEXT")
     private String content;
     @Column(nullable = false)
     private String title;

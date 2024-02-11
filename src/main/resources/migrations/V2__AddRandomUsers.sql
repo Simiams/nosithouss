@@ -1,0 +1,10 @@
+INSERT INTO public.users (user_name, active, first_name, last_name, password, roles) VALUES ('nolwax', true, 'nolwax', 'nolwax', '$2a$10$HQzp17y.520Spx27ioLZBuln81TjnWJUSBH58N94U0eRYclSgDU1u', '{1}');
+INSERT INTO public.users (user_name, active, first_name, last_name, password, roles) VALUES ('nolwaxElleTaxe', true, 'nolwaxElleTaxe', 'nolwaxElleTaxe', '$2a$10$HQzp17y.520Spx27ioLZBuln81TjnWJUSBH58N94U0eRYclSgDU1u', '{1}');
+INSERT INTO public.users (user_name, active, first_name, last_name, password, roles) VALUES ('nolwaxxxxx', true, 'nolwaxxxxx', 'nolwaxxxxx', '$2a$10$HQzp17y.520Spx27ioLZBuln81TjnWJUSBH58N94U0eRYclSgDU1u', '{1}');
+INSERT INTO public.users (user_name, active, first_name, last_name, password, roles) VALUES ('nolwaysDiscreet', true, 'nolwaysDiscreet', 'nolwaysDiscreet', '$2a$10$HQzp17y.520Spx27ioLZBuln81TjnWJUSBH58N94U0eRYclSgDU1u', '{1}');
+INSERT INTO public.users (user_name, active, first_name, last_name, password, roles) VALUES ('oussouss', true, 'oussouss', 'oussouss', '$2a$10$HQzp17y.520Spx27ioLZBuln81TjnWJUSBH58N94U0eRYclSgDU1u', '{1}');
+INSERT INTO public.users (user_name, active, first_name, last_name, password, roles) VALUES ('simsim', true, 'simsim', 'simsim', '$2a$10$HQzp17y.520Spx27ioLZBuln81TjnWJUSBH58N94U0eRYclSgDU1u', '{1}');
+INSERT INTO public.users (user_name, active, first_name, last_name, password, roles) VALUES ('bou²', true, 'bou²', 'bou²', '$2a$10$HQzp17y.520Spx27ioLZBuln81TjnWJUSBH58N94U0eRYclSgDU1u', '{1}');
+INSERT INTO public.users (user_name, active, first_name, last_name, password, roles) VALUES ('bou³', true, 'nolwaxElleTaxe', 'nolwaxElleTaxe', '$2a$10$HQzp17y.520Spx27ioLZBuln81TjnWJUSBH58N94U0eRYclSgDU1u', '{1}');
+INSERT INTO public.users (user_name, active, first_name, last_name, password, roles) VALUES ('bou⁴', true, 'nolwaxxxxx', 'nolwaxxxxx', '$2a$10$HQzp17y.520Spx27ioLZBuln81TjnWJUSBH58N94U0eRYclSgDU1u', '{1}');
+INSERT INTO public.users (user_name, active, first_name, last_name, password, roles) VALUES ('bou⁵', true, 'nolwaysDiscreet', 'nolwaysDiscreet', '$2a$10$HQzp17y.520Spx27ioLZBuln81TjnWJUSBH58N94U0eRYclSgDU1u', '{1}');

@@ -23,6 +23,7 @@ public class Message implements Comparable<Message> {
     @ManyToOne
     @JoinColumn(name = "receiver_id")
     private User receiver;
+    @Column(columnDefinition = "TEXT")
     private String content;
     @Column(nullable = false, name = "created_at")
     private Timestamp createdAt;
