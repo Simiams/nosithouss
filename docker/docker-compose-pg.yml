@@ -3,7 +3,7 @@ version: '3'
 services:
   postgres_java:
     image: postgres:latest
-    container_name: mspr_java
+    container_name: nosithouss-postgres
     environment:
       POSTGRES_DB: arosaje
       POSTGRES_USER: nosithouss
@@ -11,4 +11,4 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./data-postgres:/var/lib/postgresql/data

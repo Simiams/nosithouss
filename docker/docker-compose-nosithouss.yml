@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  nosithouss:
+    image: openjdk:21
+    container_name: nosithouss
+    command: [ "java", "-jar", "/app/nosithouss.jar" ]
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    volumes:
+      - ./data-nosithouss:/app
+    ports:
+      - "8080:8080"
+
+  postgres_java:
+    image: postgres:latest
+    container_name: nosithouss-postgres
+    environment:
+      POSTGRES_DB: arosaje
+      POSTGRES_USER: nosithouss
+      POSTGRES_PASSWORD: nosithouss
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data-postgres:/var/lib/postgresql/data
