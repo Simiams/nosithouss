@@ -4,7 +4,7 @@ services:
   nosithouss-etl:
     image: openjdk:21
     container_name: nosithouss-etl
-    command: [ "java", "-jar", "/app/nosithouss.jar", "-limit=50" ]
+    command: [ "java", "-jar", "/app/nosithouss.jar", "-limit=200" ]
     environment:
       - SPRING_PROFILES_ACTIVE=etl
     volumes:
