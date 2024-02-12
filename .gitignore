@@ -32,4 +32,9 @@ build/
 ### VS Code ###
 .vscode/
 
-/docker
+docker
+
+.mvn
+/.mvn/
+.idea
+target

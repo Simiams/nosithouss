@@ -18,20 +18,14 @@ export class TokenInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log("intercept")
-
     const token = this.tokenService.getToken()
 
     if(token !== null){
-      console.log("Intercept token")
       let clone = request.clone({
         headers: request.headers.set('Authorization', 'Bearer '+token)
       })
-      console.log(clone)
       return next.handle(clone).pipe(
         catchError(error => {
-          console.log(error)
-
           if(error.status === 401){
             this.tokenService.clearTokenExpired()
           }

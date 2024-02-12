@@ -17,15 +17,12 @@ export class SignUpComponent {
   constructor(
     private authService: AuthService,
     private tokenService: TokenService) {
-    
+
   }
 
   onSubmit(): void{
-    console.log("login component")
-    console.log(this.form)
     this.authService.login(this.form).subscribe(
       data => {
-        console.log("token from onSubmit: " + data.bearer)
         this.tokenService.saveToken(data.bearer)
       },
       err => console.error(err)

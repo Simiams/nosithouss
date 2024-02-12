@@ -25,11 +25,9 @@ export class LoginComponent {
   ) { }
 
   onSubmit(): void{
-    console.log("onSubmit")
     console.log(this.form)
     this.authService.login(this.form).subscribe(
       data => {
-        console.log("token from onSubmit: " + data.bearer)
         this.tokenService.saveToken(data.bearer)
         this.router.navigate(['home'])
       },

@@ -15,15 +15,15 @@ import java.util.UUID;
 
 @Component
 public class FileManager {
-    private static String uploadPath = "uploads"; //todo properties file
+//    private static String uploadPath = "uploads"; //todo properties file
     private final ImageRepository imageRepository;
 
     public FileManager(ImageRepository imageRepository) {this.imageRepository = imageRepository;}
 
-    public static byte[] getLocallyImage(String imageUUID) throws IOException {
-        Path imagePath = Paths.get(uploadPath, imageUUID);
-        return Files.readAllBytes(imagePath);
-    }
+//    public static byte[] getLocallyImage(String imageUUID) throws IOException {
+//        Path imagePath = Paths.get(uploadPath, imageUUID);
+//        return Files.readAllBytes(imagePath);
+//    }
 
     public byte[] getImage(String imageUUID) {
         try {

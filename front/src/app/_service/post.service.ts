@@ -2,7 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {IMessageGet, IMessageReq} from "../_interfaces/chat/message";
 import {catchError, Observable} from "rxjs";
-import {IPostGet, IPostReq, IPostTitleGet} from "../_interfaces/post";
+import {
+  ICreateCatalogReq,
+  ICreateGuardingReq,
+  ICreatePostReq,
+  IPostGet,
+  IPostReq,
+  IPostTitleGet
+} from "../_interfaces/post";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +25,16 @@ export class PostService {
       .pipe(
         catchError((error) => {
           console.error('Erreur lors de la requête de get all posts', error);
+          throw error;
+        })
+      );
+  }
+  createPost(newPost: ICreatePostReq | ICreateGuardingReq | ICreateCatalogReq): Observable<any> {
+    const url = `${this.url}/create`;
+    return this.http.post<any>(url, newPost)
+      .pipe(
+        catchError((error) => {
+          console.error('Erreur lors de la requête de create new post', error);
           throw error;
         })
       );

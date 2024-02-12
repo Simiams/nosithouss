@@ -1,23 +1,57 @@
-<div class="nav-container">
-    <p> Create a new post</p>
-</div>
-<div class="title">
-    <input type="text" placeholder="Title">
-</div>
-<div class="upload-button">
-    <button mat-button (click)="fileInput.click()">Upload Image</button>
-</div>
-<input type="file" accept="image/*" #fileInput style="display: none;" (change)="loadFile($event)">
-<div class="img-container">
-    <img id="output"/>
-</div>
+<div class="new-post">
+  <mat-chip-listbox class="chips-container" aria-label="Search Choice" [(ngModel)]="selectedChip"
+                    (ngModelChange)="onChipSelectionChange()">
+    <div class="select-chips">
+      <mat-chip-option color="accent" selected *ngFor="let choice of Object.values(choiceNewPost)" [value]="choice">
+        {{ choice }}
+      </mat-chip-option>
+    </div>
+  </mat-chip-listbox>
 
-<div class="description">
-    <input placeholder="Description..." type="text">
-</div>
+  <div class="new-post-container">
+    <div class="new-post-title">
+      <p *ngIf="selectedChip==choiceNewPost.POST">Posez une question</p>
+      <p *ngIf="selectedChip==choiceNewPost.CATALOG">Enrichissez notre catalog</p>
+      <p *ngIf="selectedChip==choiceNewPost.GUARDINGPOST">Faites garder vos plantes</p>
+    </div>
 
-<div class="post-button">
-    <a href="/">
-        <button mat-raised-button>Create a new post</button>
-    </a>
+    <form class="new-post-form" [formGroup]="createPostForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="example-full-width">
+        <mat-label>Ajoutez un titre</mat-label>
+        <input matInput class="new-post-input input-text" type="text" id="title" formControlName="title">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Donnez une petite description</mat-label>
+        <textarea
+          #autosize="cdkTextareaAutosize"
+          cdkTextareaAutosize
+          matInput
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="10"
+          class="new-post-input" type="text" id="content" formControlName="content">
+        </textarea>
+      </mat-form-field>
+
+      <label  *ngIf="selectedChip!==choiceNewPost.POST" for="fileInput" class="custom-file-input new-post-button">Choisir un fichier</label>
+      <input type="file" id="fileInput" style="display: none;" formControlName="img">
+
+<!--      <input  type="file" class="new-post-button" *ngIf="selectedChip!==choiceNewPost.POST"-->
+<!--              (change)="loadFile($event)" formControlName="img" id="images"/>-->
+
+      <mat-form-field *ngIf="selectedChip===choiceNewPost.GUARDINGPOST">
+        <mat-label>Fin du guardennage</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="guardingAt">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="selectedChip===choiceNewPost.GUARDINGPOST">
+        <mat-label>Fin du guardennage</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="endGuardingAt">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <button type="submit" class="new-post-button" [disabled]="createPostForm.invalid">Create Post</button>
+    </form>
+  </div>
 </div>

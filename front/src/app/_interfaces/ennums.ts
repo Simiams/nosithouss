@@ -4,6 +4,11 @@ export enum choiceSearch {
   POST = "Post",
   GUARDINGPOST = "Guarde de plante"
 }
+export enum choiceNewPost {
+  CATALOG = "Catalog",
+  POST = "Post",
+  GUARDINGPOST = "Guarde de plante"
+}
 
 
 export enum EPostType {
