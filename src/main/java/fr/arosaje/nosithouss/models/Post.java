@@ -26,7 +26,7 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "author_id")
     private User author;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "created_at")
     private Timestamp createdAt;
     @Column(columnDefinition = "TEXT")
     private String content;
@@ -35,8 +35,8 @@ public class Post {
     @OneToOne
     @JoinColumn(name = "last_version_id")
     private Post lastVersion;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "nb_like")
     private int nbLike;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "nb_dislike")
     private int nbDislike;
 }

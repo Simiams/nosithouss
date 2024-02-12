@@ -2,8 +2,12 @@ package fr.arosaje.nosithouss.controllers;
 
 import fr.arosaje.nosithouss.dtos.requests.PostReq;
 import fr.arosaje.nosithouss.dtos.requests.SeePostsReq;
+import fr.arosaje.nosithouss.dtos.responses.CatalogPostRes;
 import fr.arosaje.nosithouss.dtos.responses.PostRes;
+import fr.arosaje.nosithouss.dtos.responses.PostTitleRes;
+import fr.arosaje.nosithouss.enums.EPostType;
 import fr.arosaje.nosithouss.errors.ErrorRes;
+import fr.arosaje.nosithouss.models.CatalogPost;
 import fr.arosaje.nosithouss.models.Post;
 import fr.arosaje.nosithouss.services.PostService;
 import fr.arosaje.nosithouss.utils.PostUtils;
@@ -64,4 +68,11 @@ public class PostController {
         postService.upload(file, id);
         return ResponseEntity.ok("File Uploaded");
     }
+
+    @GetMapping("/{postType}/autocomplete/{prefix}")
+    @Operation(summary = "Automplete post by his title")
+    public List<PostTitleRes> autocompleteCatalogPost(@PathVariable EPostType postType, @PathVariable String prefix) {
+        return postService.autocomplete(postType, prefix);
+    }
+
 }

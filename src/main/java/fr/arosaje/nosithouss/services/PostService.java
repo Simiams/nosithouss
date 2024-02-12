@@ -3,38 +3,37 @@ package fr.arosaje.nosithouss.services;
 import fr.arosaje.nosithouss.dtos.requests.PostReq;
 import fr.arosaje.nosithouss.dtos.requests.SeePostsReq;
 import fr.arosaje.nosithouss.dtos.responses.PostRes;
+import fr.arosaje.nosithouss.dtos.responses.PostTitleRes;
+import fr.arosaje.nosithouss.enums.EPostType;
 import fr.arosaje.nosithouss.models.*;
 import fr.arosaje.nosithouss.repositories.PostRepository;
+import fr.arosaje.nosithouss.repositories.PostRepositoryPersistence;
 import fr.arosaje.nosithouss.utils.FileManager;
+import fr.arosaje.nosithouss.utils.PostUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.*;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
-import static fr.arosaje.nosithouss.utils.PostUtils.createPostByPostReq;
-import static fr.arosaje.nosithouss.utils.PostUtils.createPostResponseByPost;
+import static fr.arosaje.nosithouss.utils.PostUtils.*;
 import static fr.arosaje.nosithouss.utils.Utils.now;
 
 @Service
 public class PostService {
 
     private final PostRepository postRepository;
+    private final PostRepositoryPersistence postRepositoryPersistence;
     private final AuthService authService;
     private final FileManager fileManager;
 
-    public PostService(PostRepository postRepository, AuthService authService, FileManager fileManager) {
+    public PostService(PostRepository postRepository, PostRepositoryPersistence postRepositoryPersistence, AuthService authService, FileManager fileManager) {
         this.postRepository = postRepository;
+        this.postRepositoryPersistence = postRepositoryPersistence;
         this.authService = authService;
         this.fileManager = fileManager;
     }
@@ -77,5 +76,10 @@ public class PostService {
             catalogPost.setImages(List.of(newImage.getName()));
         }
         postRepository.save(post);
+    }
+
+    public List<PostTitleRes> autocomplete(EPostType postType, String prefix) {
+        return postRepositoryPersistence.findByTypeAndTitleStartingWith(getPostTypeByEPostType(postType), prefix)
+                .stream().map(p -> new PostTitleRes(p.getTitle(), getFirstImgPostOrNullByPost(p))).toList();
     }
 }

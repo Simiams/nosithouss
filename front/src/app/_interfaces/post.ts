@@ -42,3 +42,8 @@ export interface IPostReq {
   number: number,
   createdAt: string,
 }
+
+export interface IPostTitleGet {
+  title: string,
+  img: string,
+}

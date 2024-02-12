@@ -1,8 +1,13 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../../_service/user.service";
-import {IUsernameGet} from "../../_interfaces/user";
-import {choiceSearch} from "../../_interfaces/ennums";
+import {choiceSearch, EPostType, EPostTypeStr} from "../../_interfaces/ennums";
+import {PostService} from "../../_service/post.service";
+
+interface autocompleteType {
+  value: string,
+  img: string
+}
 
 @Component({
   selector: 'app-search',
@@ -10,16 +15,17 @@ import {choiceSearch} from "../../_interfaces/ennums";
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent {
+  assetsBaseUrl = "http://localhost:8080/api/assets/" //todo global
   protected readonly choiceSearch = choiceSearch;
   protected readonly Object = Object;
   inputValue: string = "";
-  possibleValues: IUsernameGet[] = []
+  possibleValues: autocompleteType[] = []
   private router!: Router;
   green: string = "rgba(78,94,69,0.46)";
   private userService: UserService
   selectedChip: choiceSearch = choiceSearch.USER;
 
-  constructor(userService: UserService, router: Router) {
+  constructor(userService: UserService, router: Router, private postService: PostService) {
     this.router = router
     this.userService = userService
   }
@@ -35,15 +41,14 @@ export class SearchComponent {
         case choiceSearch.USER:
           this.autocompleteUserName(inputChange)
           break;
-        case choiceSearch.FORUM:
-          console.log("form")
-          this.possibleValues = []
+        case choiceSearch.CATALOG:
+          this.autocompletePost(inputChange, EPostTypeStr.CATALOG)
           break;
         case choiceSearch.POST:
-          this.possibleValues = []
+          this.autocompletePost(inputChange, EPostTypeStr.POST)
           break;
         case choiceSearch.GUARDINGPOST:
-          this.possibleValues = []
+          this.autocompletePost(inputChange, EPostTypeStr.GUARDING)
           break;
       }
     }
@@ -51,7 +56,14 @@ export class SearchComponent {
 
   autocompleteUserName(currentValue: string) {
     this.userService.getAutocomplete(currentValue).subscribe(
-      data => this.possibleValues = data,
+      data => this.possibleValues = data.map(d => ({value: d.userName, img: d.pdp})),
+      err => console.error(err)
+    )
+  }
+
+  autocompletePost(currentValue: string, type: EPostTypeStr) {
+    this.postService.getAutocomplete(currentValue, type).subscribe(
+      data => this.possibleValues = data.map(d => ({value: d.title, img: d.img})),
       err => console.error(err)
     )
   }

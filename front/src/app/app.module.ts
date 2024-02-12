@@ -30,7 +30,7 @@ import {NgOptimizedImage} from "@angular/common";
 import { ContactComponent } from './page/contact/contact.component';
 import { NewPostComponent } from './page/new-post/new-post.component';
 import { SignUpComponent } from './page/sign-up/sign-up.component';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +65,8 @@ import { SignUpComponent } from './page/sign-up/sign-up.component';
     MatInputModule,
     ReactiveFormsModule,
     MatChipsModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    MatSnackBarModule
   ],
   providers: [
     TokenInterceptorProvider,

@@ -1,9 +1,6 @@
 package fr.arosaje.nosithouss.models;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +19,7 @@ import java.util.Map;
 @DiscriminatorValue("catalog")
 @SuperBuilder
 public class CatalogPost extends Post {
-
+    @Column(name = "additional_properties")
     private String additionalProperties;
     private List<String> images;
 }

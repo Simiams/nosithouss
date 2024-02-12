@@ -1,6 +1,6 @@
 export enum choiceSearch {
   USER = "Personne",
-  FORUM = "Forum",
+  CATALOG = "Catalog",
   POST = "Post",
   GUARDINGPOST = "Guarde de plante"
 }
@@ -10,4 +10,10 @@ export enum EPostType {
   CATALOG,
   GUARDING,
   POST
+}
+
+export enum EPostTypeStr {
+  CATALOG = "CATALOG",
+  GUARDING = "GUARDING",
+  POST = "POST"
 }

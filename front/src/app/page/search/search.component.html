@@ -21,10 +21,10 @@
   <div class="display-values">
     <mat-list>
       <mat-list-item matRipple [matRippleColor]=green class="display-value-item"
-                     *ngFor="let possibleValue of possibleValues" (click)="redirectToProfile(possibleValue.userName)">
+                     *ngFor="let possibleValue of possibleValues" (click)="redirectToProfile(possibleValue.value)">
         <div class="top-item">
-          <img matListItemAvatar class="contact-icon" src="favicon.ico" alt="...">
-          <div class="contact-username">{{ possibleValue.userName }}</div>
+          <img matListItemAvatar class="contact-icon" src="{{ assetsBaseUrl + (possibleValue.img ?? 'default') }}" alt="...">
+          <div class="contact-username">{{ possibleValue.value }}</div>
         </div>
         <div class="contacts-list-item-bottom"></div>
       </mat-list-item>

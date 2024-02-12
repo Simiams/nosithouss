@@ -58,7 +58,7 @@ public class UserService implements UserDetailsService {
     }
 
     public List<UserNameRes> getAutocompleteUsername(String usernamePrefix) {
-        return userRepository.findByUserNameStartingWith(usernamePrefix).stream().map(user -> new UserNameRes(user.getUsername())).toList();
+        return userRepository.findByUserNameStartingWith(usernamePrefix).stream().map(user -> new UserNameRes(user.getUsername(), user.getPdp())).toList();
     }
 
     public void saveUserPdp(String username, MultipartFile file) throws IOException {

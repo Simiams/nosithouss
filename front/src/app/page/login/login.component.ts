@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ICredential } from 'src/app/_interfaces/credential';
-import { AuthService } from 'src/app/_service/auth.service';
-import { TokenService } from 'src/app/_service/token.service';
+import {Component} from '@angular/core';
+import {ICredential} from 'src/app/_interfaces/credential';
+import {AuthService} from 'src/app/_service/auth.service';
+import {TokenService} from 'src/app/_service/token.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -9,29 +11,31 @@ import { TokenService } from 'src/app/_service/token.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
+  error: string = ""
   form: ICredential = {
     userName: '',
     password: ''
   }
 
   constructor(
+    private _snackBar: MatSnackBar,
     private authService: AuthService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private router: Router
   ) { }
 
-  // ngOnInit(): void {
-  // }
-
   onSubmit(): void{
-    console.log("login component")
+    console.log("onSubmit")
     console.log(this.form)
     this.authService.login(this.form).subscribe(
       data => {
         console.log("token from onSubmit: " + data.bearer)
         this.tokenService.saveToken(data.bearer)
+        this.router.navigate(['home'])
       },
-      err => console.error(err)
+      err => this._snackBar.open('Username or password incorrect', 'Fermer', {
+        duration: 2000,
+      })
     )
   }
 }

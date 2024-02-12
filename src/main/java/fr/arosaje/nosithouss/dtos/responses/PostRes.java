@@ -1,6 +1,8 @@
 package fr.arosaje.nosithouss.dtos.responses;
 
 import fr.arosaje.nosithouss.enums.EPostType;
+import fr.arosaje.nosithouss.models.CatalogPost;
+import fr.arosaje.nosithouss.models.GuardingPost;
 import fr.arosaje.nosithouss.models.Post;
 import fr.arosaje.nosithouss.utils.PostUtils;
 import lombok.AllArgsConstructor;
@@ -8,6 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
+
+import static fr.arosaje.nosithouss.utils.PostUtils.*;
 
 @Getter
 @Setter
@@ -23,9 +28,10 @@ public class PostRes {
     private Post lastVersion;
     private int nbLike;
     private int nbDislike;
+    private List<String> images;
 
     public PostRes(Post post) {
-        this.type = PostUtils.getEPostByPost(post);
+        this.type = getEPostByPost(post);
         this.id = post.getId();
         this.authorUserName = post.getAuthor() != null ? post.getAuthor().getUsername(): "";
         this.createdAt = post.getCreatedAt();
@@ -34,5 +40,6 @@ public class PostRes {
         this.lastVersion = post.getLastVersion();
         this.nbLike = post.getNbLike();
         this.nbDislike = post.getNbDislike();
+        this.images = getAllImagesByPost(post);
     }
 }

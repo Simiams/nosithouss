@@ -27,7 +27,8 @@ export interface ITokenUser{
 }
 
 export interface IUsernameGet{
-  userName:string
+  userName:string,
+  pdp: string
 }
 
 export interface IProfileGet {
