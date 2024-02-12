@@ -9,7 +9,6 @@ public enum EPostType {
     CATALOG,
     GUARDING,
     POST;
-
     public static EPostType fromString(String type) {
         return Arrays.stream(EPostType.values()).filter(r -> r.toString().equals(type)).findFirst().orElse(null);
     }

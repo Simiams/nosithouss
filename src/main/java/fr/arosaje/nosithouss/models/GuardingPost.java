@@ -1,6 +1,9 @@
 package fr.arosaje.nosithouss.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +11,6 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -20,10 +22,13 @@ import java.util.List;
 @DiscriminatorValue("guarding")
 @SuperBuilder
 public class GuardingPost extends Post {
-
+    @Column(name = "coordinatex")
     private int coordinateX;
+    @Column(name = "coordinatey")
     private int coordinateY;
+    @Column(name = "guarding_at")
     private Timestamp guardingAt;
+    @Column(name = "end_guarding_at")
     private Timestamp endGuardingAt;
     private List<String> images;
 }

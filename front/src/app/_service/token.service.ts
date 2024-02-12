@@ -19,8 +19,7 @@ export class TokenService {
   }
 
   isLogged(): boolean{
-    console.log("isLogged from token service")
-    const token = localStorage.getItem('token')
+      const token = localStorage.getItem('token')
     return !! token
   }
 

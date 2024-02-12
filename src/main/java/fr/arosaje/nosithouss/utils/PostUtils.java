@@ -8,6 +8,8 @@ import fr.arosaje.nosithouss.models.CatalogPost;
 import fr.arosaje.nosithouss.models.GuardingPost;
 import fr.arosaje.nosithouss.models.Post;
 
+import java.util.List;
+
 public class PostUtils {
 
     public static PostRes createPostResponseByPost(Post post) {
@@ -26,6 +28,14 @@ public class PostUtils {
         };
     }
 
+    public static Class<?> getPostTypeByEPostType(EPostType ePostType) {
+        return switch (ePostType) {
+            case CATALOG -> CatalogPost.class;
+            case GUARDING -> GuardingPost.class;
+            default -> Post.class;
+        };
+    }
+
     public static EPostType getEPostByPost(Post post) {
         return switch (post) {
             case CatalogPost catalogPost -> EPostType.CATALOG;
@@ -34,12 +44,28 @@ public class PostUtils {
         };
     }
 
-//    public static <T extends Post> T getPostInstance(T post) {
-//        if (post instanceof CatalogPost)
-//            return (T) new CatalogPost();
-//        else if (post instanceof GuardingPost)
-//            return (T) new GuardingPost();
-//        else
-//            return post;
-//    }
+    public static <T extends Post> T getPostInstance(T post) {
+        if (post instanceof CatalogPost)
+            return (T) new CatalogPost();
+        else if (post instanceof GuardingPost)
+            return (T) new GuardingPost();
+        else
+            return post;
+    }
+
+    public static String getFirstImgPostOrNullByPost(Post post) {
+        return switch (getEPostByPost(post)) {
+            case CATALOG -> ((CatalogPost) post).getImages().getFirst();
+            case GUARDING -> ((GuardingPost) post).getImages().getFirst();
+            default -> null;
+        };
+    }
+
+    public static List<String> getAllImagesByPost(Post post) {
+        return switch (getEPostByPost(post)) {
+            case CATALOG -> ((CatalogPost) post).getImages();
+            case GUARDING -> ((GuardingPost) post).getImages();
+            default -> null;
+        };
+    }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Renderer2} from '@angular/core';
 import { Router } from '@angular/router';
 import {logMessages} from "@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild";
 import { FavoriteService } from 'src/app/_service/favorite.service';
@@ -27,32 +27,17 @@ export class HomeComponent implements OnInit{
     number: 25,
     createdAt: now(),
   }
-
-  // images = [
-  //   "nature",
-  //   "sky",
-  //   "grass",
-  //   "mountains",
-  //   "rivers",
-  //   "glacier",
-  //   "forest",
-  //   "streams",
-  //   "rain",
-  //   "clouds",
-  // ];
-
-  constructor(private favoriteService: FavoriteService, private router: Router, private postService: PostService) {
-    // this.posts = this.images.map((image, index) => ({
-    //   id: `post_${index}`,
-    //   title: `Card ${index + 1}`,
-    //   description: `Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.`,
-    //   imageUrl: `https://source.unsplash.com/random/500X500?${image}`,
-    //   liked: this.favoriteService.isPostLiked(`post_${index}`)
-    // }));
+  constructor(private favoriteService: FavoriteService, private router: Router, private postService: PostService, private renderer: Renderer2) {
   }
 
   ngOnInit() {
     this.getPosts(this.currentPost)
+  }
+  getMore() {
+    this.getPosts({
+      number: 5,
+      createdAt: this.posts[this.posts.length - 1].createdAt.toString(),
+    })
   }
 
   likePost(post: IPostRes) {
@@ -64,9 +49,10 @@ export class HomeComponent implements OnInit{
     post.liked = !post.liked;
   }
 
+
   getPosts(post: IPostReq) {
     this.postService.getPosts(post).subscribe(
-      data => this.posts = data,
+      data => this.posts.push(...data),
       error => console.log(error)
     )
   }
