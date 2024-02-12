@@ -33,7 +33,7 @@ export interface IPostRes {
   liked?: boolean,
 }
 
-interface ICoordinate{
+interface ICoordinate {
   c: number,
   y: number
 }
@@ -46,4 +46,34 @@ export interface IPostReq {
 export interface IPostTitleGet {
   title: string,
   img: string,
+}
+
+export interface ICreatePostReq {
+  content: string,
+  title: string,
+  lastVersion: null,
+  nbLike: number,
+  nbDisLike: number,
+}
+
+export interface ICreateCatalogReq {
+  content: string,
+  title: string,
+  lastVersion: null,
+  nbLike: number,
+  nbDisLike: number,
+  img: string[],
+}
+
+export interface ICreateGuardingReq {
+  content: string,
+  title: string,
+  lastVersion: null,
+  nbLike: number,
+  nbDisLike: number,
+  img: string[],
+  guardingAt: string,
+  endGuardingAt: string,
+  coordinateX: number,
+  coordinateY: number
 }

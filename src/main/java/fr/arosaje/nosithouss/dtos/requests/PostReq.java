@@ -21,8 +21,9 @@ public class PostReq {
     private Post lastVersion;
     private int nbLike;
     private int nbDislike;
-    private String img;
-    private Point coordinates;
+    private List<String> img;
+    private int coordinateX;
+    private int coordinateY;
     private Timestamp guardingAt;
     private Timestamp endGuardingAt;
 
@@ -31,10 +32,10 @@ public class PostReq {
     }
 
     public CatalogPost toCatalogPost() {
-        return CatalogPost.builder().content(content).title(title).lastVersion(lastVersion).nbLike(nbLike).nbDislike(nbDislike).images(List.of(img)).build();
+        return CatalogPost.builder().content(content).title(title).lastVersion(lastVersion).nbLike(nbLike).nbDislike(nbDislike).images(img).build();
     }
 
     public GuardingPost toGuardingPost() {
-        return GuardingPost.builder().content(content).title(title).lastVersion(lastVersion).nbLike(nbLike).nbDislike(nbDislike).images(List.of(img)).guardingAt(guardingAt).endGuardingAt(endGuardingAt).coordinateX(coordinates.x).coordinateY(coordinates.y).build();
+        return GuardingPost.builder().content(content).title(title).lastVersion(lastVersion).nbLike(nbLike).nbDislike(nbDislike).images(img).guardingAt(guardingAt).endGuardingAt(endGuardingAt).coordinateX(coordinateX).coordinateY(coordinateY).build();
     }
 }

@@ -16,7 +16,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(credentials: ICredential): Observable<IToken> {
-    console.log('login');
     return this.http.post<IToken>(this.url, credentials)
       .pipe(
         catchError((error) => {

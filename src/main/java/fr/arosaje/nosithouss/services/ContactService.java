@@ -37,6 +37,6 @@ public class ContactService {
                 .userName((contact.getContactUser().equals(user) ? contact.getUser() : contact.getContactUser()).getUsername())
                 .lastChat(contact.getLastChat())
                 .build())
-                .toList();
+                .toList().reversed();
     }
 }

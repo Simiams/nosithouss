@@ -11,10 +11,7 @@ export class TokenService {
   constructor(private router: Router) { }
 
   saveToken(token: string): void{
-    console.log("save token")
-    console.log("token: " + token)
     localStorage.setItem('token', token)
-    console.log("tokenfrom localstorage: " + localStorage.getItem('token'))
     this.router.navigate(['admin'])
   }
 
@@ -24,25 +21,20 @@ export class TokenService {
   }
 
   clearToken(): void{
-    console.log("clearToken")
     localStorage.removeItem('token')
     this.router.navigate(['/'])
   }
 
   clearTokenExpired(): void{
-    console.log("clearTokenExpired")
     localStorage.removeItem('token')
     this.router.navigate(['auth'])
   }
 
   getToken(): string | null{
-    console.log("getToken")
-    console.log("token from localStorage: " + localStorage.getItem('token'))
     return localStorage.getItem('token')
   }
 
   getPayload(){
-    console.log("getPayLoad")
     let user: ITokenUser = {
       id: 0,
       nom: '',

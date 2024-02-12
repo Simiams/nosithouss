@@ -1,70 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+.new-post {
+  padding: 25px 0;
+  display: flex;
+  flex-direction: column;
+}
 
-.nav-container p{
-    font-family: 'Playfair Display', serif;
-    text-align: center;
-    font-size: 2.3vh;
-    margin-top: 4vh;
+.select-chips {
+  margin: 0 auto;
+}
+
+.new-post-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.new-post-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  padding: 25px 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.new-post-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 
-
-.img-container img{
-    max-width: 40%;
-    max-height: auto;
-    margin-top: 3vh;
+.new-post-button {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 50%;
+  height: 45px;
+  border-radius: 25px;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  background-color: #4e5e45;
+  color: #f0f0f0;
+  margin: 0 auto 15px auto;
 }
 
-.img-container {
-    display: flex;
-    justify-content: center;
+.new-post-button:hover {
+  color: #4e5e45;
+  background-color: #f0f0f0;
+  transition: .5s;
 }
 
-.upload-button {
-    display: flex;
-    justify-content: center;
-}
-
-.upload-button button {
-    color: #4E5E45;
-}
-
-.description {
-    display: flex;
-    margin-top: 10vh;
-    justify-content: center;
-}
-
-.description input {
-    padding-bottom: 7vh;
-    padding-right: 30vw;
-    border-radius: 8px;
-    border-width: 0.5px;
-}
-
-.post-button button {
-    background-color: #4E5E45;
-    color: aliceblue;
-    font-family: 'Playfair Display', serif;
-    position: fixed; /* Position fixe par rapport à la fenêtre du navigateur */
-    bottom: 10vh; /* Distance par rapport au bas de la fenêtre */
-    z-index: 3;
-}
-
-.post-button a{
-    display: flex;
-    justify-content: center;
-}
-
-.title {
-    display: flex;
-    margin-top: 10vh;
-    margin-bottom: 2vh;
-    justify-content: center;
-}
-
-.title input {
-    padding-right: 30vw;
-    border-radius: 4px;
-    border-width: 0.5px;
+input[type="file"] {
+  display: none;
 }
