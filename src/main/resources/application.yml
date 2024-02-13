@@ -1,13 +1,15 @@
 spring:
   profiles:
     active: default
+  config:
+    import: optional:file:.env[.properties]
   main:
     web-application-type: servlet
     etl: true
   datasource:
-    url: jdbc:postgresql://localhost/arosaje
-    username: nosithouss
-    password: nosithouss
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PWD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -17,8 +19,8 @@ spring:
     locations: classpath:migrations
   security:
     user:
-      name: nosithouss
-      password: nosithouss
+      name: ${SPRING_SECURITY_USER}
+      password: ${SPRING_SECURITY_PWD}
 
 debug: false
 

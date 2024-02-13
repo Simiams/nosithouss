@@ -9,17 +9,5 @@ services:
       - SPRING_PROFILES_ACTIVE=etl
     volumes:
       - ./data-nosithouss:/app
-    ports:
-      - "9090:8080"
-
-  postgres_java:
-    image: postgres:latest
-    container_name: nosithouss-postgres
-    environment:
-      POSTGRES_DB: arosaje
-      POSTGRES_USER: nosithouss
-      POSTGRES_PASSWORD: nosithouss
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./data-postgres:/var/lib/postgresql/data
+    env_file:
+      - .env

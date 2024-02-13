@@ -1,8 +1,0 @@
-spring:
-  main:
-    web-application-type: servlet
-    etl: true
-  datasource:
-    url: jdbc:postgresql://localhost/arosaje
-    username: nosithouss
-    password: nosithouss
