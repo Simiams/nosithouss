@@ -2,7 +2,7 @@ version: '3'
 
 services:
   postgres_java:
-    image: postgres:latest
+    image: postgres:16.2
     container_name: nosithouss-postgres
     environment:
       POSTGRES_DB: arosaje
