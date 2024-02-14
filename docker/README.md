@@ -3,7 +3,8 @@
 En théorie, en aillant la derniére version du git, vous devriez avoir les fichier docker-compos necessaire et utiliser les commande:
 - ``docker-compose -f docker-compose-pg.yml up -d``
 - ``docker-compose -f docker-compose-nosithouss.yml up -d``
-- ``docker-compose -f docker-compose-etl.yml up -d``
+- ``docker-compose -f docker-compose-etl.yml up -d`` (Si vous souhaitez lancer l'etl...)
+- ``docker-compose -f docker-compose-web.yml up -d``
 
 Cependant, si ça ne marche pas, suivez la procédure ci-dessous
 
