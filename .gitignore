@@ -32,9 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 
-docker
+docker/data-postgres
 
 .mvn
 /.mvn/
-.idea
 target
