@@ -39,7 +39,7 @@
 <!--              (change)="loadFile($event)" formControlName="img" id="images"/>-->
 
       <mat-form-field *ngIf="selectedChip===choiceNewPost.GUARDINGPOST">
-        <mat-label>Fin du guardennage</mat-label>
+        <mat-label>Debut du guardennage</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="guardingAt">
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>

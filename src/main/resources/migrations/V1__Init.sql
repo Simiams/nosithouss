@@ -1,4 +1,4 @@
-create table flags
+create table public.flags
 (
     key   varchar(255) not null
         primary key,
@@ -6,20 +6,20 @@ create table flags
     value varchar(255)
 );
 
-alter table flags
+alter table public.flags
     owner to nosithouss;
 
-create table images
+create table public.images
 (
     name varchar(255) not null
         primary key,
     data oid
 );
 
-alter table images
+alter table public.images
     owner to nosithouss;
 
-create table users
+create table public.users
 (
     user_name  varchar(255) not null
         primary key,
@@ -31,26 +31,43 @@ create table users
     roles      smallint[]
 );
 
-alter table users
+alter table public.users
     owner to nosithouss;
 
-create table contacts
+create table public.contacts
 (
     id         bigserial
         primary key,
     last_chat  timestamp(6),
     contact_id varchar(255)
         constraint fkbwdla3daipku5af60p84menq5
-            references users,
+            references public.users,
     user_id    varchar(255)
         constraint fkna8bddygr3l3kq1imghgcskt8
-            references users
+            references public.users
 );
 
-alter table contacts
+alter table public.contacts
     owner to nosithouss;
 
-create table posts
+create table public.messages
+(
+    id          bigserial
+        primary key,
+    content     text,
+    created_at  timestamp(6) not null,
+    receiver_id varchar(255)
+        constraint fkt05r0b6n0iis8u7dfna4xdh73
+            references public.users,
+    sender_id   varchar(255)
+        constraint fk4ui4nnwntodh6wjvck53dbk9m
+            references public.users
+);
+
+alter table public.messages
+    owner to nosithouss;
+
+create table public.posts
 (
     type                  varchar(31)  not null,
     id                    bigserial
@@ -68,16 +85,19 @@ create table posts
     guarding_at           timestamp(6),
     author_id             varchar(255)
         constraint fk6xvn0811tkyo3nfjk2xvqx6ns
-            references users,
+            references public.users,
     last_version_id       bigint
         constraint fk268l0ibw80sligk73yx3vdi8c
-            references posts
+            references public.posts,
+    guard_claimer         varchar(255)
+        constraint fkobac4feo24nork1nuikismtt
+            references public.users
 );
 
-alter table posts
+alter table public.posts
     owner to nosithouss;
 
-create table comments
+create table public.comments
 (
     id         bigserial
         primary key,
@@ -85,29 +105,12 @@ create table comments
     created_at timestamp(6) not null,
     author_id  varchar(255)
         constraint fkn2na60ukhs76ibtpt9burkm27
-            references users,
+            references public.users,
     post_id    bigint
         constraint fkh4c7lvsc298whoyd4w9ta25cr
-            references posts
+            references public.posts
 );
 
-alter table comments
-    owner to nosithouss;
-
-create table messages
-(
-    id          bigserial
-        primary key,
-    content     text,
-    created_at  timestamp(6) not null,
-    receiver_id varchar(255)
-        constraint fkt05r0b6n0iis8u7dfna4xdh73
-            references users,
-    sender_id   varchar(255)
-        constraint fk4ui4nnwntodh6wjvck53dbk9m
-            references users
-);
-
-alter table messages
+alter table public.comments
     owner to nosithouss;
 

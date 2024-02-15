@@ -1,6 +1,7 @@
 package fr.arosaje.nosithouss.controllers;
 
 import fr.arosaje.nosithouss.dtos.requests.PostReq;
+import fr.arosaje.nosithouss.dtos.requests.ProposalGuardReq;
 import fr.arosaje.nosithouss.dtos.requests.SeePostsReq;
 import fr.arosaje.nosithouss.dtos.responses.CatalogPostRes;
 import fr.arosaje.nosithouss.dtos.responses.PostRes;
@@ -73,6 +74,12 @@ public class PostController {
     @Operation(summary = "Automplete post by his title")
     public List<PostTitleRes> autocompleteCatalogPost(@PathVariable EPostType postType, @PathVariable String prefix) {
         return postService.autocomplete(postType, prefix);
+    }
+
+    @PostMapping("/guard-claimer")
+    @Operation(summary = "Add guard claimer to a guarding post")
+    public void addGuardClaimer(@RequestBody ProposalGuardReq proposalGuardReq) {
+        postService.addGuardClaimer(proposalGuardReq);
     }
 
 }

@@ -1,6 +1,7 @@
 package fr.arosaje.nosithouss.services;
 
 import fr.arosaje.nosithouss.dtos.requests.PostReq;
+import fr.arosaje.nosithouss.dtos.requests.ProposalGuardReq;
 import fr.arosaje.nosithouss.dtos.requests.SeePostsReq;
 import fr.arosaje.nosithouss.dtos.responses.PostRes;
 import fr.arosaje.nosithouss.dtos.responses.PostTitleRes;
@@ -9,7 +10,6 @@ import fr.arosaje.nosithouss.models.*;
 import fr.arosaje.nosithouss.repositories.PostRepository;
 import fr.arosaje.nosithouss.repositories.PostRepositoryPersistence;
 import fr.arosaje.nosithouss.utils.FileManager;
-import fr.arosaje.nosithouss.utils.PostUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import static fr.arosaje.nosithouss.utils.PostUtils.*;
 import static fr.arosaje.nosithouss.utils.Utils.now;
@@ -81,5 +83,14 @@ public class PostService {
     public List<PostTitleRes> autocomplete(EPostType postType, String prefix) {
         return postRepositoryPersistence.findByTypeAndTitleStartingWith(getPostTypeByEPostType(postType), prefix)
                 .stream().map(p -> new PostTitleRes(p.getTitle(), getFirstImgPostOrNullByPost(p))).toList();
+    }
+
+    public void addGuardClaimer(ProposalGuardReq proposalGuardReq) {
+        Optional<Post> post = postRepository.findById(proposalGuardReq.getPostId());
+        if (post.isPresent() && (Objects.equals(post.get().getAuthor().getUsername(), SecurityContextHolder.getContext().getAuthentication().getName()))) {
+            GuardingPost newPost = (GuardingPost) post.get();
+            newPost.setGuardClaimer(authService.getUser(proposalGuardReq.getUserName()));
+            postRepository.save(newPost);
+        }
     }
 }
