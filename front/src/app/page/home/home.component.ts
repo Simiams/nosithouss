@@ -1,10 +1,10 @@
 import {Component, OnInit, Renderer2} from '@angular/core';
-import { Router } from '@angular/router';
-import {logMessages} from "@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild";
-import { FavoriteService } from 'src/app/_service/favorite.service';
-import { PostService } from 'src/app/_service/post.service';
-import { now } from 'src/app/_utils/utils';
-import { IPostReq, IPostRes } from 'src/app/_interfaces/post';
+import {Router} from '@angular/router';
+import {FavoriteService} from 'src/app/_service/favorite.service';
+import {PostService} from 'src/app/_service/post.service';
+import {now, printTimestamp} from 'src/app/_utils/utils';
+import {IPostReq, IPostRes} from 'src/app/_interfaces/post';
+import {EPostType} from "../../_interfaces/ennums";
 
 type Post = {
   id: string;
@@ -20,19 +20,21 @@ type Post = {
   styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   posts: IPostRes[] = [];
   assetsBaseUrl = "http://localhost:8080/api/assets/" //todo global
   currentPost: IPostReq = {
     number: 25,
     createdAt: now(),
   }
+
   constructor(private favoriteService: FavoriteService, private router: Router, private postService: PostService, private renderer: Renderer2) {
   }
 
   ngOnInit() {
     this.getPosts(this.currentPost)
   }
+
   getMore() {
     this.getPosts({
       number: 5,
@@ -55,5 +57,16 @@ export class HomeComponent implements OnInit{
       data => this.posts.push(...data),
       error => console.log(error)
     )
+  }
+
+  protected readonly printTimestamp = printTimestamp;
+  protected readonly EPostType = EPostType;
+
+  redirectUser(userName: string) {
+    this.router.navigate(["/profile", userName])
+  }
+
+  redirectMessage(authorUserName: string) {
+    this.router.navigate(["/chat", authorUserName])
   }
 }

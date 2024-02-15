@@ -1,9 +1,6 @@
 package fr.arosaje.nosithouss.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,4 +28,7 @@ public class GuardingPost extends Post {
     @Column(name = "end_guarding_at")
     private Timestamp endGuardingAt;
     private List<String> images;
+    @OneToOne
+    @JoinColumn(name = "guard_claimer")
+    private User guardClaimer;
 }

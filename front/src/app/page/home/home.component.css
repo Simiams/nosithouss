@@ -19,9 +19,56 @@
   font-family: 'Playfair Display', serif;
 }
 
+.header-post {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.first-line-header {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgba(78, 94, 69, 0.32);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.first-line-header:hover {
+  cursor: pointer;
+}
+
+.first-line-header .contact-username {
+  font-weight: bold;
+  margin-left: 25px;
+  margin-right: 6px;
+}
+
+.first-line-header * {
+  margin: auto 0;
+}
+
+.contact-icon {
+  margin-bottom: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+
+.second-line-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .mat-card {
   width: 100%;
   margin-bottom: 20px;
+}
+
+.card-container {
+  border-bottom: 1px solid rgba(78, 94, 69, 0.32);
 }
 
 .img-container {
@@ -37,4 +84,15 @@
 
 .button-get-more {
   margin-bottom: 100px;
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.actions * {
+  margin: auto 0;
 }
