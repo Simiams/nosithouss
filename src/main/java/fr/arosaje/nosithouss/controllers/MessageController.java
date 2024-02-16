@@ -1,5 +1,7 @@
 package fr.arosaje.nosithouss.controllers;
 
+import fr.arosaje.nosithouss.dtos.requests.MessageGuardAcceptReq;
+import fr.arosaje.nosithouss.dtos.requests.MessageGuardReq;
 import fr.arosaje.nosithouss.dtos.requests.MessageReq;
 import fr.arosaje.nosithouss.dtos.responses.MessageRes;
 import fr.arosaje.nosithouss.models.Message;
@@ -34,5 +36,16 @@ public class MessageController {
     public ResponseEntity getMessagesByUser(@PathVariable String userIdentifier) {
         List<Message> messages = messageService.getMessagesByReceiver(userIdentifier);
         return ResponseEntity.ok(messages.stream().map(MessageRes::new).toList());
+    }
+
+    @PostMapping(value = "/guard-request/{userIdentifier}")
+    @Operation(summary = "Send a guard request to the given user")
+    public void createGuardRequest(@RequestBody MessageGuardReq messageGuardReq, @PathVariable String userIdentifier) {
+       messageService.createGuardRequest(messageGuardReq, userIdentifier);
+    }
+    @PostMapping(value = "/guard-request/{messageId}/accept")
+    @Operation(summary = "Send a guard request to the given user")
+    public void acceptGuardRequest(@RequestBody MessageGuardAcceptReq messageGuardAcceptReq, @PathVariable Long messageId) {
+       messageService.acceptGuardRequest(messageGuardAcceptReq, messageId);
     }
 }

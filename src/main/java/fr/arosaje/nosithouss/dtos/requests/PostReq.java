@@ -7,9 +7,7 @@ import fr.arosaje.nosithouss.models.Post;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.awt.Point;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 @Getter

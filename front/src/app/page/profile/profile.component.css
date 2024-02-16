@@ -37,24 +37,6 @@
     align-items: center;
 }
 
-.posts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px;
-
-}
-
-.post-item {
-  border: 1px solid #ccc;
-  overflow: hidden;
-
-}
-
-img {
-    width: 100%;
-    height: 25vh;
-}
-
 .container-nav {
   display: flex;
   justify-content: space-between;
@@ -67,10 +49,28 @@ img {
   background-color: transparent;
   color: #4E5E45;
   margin-top: 1vh;
-
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
 
+.post-container {
+  margin-bottom: 50px;
+}
+
+.post-card {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.post-image {
+  width: 350px;
+  margin: 0 auto;
+}
 
 
 

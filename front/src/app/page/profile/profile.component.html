@@ -11,7 +11,7 @@
   </a>
 </div>
 <div class="profile-container">
-  <img [src]="assetsBaseUrl + currentProfile.pdp" alt="Photo de profil" class="profile-image"/>
+  <img [src]="assetsBaseUrl + 'default'" alt="Photo de profil" class="profile-image"/>
 </div>
 <div class="name">
   <p>{{ currentProfile.userName }}</p>
@@ -19,21 +19,26 @@
 
 <mat-tab-group>
   <mat-tab label="Posts">
-    <div class="posts-grid">
+    <div class="post-container">
       <mat-card *ngFor="let post of posts" class="post-card">
-        <img mat-card-image [src]="assetsBaseUrl + post.img" alt="Post Image">
+        <div class="header">
+          <mat-chip color="primary">{{ post.type }}</mat-chip>
+          <mat-chip class="date-guard" *ngIf="post.guardingAt"> {{ printTimestamp(post.guardingAt!) }}
+            - {{ printTimestamp(post.endGuardingAt!) }}
+          </mat-chip>
+        </div>
+        <img *ngIf="post.img" mat-card-image [src]="assetsBaseUrl + post.img" alt="Post Image" class="post-image">
         <mat-card-content>
           <h3 mat-card-title>{{ post.title }}</h3>
           <p mat-card-subtitle>{{ post.content }}</p>
         </mat-card-content>
       </mat-card>
     </div>
-
   </mat-tab>
   <mat-tab label="Favoris">
-    <div class="posts-grid">
+    <div class="post-container">
       <mat-card *ngFor="let post of favorites" class="post-card">
-        <img mat-card-image [src]="assetsBaseUrl + post.img" alt="Post Image">
+        <img mat-card-image [src]="assetsBaseUrl + post.img" alt="Post Image" class="post-image">
         <mat-card-content>
           <h3 mat-card-title>{{ post.title }}</h3>
           <p mat-card-subtitle>{{ post.content }}</p>
@@ -45,6 +50,25 @@
       </mat-card>
     </div>
   </mat-tab>
-  <mat-tab label="Mes plantes"> Content 3</mat-tab>
+  <mat-tab label="Plantes gardées">
+    <div class="post-container">
+
+      <mat-card *ngFor="let post of postsGuarding" class="post-card">
+        <div class="header">
+          <mat-chip color="primary">{{ post.type }}</mat-chip>
+          <mat-chip class="date-guard" *ngIf="post.guardingAt"> {{ printTimestamp(post.guardingAt!) }}
+            - {{ printTimestamp(post.endGuardingAt!) }}
+          </mat-chip>
+        </div>
+        <img *ngIf="post.img" mat-card-image [src]="assetsBaseUrl + post.img" alt="Post Image" class="post-image">
+        <mat-card-content>
+          <h3 mat-card-title>{{ post.title }}</h3>
+          <p mat-card-subtitle>{{ post.content }}</p>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+
+  </mat-tab>
 </mat-tab-group>
 

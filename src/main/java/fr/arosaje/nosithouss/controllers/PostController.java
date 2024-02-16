@@ -3,18 +3,15 @@ package fr.arosaje.nosithouss.controllers;
 import fr.arosaje.nosithouss.dtos.requests.PostReq;
 import fr.arosaje.nosithouss.dtos.requests.ProposalGuardReq;
 import fr.arosaje.nosithouss.dtos.requests.SeePostsReq;
-import fr.arosaje.nosithouss.dtos.responses.CatalogPostRes;
 import fr.arosaje.nosithouss.dtos.responses.PostRes;
 import fr.arosaje.nosithouss.dtos.responses.PostTitleRes;
 import fr.arosaje.nosithouss.enums.EPostType;
 import fr.arosaje.nosithouss.errors.ErrorRes;
-import fr.arosaje.nosithouss.models.CatalogPost;
 import fr.arosaje.nosithouss.models.Post;
 import fr.arosaje.nosithouss.services.PostService;
 import fr.arosaje.nosithouss.utils.PostUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -71,7 +68,7 @@ public class PostController {
     }
 
     @GetMapping("/{postType}/autocomplete/{prefix}")
-    @Operation(summary = "Automplete post by his title")
+    @Operation(summary = "Autocomplete post by his title")
     public List<PostTitleRes> autocompleteCatalogPost(@PathVariable EPostType postType, @PathVariable String prefix) {
         return postService.autocomplete(postType, prefix);
     }
@@ -82,4 +79,15 @@ public class PostController {
         postService.addGuardClaimer(proposalGuardReq);
     }
 
+    @GetMapping("/profile")
+    @Operation(summary = "Get all post by token user")
+    public List<PostRes> getOwnPosts() {
+        return postService.getOwnPosts();
+    }
+
+    @GetMapping("/guarding")
+    @Operation(summary = "Get all post that user guard by token user")
+    public List<PostRes> getGuardingPosts() {
+        return postService.getGuardingPosts();
+    }
 }

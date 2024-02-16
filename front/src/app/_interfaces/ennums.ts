@@ -1,3 +1,4 @@
+
 export enum choiceSearch {
   USER = "Personne",
   CATALOG = "Catalog",
@@ -21,4 +22,9 @@ export enum EPostTypeStr {
   CATALOG = "CATALOG",
   GUARDING = "GUARDING",
   POST = "POST"
+}
+
+export enum MessageType {
+  CLAIM_GUARD,
+  MESSAGE
 }

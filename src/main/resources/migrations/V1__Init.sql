@@ -50,23 +50,6 @@ create table public.contacts
 alter table public.contacts
     owner to nosithouss;
 
-create table public.messages
-(
-    id          bigserial
-        primary key,
-    content     text,
-    created_at  timestamp(6) not null,
-    receiver_id varchar(255)
-        constraint fkt05r0b6n0iis8u7dfna4xdh73
-            references public.users,
-    sender_id   varchar(255)
-        constraint fk4ui4nnwntodh6wjvck53dbk9m
-            references public.users
-);
-
-alter table public.messages
-    owner to nosithouss;
-
 create table public.posts
 (
     type                  varchar(31)  not null,
@@ -112,5 +95,24 @@ create table public.comments
 );
 
 alter table public.comments
+    owner to nosithouss;
+
+create table public.messages
+(
+    type        varchar(31)  not null,
+    id          bigserial
+        primary key,
+    content     text,
+    created_at  timestamp(6) not null,
+    accept      boolean,
+    receiver_id varchar(255)
+        constraint fkt05r0b6n0iis8u7dfna4xdh73
+            references public.users,
+    sender_id   varchar(255)
+        constraint fk4ui4nnwntodh6wjvck53dbk9m
+            references public.users
+);
+
+alter table public.messages
     owner to nosithouss;
 

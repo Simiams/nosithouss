@@ -12,7 +12,7 @@
 
 <div class="container responsive-grid">
   <mat-card *ngFor="let post of posts">
-    <div class="card-container" *ngIf="post.img">
+    <div class="card-container">
       <mat-card-header>
         <div class="header-post">
           <div class="first-line-header" *ngIf="post.authorUserName" (click)="redirectUser(post.authorUserName)">
@@ -23,7 +23,6 @@
 
           </div>
           <div class="second-line-header">
-            <mat-card-title>{{ post.title }}</mat-card-title>
             <mat-chip class="date-guard" *ngIf="post.guardingAt"> {{ printTimestamp(post.guardingAt!) }}
               - {{ printTimestamp(post.endGuardingAt!) }}
             </mat-chip>
@@ -32,11 +31,12 @@
         </div>
       </mat-card-header>
       <br/>
-      <div class="img-container">
+      <div  *ngIf="post.img" class="img-container">
         <img mat-card-image ngSrc="{{assetsBaseUrl}}{{post.img}}" alt="image du post" fill class="post-image"/>
       </div>
       <mat-card-content>
         <br/>
+        <mat-card-title>{{ post.title }}</mat-card-title>
         <p>{{ post.content }}</p>
       </mat-card-content>
       <mat-card-actions>
@@ -45,7 +45,7 @@
             <mat-button-toggle [ngClass]="{'liked': post.liked}" (click)="likePost(post)">LIKE</mat-button-toggle>
             <button mat-button>SHARE</button>
           </div>
-          <button *ngIf="post.guardingAt" mat-button class="action-guard" (click)="redirectMessage(post.authorUserName)">Disponnible?</button>
+          <button *ngIf="post.guardingAt" mat-button class="action-guard" (click)="redirectMessage(post.authorUserName, post.id)">Disponnible?</button>
         </div>
       </mat-card-actions>
     </div>

@@ -1,6 +1,8 @@
 package fr.arosaje.nosithouss.repositories;
 
+import fr.arosaje.nosithouss.models.GuardingPost;
 import fr.arosaje.nosithouss.models.Post;
+import fr.arosaje.nosithouss.models.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -17,6 +19,16 @@ public class PostRepositoryPersistence {
         List<Post> posts = em.createQuery("SELECT p FROM Post p WHERE TYPE(p) = :type AND p.title LIKE :prefix", Post.class)
                 .setParameter("type", type)
                 .setParameter("prefix", "%" + prefix + "%")
+                .getResultList();
+        em.close();
+        emf.close();
+        return posts;
+    }
+    public List<GuardingPost> findByGuardClaimer(User user) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("arosaje"); //todo add .env var fr prod...
+        EntityManager em = emf.createEntityManager();
+        List<GuardingPost> posts = em.createQuery("SELECT p FROM GuardingPost p WHERE p.guardClaimer = :user", GuardingPost.class)
+                .setParameter("user", user)
                 .getResultList();
         em.close();
         emf.close();
