@@ -70,6 +70,7 @@
 }
 
 .message {
+  margin-top: 15px;
   padding: 12px;
   flex-shrink: 0;
   overflow-wrap: break-word;
@@ -91,6 +92,61 @@
   background-color: #4e5e45;
   color: #ffffff;
 }
+
+.message-comment {
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.message-action {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  font-style: italic;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-action-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.message-action-button {
+  width: 75px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.message-action-button.accept{
+  background-color: #4e5e45;
+  color: #f0f0f0;
+  border: 2px solid #f0f0f0;
+}
+
+.message-action-button.refuse{
+  background-color: #f0f0f0;
+  color: #4e5e45;
+  border: 2px solid #4e5e45;
+}
+
+.message-action-button.accept:hover{
+  background-color: #f0f0f0;
+  color: #4e5e45;
+  border: 2px solid #4e5e45;
+  transition: 0.2s;
+}
+
+.message-action-button.refuse:hover{
+  background-color: #4e5e45;
+  color: #f0f0f0;
+  border: 2px solid #f0f0f0;
+  transition: 0.2s;
+}
+
 
 .message-input {
   display: flex;

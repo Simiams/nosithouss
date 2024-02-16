@@ -5,6 +5,7 @@ import {PostService} from 'src/app/_service/post.service';
 import {now, printTimestamp} from 'src/app/_utils/utils';
 import {IPostReq, IPostRes} from 'src/app/_interfaces/post';
 import {EPostType} from "../../_interfaces/ennums";
+import {ChatService} from "../../_service/chat.service";
 
 type Post = {
   id: string;
@@ -17,7 +18,7 @@ type Post = {
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 
 export class HomeComponent implements OnInit {
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
     createdAt: now(),
   }
 
-  constructor(private favoriteService: FavoriteService, private router: Router, private postService: PostService, private renderer: Renderer2) {
+  constructor(private favoriteService: FavoriteService, private router: Router, private postService: PostService, private renderer: Renderer2, private messageService: ChatService) {
   }
 
   ngOnInit() {
@@ -66,7 +67,15 @@ export class HomeComponent implements OnInit {
     this.router.navigate(["/profile", userName])
   }
 
-  redirectMessage(authorUserName: string) {
-    this.router.navigate(["/chat", authorUserName])
+  redirectMessage(authorUserName: string, postId: number) {
+    this.messageService.sendGuardRequest({
+      content: "",
+      type: "GUARD_CLAIM",
+      accept: null,
+      postId: postId
+    }, authorUserName).subscribe(
+      response => this.router.navigate(["/chat", authorUserName]),
+      error => console.error('Erreur de sendGuardRequest:', error)
+    );
   }
 }

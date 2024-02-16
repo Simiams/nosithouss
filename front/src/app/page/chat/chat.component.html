@@ -16,11 +16,31 @@
          [ngClass]="{'inner-right': message.senderIdentifier !== user, 'inner-left': message.senderIdentifier === user}"
          *ngFor="let message of messages">
       <div class="message-avatar">
-        <img class="avatar" src="favicon.ico" alt="Photo of Ahmad Shadeed" *ngIf="message.senderIdentifier === user" />
+        <img class="avatar" src="favicon.ico" alt="Photo of Ahmad Shadeed" *ngIf="message.senderIdentifier === user"/>
       </div>
       <div
         [ngClass]="{'message': true, 'message-right': message.senderIdentifier !== user, 'message-left': message.senderIdentifier === user}">
         {{ message.content }}
+        <div class="message-comment"
+             *ngIf="message.senderIdentifier !== user && message.type === 'GUARD_CLAIM'">Vous avez envoyé une
+          demande de gardiennage
+        </div>
+        <div class="message-action"
+             *ngIf="message.senderIdentifier === user && message.type === 'GUARD_CLAIM'  && message.accept === null">
+          {{ message.senderIdentifier }} vous a fais un demande de gardiennage
+          <div class="message-action-buttons">
+            <button class="message-action-button accept" (click)="acceptGuardClaim(message, true)">Accepter</button>
+            <button class="message-action-button refuse" (click)="acceptGuardClaim(message, false)">Refuser</button>
+          </div>
+        </div>
+        <div class="message-comment"
+             *ngIf="message.senderIdentifier === user && message.type === 'GUARD_CLAIM'  && message.accept === true">
+          vous avez acceptez la demande de garidenage de {{ message.senderIdentifier }}
+        </div>
+        <div class="message-comment"
+             *ngIf="message.senderIdentifier === user && message.type === 'GUARD_CLAIM'  && message.accept === false">
+          vous avez refuser la demande de garidenage de {{ message.senderIdentifier }}
+        </div>
       </div>
 
       <div class="message-date">

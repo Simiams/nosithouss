@@ -4,9 +4,11 @@ import {MatIconModule} from "@angular/material/icon";
 import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
-import { ChatService } from "src/app/_service/chat.service";
-import { IMessageRes } from "src/app/_interfaces/chat/message";
-import { printTimestamp } from "src/app/_utils/utils";
+import {ChatService} from "src/app/_service/chat.service";
+import {IMessageRes} from "src/app/_interfaces/chat/message";
+import {printTimestamp} from "src/app/_utils/utils";
+import {MessageType} from "../../_interfaces/ennums";
+import {logMessages} from "@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild";
 
 @Component({
   selector: 'app-chat',
@@ -31,7 +33,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   messages: IMessageRes[] = []
   messageContent: string = "";
 
-  constructor(chatService: ChatService,private route: ActivatedRoute) {
+  constructor(chatService: ChatService, private route: ActivatedRoute) {
     this.chatService = chatService
   }
 
@@ -54,8 +56,22 @@ export class ChatComponent implements OnInit, AfterViewInit {
   }
 
   getMessages() {
-    this.chatService.getMessages(this.user).subscribe(
-      data => this.messages = data.map(d => ({...d, createdAt: printTimestamp(d.createdAt)})),
+    // function getMessageType(content: string): (MessageType | null) {
+    //   if (content.startsWith("/*") && content.endsWith("*/"))
+    //     return MessageType.CLAIM_GUARD
+    //   return null
+    // }
+    //
+    // function getContent(content: string): string {
+    //   if (content.startsWith("/*") && content.endsWith("*/"))
+    //     return content.slice(2, -2)
+    //   return content
+    // }
+
+    this.chatService.getMessages(this.user).subscribe(data => {
+        this.messages = data.map(d => ({...d, createdAt: printTimestamp(d.createdAt)}))
+        console.log(this.messages)
+      },
       err => console.error(err)
     )
   }
@@ -78,5 +94,14 @@ export class ChatComponent implements OnInit, AfterViewInit {
       err => console.error(err)
     )
     this.messageContent = ""
+  }
+
+  protected readonly MessageType = MessageType;
+
+  acceptGuardClaim(message: IMessageRes | null, accept: boolean) {
+    message?.id && this.chatService.acceptGuardRequest(accept, message?.id).subscribe(
+      response => message.accept = accept,
+      error => console.error('Erreur de sendGuardRequest:', error)
+    );
   }
 }

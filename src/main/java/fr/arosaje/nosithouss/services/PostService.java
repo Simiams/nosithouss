@@ -10,6 +10,7 @@ import fr.arosaje.nosithouss.models.*;
 import fr.arosaje.nosithouss.repositories.PostRepository;
 import fr.arosaje.nosithouss.repositories.PostRepositoryPersistence;
 import fr.arosaje.nosithouss.utils.FileManager;
+import fr.arosaje.nosithouss.utils.PostUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import static fr.arosaje.nosithouss.utils.PostUtils.*;
+import static fr.arosaje.nosithouss.utils.Utils.addTimestamp;
 import static fr.arosaje.nosithouss.utils.Utils.now;
 
 @Service
@@ -50,7 +52,7 @@ public class PostService {
 
     public List<Post> getPosts(SeePostsReq seePostsReq) {
         Pageable pageable = PageRequest.of(0, seePostsReq.getNumber());
-        return postRepository.findByCreatedAtBeforeOrCreatedAtEqualsOrderByCreatedAtDesc(seePostsReq.getCreatedAt(), seePostsReq.getCreatedAt(), pageable).getContent();
+        return postRepository.findByCreatedAtBeforeOrderByCreatedAtDesc(seePostsReq.getCreatedAt(), pageable).getContent();
     }
 
     public Post updatePost(PostReq postReq, Long id) {
@@ -92,5 +94,13 @@ public class PostService {
             newPost.setGuardClaimer(authService.getUser(proposalGuardReq.getUserName()));
             postRepository.save(newPost);
         }
+    }
+
+    public List<PostRes> getOwnPosts() {
+        return postRepository.findByAuthor(authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName())).stream().map(PostUtils::createPostResponseByPost).toList();
+    }
+
+    public List<PostRes> getGuardingPosts() {
+        return postRepositoryPersistence.findByGuardClaimer(authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName())).stream().map(PostUtils::createPostResponseByPost).toList();
     }
 }

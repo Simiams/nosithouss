@@ -2,6 +2,8 @@
 
 ## Livrable
 
+Vous trouverez de la documentation sur le pdf LIVRABLE.pdf
+
 ---
 
 ### Swagger
