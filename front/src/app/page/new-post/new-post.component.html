@@ -47,6 +47,24 @@
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
+      <mat-form-field *ngIf="selectedChip === choiceNewPost.GUARDINGPOST" class="example-full-width">
+        <mat-label>Number</mat-label>
+        <input type="text"
+               (input)="autocompleteAddressChange()"
+               placeholder="Pick one"
+               aria-label="Number"
+               matInput
+               formControlName="address"
+               [matAutocomplete]="auto">
+
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+          <mat-option *ngFor="let option of newOptions" [value]="option.display_name">{{ option.display_name }}</mat-option>
+        </mat-autocomplete>
+        <div *ngIf="createPostForm.value.address?.lon && createPostForm.value.address?.lat">
+          <p>Longitude: {{ createPostForm.value.address.lon }}</p>
+          <p>Latitude: {{ createPostForm.value.address.lat }}</p>
+        </div>
+      </mat-form-field>
       <button type="submit" class="custom-file-input new-post-button" [disabled]="createPostForm.invalid">Create Post</button>
     </form>
   </div>

@@ -10,7 +10,8 @@ export interface IPostGet {
   lastVersion?: IPostGet,
   nbLike: number,
   nbDislike: number,
-  coordinates: ICoordinate,
+  coordinateX?: number,
+  coordinateY?: number,
   guardingAt?: number,
   endGuardingAt?: number,
   img: string
@@ -26,17 +27,18 @@ export interface IPostRes {
   lastVersion?: IPostGet,
   nbLike: number,
   nbDislike: number,
-  coordinates: ICoordinate,
+  coordinateX?: number,
+  coordinateY?: number,
   guardingAt?: number,
   endGuardingAt?: number,
   img: string,
   liked?: boolean,
 }
 
-interface ICoordinate {
-  c: number,
-  y: number
-}
+// interface ICoordinate {
+//   c: number,
+//   y: number
+// }
 
 export interface IPostReq {
   number: number,
@@ -76,4 +78,10 @@ export interface ICreateGuardingReq {
   endGuardingAt: string,
   coordinateX: number,
   coordinateY: number
+}
+
+export interface IOsmGet{
+  display_name: string,
+  lat: number,
+  lon: number,
 }

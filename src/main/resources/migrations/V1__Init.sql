@@ -62,8 +62,8 @@ create table public.posts
     title                 varchar(255) not null,
     additional_properties varchar(255),
     images                varchar(255)[],
-    coordinatex           integer,
-    coordinatey           integer,
+    coordinatex           real,
+    coordinatey           real,
     end_guarding_at       timestamp(6),
     guarding_at           timestamp(6),
     author_id             varchar(255)
@@ -110,7 +110,10 @@ create table public.messages
             references public.users,
     sender_id   varchar(255)
         constraint fk4ui4nnwntodh6wjvck53dbk9m
-            references public.users
+            references public.users,
+    post_id     bigint
+        constraint fk86vxjyfsjfddqi277p88mjt3f
+            references public.posts
 );
 
 alter table public.messages

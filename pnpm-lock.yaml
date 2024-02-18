@@ -1,0 +1,72 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+dependencies:
+  '@asymmetrik/ngx-leaflet':
+    specifier: ^17.0.0
+    version: 17.0.0(@angular/common@17.2.1)(@angular/core@17.2.1)(leaflet@1.9.4)
+  leaflet:
+    specifier: ^1.9.4
+    version: 1.9.4
+
+packages:
+
+  /@angular/common@17.2.1(@angular/core@17.2.1)(rxjs@7.8.1):
+    resolution: {integrity: sha512-ZkQwvjJhnqKulJn3kwbnodYvQf8g8hy2FUMB2MRLXKgwLPv9iqF/KRgSwcNIZnq8hyvIr6FmAntMdyCOonykDQ==}
+    engines: {node: ^18.13.0 || >=20.9.0}
+    peerDependencies:
+      '@angular/core': 17.2.1
+      rxjs: ^6.5.3 || ^7.4.0
+    dependencies:
+      '@angular/core': 17.2.1(rxjs@7.8.1)(zone.js@0.14.4)
+      rxjs: 7.8.1
+      tslib: 2.6.2
+    dev: false
+
+  /@angular/core@17.2.1(rxjs@7.8.1)(zone.js@0.14.4):
+    resolution: {integrity: sha512-gfWeskXA8RA0D3WOPBV5wT8RpqtqFhB8OCR8diGfLojqbMrmZXEvxALBHKAgfarWcR1rnRgmjCQKejWLWCLmmg==}
+    engines: {node: ^18.13.0 || >=20.9.0}
+    peerDependencies:
+      rxjs: ^6.5.3 || ^7.4.0
+      zone.js: ~0.14.0
+    dependencies:
+      rxjs: 7.8.1
+      tslib: 2.6.2
+      zone.js: 0.14.4
+    dev: false
+
+  /@asymmetrik/ngx-leaflet@17.0.0(@angular/common@17.2.1)(@angular/core@17.2.1)(leaflet@1.9.4):
+    resolution: {integrity: sha512-Tg09780yg1pPRR7k9Z0B0Fb3Mr4SMXYfi+hii8S0McHiqiUqkB+ZhhB4hJq83v4cuvcYgZjtkz+p06lCJY/z+w==}
+    peerDependencies:
+      '@angular/common': '17'
+      '@angular/core': '17'
+      leaflet: '1'
+    dependencies:
+      '@angular/common': 17.2.1(@angular/core@17.2.1)(rxjs@7.8.1)
+      '@angular/core': 17.2.1(rxjs@7.8.1)(zone.js@0.14.4)
+      leaflet: 1.9.4
+      tslib: 2.6.2
+    dev: false
+
+  /leaflet@1.9.4:
+    resolution: {integrity: sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==}
+    dev: false
+
+  /rxjs@7.8.1:
+    resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
+    dependencies:
+      tslib: 2.6.2
+    dev: false
+
+  /tslib@2.6.2:
+    resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
+    dev: false
+
+  /zone.js@0.14.4:
+    resolution: {integrity: sha512-NtTUvIlNELez7Q1DzKVIFZBzNb646boQMgpATo9z3Ftuu/gWvzxCW7jdjcUDoRGxRikrhVHB/zLXh1hxeJawvw==}
+    dependencies:
+      tslib: 2.6.2
+    dev: false

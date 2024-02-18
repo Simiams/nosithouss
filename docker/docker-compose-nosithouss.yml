@@ -4,7 +4,7 @@ services:
   nosithouss:
     image: openjdk:21
     container_name: nosithouss
-    command: [ "java", "-jar", "/app/nosithouss-3.jar" ]
+    command: [ "java", "-jar", "/app/nosithouss-4.jar" ]
     volumes:
       - ./data-nosithouss:/app
     ports:

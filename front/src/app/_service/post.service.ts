@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {IMessageGet, IMessageReq} from "../_interfaces/chat/message";
 import {catchError, Observable} from "rxjs";
 import {
   ICreateCatalogReq,
@@ -43,6 +42,16 @@ export class PostService {
   getAutocomplete(currentValue: string, type: string) {
     const url = `${this.url}/${type.toUpperCase()}/autocomplete/${currentValue}`;
     return this.http.get<IPostTitleGet[]>(url)
+      .pipe(
+        catchError((error) => {
+          console.error('Erreur lors de la requête de get autocomplete post', error);
+          throw error;
+        })
+      );
+  }
+  getPostByType(type: string) {
+    const url = `${this.url}/${type.toUpperCase()}`;
+    return this.http.get<IPostGet[]>(url)
       .pipe(
         catchError((error) => {
           console.error('Erreur lors de la requête de get autocomplete post', error);

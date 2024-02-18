@@ -90,4 +90,11 @@ public class PostController {
     public List<PostRes> getGuardingPosts() {
         return postService.getGuardingPosts();
     }
+
+    @GetMapping("/{postType}")
+    @Operation(summary = "Get all post by type")
+    public List<PostRes> getAllPostByType(@PathVariable EPostType postType){
+        var test = postService.getAllPostByType(postType);
+        return test;
+    }
 }

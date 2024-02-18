@@ -103,4 +103,9 @@ public class PostService {
     public List<PostRes> getGuardingPosts() {
         return postRepositoryPersistence.findByGuardClaimer(authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName())).stream().map(PostUtils::createPostResponseByPost).toList();
     }
+
+    public List<PostRes> getAllPostByType(EPostType postType) {
+        return postRepositoryPersistence.findByType(getPostTypeByEPostType(postType))
+                .stream().map(PostUtils::createPostResponseByPost).toList();
+    }
 }
