@@ -9,6 +9,7 @@ import {ContactComponent} from './page/contact/contact.component';
 import {NewPostComponent} from './page/new-post/new-post.component';
 import {SignUpComponent} from './page/sign-up/sign-up.component';
 import {AuthGuard} from "./_helpers/auth.guard";
+import {MapComponent} from "./page/map/map.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path: 'signup', component: SignUpComponent},
   {path: 'add', component: NewPostComponent, canActivate: [AuthGuard]},
   {path: 'contact', component: ContactComponent, canActivate: [AuthGuard]},
-  {path: 'search', component: SearchComponent, canActivate: [AuthGuard]}
+  {path: 'search', component: SearchComponent, canActivate: [AuthGuard]},
+  {path: 'map', component: MapComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

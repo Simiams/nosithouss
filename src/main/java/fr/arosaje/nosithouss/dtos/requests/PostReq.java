@@ -20,8 +20,8 @@ public class PostReq {
     private int nbLike;
     private int nbDislike;
     private List<String> img;
-    private int coordinateX;
-    private int coordinateY;
+    private float coordinateX;
+    private float coordinateY;
     private Timestamp guardingAt;
     private Timestamp endGuardingAt;
 

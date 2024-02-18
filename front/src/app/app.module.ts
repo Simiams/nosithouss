@@ -32,6 +32,7 @@ import {NewPostComponent} from './page/new-post/new-post.component';
 import {SignUpComponent} from './page/sign-up/sign-up.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MapComponent} from "./page/map/map.component";
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     ContactComponent,
     SearchComponent,
     SignUpComponent,
+    MapComponent
   ],
   imports: [
     MatGridListModule,
@@ -70,7 +72,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     NgOptimizedImage,
     MatSnackBarModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
   ],
   providers: [
     TokenInterceptorProvider,

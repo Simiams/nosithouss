@@ -20,9 +20,9 @@ import java.util.List;
 @SuperBuilder
 public class GuardingPost extends Post {
     @Column(name = "coordinatex")
-    private int coordinateX;
+    private float coordinateX;
     @Column(name = "coordinatey")
-    private int coordinateY;
+    private float coordinateY;
     @Column(name = "guarding_at")
     private Timestamp guardingAt;
     @Column(name = "end_guarding_at")
