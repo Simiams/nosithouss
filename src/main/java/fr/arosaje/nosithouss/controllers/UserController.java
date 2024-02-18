@@ -23,7 +23,7 @@ public class UserController {
 
     @GetMapping("/{username}")
     @Operation(summary = "Get profile to a given user")
-    public User getUserByUsername(@PathVariable String username) {
+    public UserRes getUserByUsername(@PathVariable String username) {
         return userService.findByUsername(username);
     }
     @GetMapping("")

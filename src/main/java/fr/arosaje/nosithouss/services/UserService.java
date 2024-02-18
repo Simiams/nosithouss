@@ -48,8 +48,18 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    public User findByUsername(String username) {
-        return userRepository.findByUserName(username).orElse(null);
+    public UserRes findByUsername(String username) {
+        Optional<User> user = userRepository.findByUserName(username);
+        if (user.isPresent()) {
+            User currentUser = user.get();
+            return UserRes.builder()
+                    .userName(currentUser.getUsername())
+                    .roles(currentUser.getRoles())
+                    .pdp(currentUser.getPdp())
+                    .lastName(currentUser.getLastName())
+                    .build();
+        }
+        throw new UsernameNotFoundException("User not found");
     }
 
     @Override

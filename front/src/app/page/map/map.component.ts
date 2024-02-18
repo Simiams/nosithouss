@@ -67,7 +67,7 @@ export class MapComponent implements AfterViewInit {
         '<img matListItemAvatar class="popup-contact-icon" src="favicon.ico" alt="..." style="width: 35px; height: 35px">' +
         '<div class="popup-contact-username" style="margin: auto 0 auto 10px">'+ p.authorUserName + ' veut faire garder sa plante</div>' +
         '</div>' +
-        '<a class="popup-content" style="display: flex" href="https://localhost/profile/' + p.authorUserName +'">' +
+        '<a class="popup-content" style="display: flex" href="profile/' + p.authorUserName +'">' +
         '<img src="http://localhost:8080/api/assets/'+ p.img +'" alt="" style="width: 250px; margin: 0 auto; border-radius: 10px">' +
         '</a>'
       L.marker([p.coordinateY!, p.coordinateX!]).addTo(this.map!).bindPopup(htmlPopup);

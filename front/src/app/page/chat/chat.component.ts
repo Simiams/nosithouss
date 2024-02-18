@@ -8,7 +8,6 @@ import {ChatService} from "src/app/_service/chat.service";
 import {IMessageRes} from "src/app/_interfaces/chat/message";
 import {printTimestamp} from "src/app/_utils/utils";
 import {MessageType} from "../../_interfaces/ennums";
-import {logMessages} from "@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild";
 
 @Component({
   selector: 'app-chat',
