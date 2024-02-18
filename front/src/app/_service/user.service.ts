@@ -36,8 +36,30 @@ export class UserService {
       );
   }
 
+  getProfile(userName: string): Observable<IProfileGet> {
+    const url = `${this.url}/${userName}`;
+    return this.http.get<IProfileGet>(url)
+      .pipe(
+        catchError((error) => {
+          console.error('Erreur lors de la requête de get current profile', error);
+          throw error;
+        })
+      );
+  }
+
   getOwnPosts() {
     const url = `${this.urlPost}/profile`;
+    return this.http.get<IPostRes[]>(url)
+      .pipe(
+        catchError((error) => {
+          console.error('Erreur lors de la requête de get post profile', error);
+          throw error;
+        })
+      );
+  }
+
+  getPostByUsername(userName: string) {
+    const url = `${this.urlPost}/profile/${userName}`;
     return this.http.get<IPostRes[]>(url)
       .pipe(
         catchError((error) => {

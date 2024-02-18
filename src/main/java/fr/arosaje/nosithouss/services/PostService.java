@@ -108,4 +108,12 @@ public class PostService {
         return postRepositoryPersistence.findByType(getPostTypeByEPostType(postType))
                 .stream().map(PostUtils::createPostResponseByPost).toList();
     }
+
+    public List<PostRes> getPostsByProfile(String userName) {
+        return postRepository.findByAuthor(authService.getUser(userName)).stream().map(PostUtils::createPostResponseByPost).toList();
+    }
+
+    public List<PostRes> getGuardinByUsername(String userName) {
+        return postRepositoryPersistence.findByGuardClaimer(authService.getUser(userName)).stream().map(PostUtils::createPostResponseByPost).toList();
+    }
 }

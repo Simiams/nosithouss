@@ -85,6 +85,18 @@ public class PostController {
         return postService.getOwnPosts();
     }
 
+    @GetMapping("/profile/{userName}")
+    @Operation(summary = "Get all post by given user")
+    public List<PostRes> getPostByProfile(@PathVariable String userName) {
+        return postService.getPostsByProfile(userName);
+    }
+
+    @GetMapping("/guarding/{userName}")
+    @Operation(summary = "Get all post that user guard by given user")
+    public List<PostRes> getGuardinByUsername(@PathVariable String userName) {
+        return postService.getGuardinByUsername(userName);
+    }
+
     @GetMapping("/guarding")
     @Operation(summary = "Get all post that user guard by token user")
     public List<PostRes> getGuardingPosts() {
@@ -93,7 +105,7 @@ public class PostController {
 
     @GetMapping("/{postType}")
     @Operation(summary = "Get all post by type")
-    public List<PostRes> getAllPostByType(@PathVariable EPostType postType){
+    public List<PostRes> getAllPostByType(@PathVariable EPostType postType) {
         var test = postService.getAllPostByType(postType);
         return test;
     }

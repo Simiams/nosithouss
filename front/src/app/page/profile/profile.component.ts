@@ -26,8 +26,13 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCurrentProfile();
-    this.getOwnPosts();
+    if (this.route.snapshot.params['username']) {
+      this.getProfile()
+      this.getPostByUsername();
+    } else {
+      this.getCurrentProfile();
+      this.getOwnPosts()
+    }
     this.getPostGuarding();
   }
 
@@ -39,17 +44,12 @@ export class ProfileComponent implements OnInit {
     )
   }
 
-
-  // onFileSelected(event: any) {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(file);
-  //     reader.onload = () => {
-  //       this.currentImage = reader.result;
-  //     };
-  //   }
-  // }
+  getProfile() {
+    this.userService.getProfile(this.route.snapshot.params['username']).subscribe(
+      data => this.currentProfile = data,
+      err => console.error(err)
+    )
+  }
 
   toggleLike(post: IPostRes) {
     const index = this.favorites.findIndex(p => p.id === post.id);
@@ -66,12 +66,21 @@ export class ProfileComponent implements OnInit {
     )
   }
 
+
+  private getPostByUsername() {
+    console.log(this.route.snapshot.params['username'])
+    this.userService.getPostByUsername(this.route.snapshot.params['username']).subscribe(
+      data => this.posts = data,
+      err => console.error(err)
+    )
+  }
+
   protected readonly printTimestamp = printTimestamp;
 
   private getPostGuarding() {
-      this.userService.getPostsGuarding().subscribe(
-        data => this.postsGuarding = data,
-        err => console.error(err)
-      )
+    this.userService.getPostsGuarding().subscribe(
+      data => this.postsGuarding = data,
+      err => console.error(err)
+    )
   }
 }
