@@ -2,7 +2,7 @@
 
 ## Livrable
 
-Vous trouverez de la documentation sur le pdf LIVRABLE.pdf
+Vous trouverez tout les livrable (Benchmark, maquette, documentation) sur les document prefixés de "LIVRABLE-"
 
 ---
 
