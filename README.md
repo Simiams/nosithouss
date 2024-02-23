@@ -4,6 +4,8 @@
 
 Vous trouverez tout les livrable (Benchmark, maquette, documentation) sur les document prefixés de "LIVRABLE-"
 
+Un second readme se trouve dans le dossier docker
+
 ---
 
 ### Swagger
