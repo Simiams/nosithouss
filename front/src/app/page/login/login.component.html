@@ -1,4 +1,4 @@
-<h3 mat-card-title>Login</h3>
+<h3 mat-card-title>Connexion</h3>
 <br>
 <div class="form_container">
   <form
@@ -9,20 +9,20 @@
     <mat-form-field class="group">
       <mat-label>Email</mat-label>
       <input matInput type="text" name="email" id="email" [(ngModel)]="form.userName" #email="ngModel" required>
-      <mat-error *ngIf="email.errors && f.submitted">Email is required !</mat-error>
+      <mat-error *ngIf="email.errors && f.submitted">Email requis !</mat-error>
     </mat-form-field>
 
     <mat-form-field class="group">
-      <mat-label>Password</mat-label>
+      <mat-label>Mot de passe</mat-label>
       <input matInput type="password" name="password" id="password" [(ngModel)]="form.password" #password="ngModel">
     </mat-form-field>
     <div class="button">
-      <button mat-raised-button color="primary" type="submit">Login</button>
+      <button mat-raised-button color="primary" type="submit">Se Connecter</button>
     </div>
   </form>
 </div>
 <div class="signup">
-  <p>I don't have account. <a href="/signup">Sign Up</a></p>
+  <p>Je n'ai pas de compte. <a href="/signup">S'inscrire</a></p>
 </div>
 
 

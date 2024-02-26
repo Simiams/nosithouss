@@ -35,20 +35,20 @@
       <label  *ngIf="selectedChip!==choiceNewPost.POST" for="fileInput" class="custom-file-input new-post-button">Choisir un fichier</label>
       <input type="file" id="fileInput" style="display: none;" formControlName="img">
       <mat-form-field *ngIf="selectedChip===choiceNewPost.GUARDINGPOST">
-        <mat-label>Debut du guardennage</mat-label>
+        <mat-label>Début du guardiennage</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="guardingAt">
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field *ngIf="selectedChip===choiceNewPost.GUARDINGPOST">
-        <mat-label>Fin du guardennage</mat-label>
+        <mat-label>Fin du guardiennage</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="endGuardingAt">
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <mat-form-field *ngIf="selectedChip === choiceNewPost.GUARDINGPOST" class="example-full-width">
-        <mat-label>Number</mat-label>
+        <mat-label>Adresse</mat-label>
         <input type="text"
                (input)="autocompleteAddressChange()"
                placeholder="Pick one"
@@ -65,7 +65,7 @@
           <p>Latitude: {{ createPostForm.value.address.lat }}</p>
         </div>
       </mat-form-field>
-      <button type="submit" class="custom-file-input new-post-button" [disabled]="createPostForm.invalid">Create Post</button>
+      <button type="submit" class="custom-file-input new-post-button" [disabled]="createPostForm.invalid">Créer un Post</button>
     </form>
   </div>
 </div>
