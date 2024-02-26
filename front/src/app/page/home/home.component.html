@@ -42,13 +42,13 @@
       <mat-card-actions>
         <div class="actions">
           <div class="card-action">
-            <mat-button-toggle [ngClass]="{'liked': post.liked}" (click)="likePost(post)">LIKE</mat-button-toggle>
-            <button mat-button>SHARE</button>
+            <mat-button-toggle [ngClass]="{'liked': post.liked}" (click)="likePost(post)">J'aime</mat-button-toggle>
+            <button mat-button>Partager</button>
           </div>
-          <button *ngIf="post.guardingAt" mat-button class="action-guard" (click)="redirectMessage(post.authorUserName, post.id)">Disponnible?</button>
+          <button *ngIf="post.guardingAt" mat-button class="action-guard" (click)="redirectMessage(post.authorUserName, post.id)">Disponible ?</button>
         </div>
       </mat-card-actions>
     </div>
   </mat-card>
-  <button class="button-get-more" (click)="getMore()">Get More</button>
+  <button class="button-get-more" (click)="getMore()">Voir plus</button>
 </div>

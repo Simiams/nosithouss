@@ -27,7 +27,7 @@
         </div>
         <div class="message-action"
              *ngIf="message.senderIdentifier === user && message.type === 'GUARD_CLAIM'  && message.accept === null">
-          {{ message.senderIdentifier }} vous a fais un demande de gardiennage
+          {{ message.senderIdentifier }} vous a fait une demande de gardiennage
           <div class="message-action-buttons">
             <button class="message-action-button accept" (click)="acceptGuardClaim(message, true)">Accepter</button>
             <button class="message-action-button refuse" (click)="acceptGuardClaim(message, false)">Refuser</button>
@@ -35,11 +35,11 @@
         </div>
         <div class="message-comment"
              *ngIf="message.senderIdentifier === user && message.type === 'GUARD_CLAIM'  && message.accept === true">
-          vous avez acceptez la demande de garidenage de {{ message.senderIdentifier }}
+          vous avez accepté la demande de gardiennage de {{ message.senderIdentifier }}
         </div>
         <div class="message-comment"
              *ngIf="message.senderIdentifier === user && message.type === 'GUARD_CLAIM'  && message.accept === false">
-          vous avez refuser la demande de garidenage de {{ message.senderIdentifier }}
+          vous avez refusé la demande de gardiennage de {{ message.senderIdentifier }}
         </div>
       </div>
 
@@ -50,7 +50,7 @@
   </div>
 
   <div class="message-input">
-    <input type="text" id="message-input" [(ngModel)]="messageContent" placeholder="Dites salam">
+    <input type="text" id="message-input" [(ngModel)]="messageContent" placeholder="Dites Bonjour">
     <button class="message-submit" (click)="sendMessage()">
       <mat-icon>send</mat-icon>
     </button>
