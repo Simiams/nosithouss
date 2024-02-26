@@ -11,6 +11,7 @@ import fr.arosaje.nosithouss.repositories.PostRepository;
 import fr.arosaje.nosithouss.repositories.PostRepositoryPersistence;
 import fr.arosaje.nosithouss.utils.FileManager;
 import fr.arosaje.nosithouss.utils.PostUtils;
+import fr.arosaje.nosithouss.utils.Utils;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +25,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 import static fr.arosaje.nosithouss.utils.PostUtils.*;
-import static fr.arosaje.nosithouss.utils.Utils.addTimestamp;
 import static fr.arosaje.nosithouss.utils.Utils.now;
 
 @Service
@@ -43,7 +43,7 @@ public class PostService {
     }
 
     public PostRes createPost(PostReq postReq) {
-        User author = authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        User author = authService.getUser(Utils.getCurrentUserName());
         Post post = createPostByPostReq(postReq);
         post.setAuthor(author);
         post.setCreatedAt(now());
@@ -56,8 +56,7 @@ public class PostService {
     }
 
     public Post updatePost(PostReq postReq, Long id) {
-        //todo in postReq get Author/creatxedAt
-        User author = authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        User author = authService.getUser(Utils.getCurrentUserName());
         Post newPost = createPostByPostReq(postReq);
         newPost.setAuthor(author);
         newPost.setCreatedAt(now());
@@ -97,11 +96,11 @@ public class PostService {
     }
 
     public List<PostRes> getOwnPosts() {
-        return postRepository.findByAuthor(authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName())).stream().map(PostUtils::createPostResponseByPost).toList();
+        return postRepository.findByAuthor(authService.getUser(Utils.getCurrentUserName())).stream().map(PostUtils::createPostResponseByPost).toList();
     }
 
     public List<PostRes> getGuardingPosts() {
-        return postRepositoryPersistence.findByGuardClaimer(authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName())).stream().map(PostUtils::createPostResponseByPost).toList();
+        return postRepositoryPersistence.findByGuardClaimer(authService.getUser(Utils.getCurrentUserName())).stream().map(PostUtils::createPostResponseByPost).toList();
     }
 
     public List<PostRes> getAllPostByType(EPostType postType) {

@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../../_service/user.service";
-import {choiceSearch, EPostType, EPostTypeStr} from "../../_interfaces/ennums";
+import {choiceSearch, EPostTypeStr} from "../../_interfaces/ennums";
 import {PostService} from "../../_service/post.service";
+import {environment} from "../../../environments/environments";
 
 interface autocompleteType {
   value: string,
@@ -15,7 +16,7 @@ interface autocompleteType {
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent {
-  assetsBaseUrl = "http://localhost:8080/api/assets/" //todo global
+  assetsBaseUrl = environment.assetsBaseUrl;
   protected readonly choiceSearch = choiceSearch;
   protected readonly Object = Object;
   inputValue: string = "";

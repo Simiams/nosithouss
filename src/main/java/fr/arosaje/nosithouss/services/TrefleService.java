@@ -8,6 +8,7 @@ import fr.arosaje.nosithouss.models.Flag;
 import fr.arosaje.nosithouss.repositories.FlagRepository;
 import fr.arosaje.nosithouss.repositories.PostRepository;
 import fr.arosaje.nosithouss.utils.FileManager;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,9 @@ public class TrefleService {
     private int currentNumber = 0;
     private String lastCommonName;
 
+    @Value("${etl.first-plant-page}")
+    private String routeFirstPlantPage;
+
     public TrefleService(TrefleClient trefleClient, PostRepository postRepository, FlagRepository flagRepository, FileManager fileManager) {
         this.trefleClient = trefleClient;
         this.postRepository = postRepository;
@@ -33,7 +37,7 @@ public class TrefleService {
 
     public void savePlants(int limit) {
         Flag flagPage = flagRepository.findByKey(EFlag.LAST_PAGE.getKey());
-        String nextPage = flagPage == null ? "/api/v1/plants?page=1" : flagPage.getValue(); //todo aplication.yml
+        String nextPage = flagPage == null ? routeFirstPlantPage : flagPage.getValue();
         while (!nextPage.isEmpty() && (limit == 0 || limit > currentNumber)) {
             Pair<List<TrefleReq>, String> res = trefleClient.getPlants(nextPage);
             res.getFirst().stream()

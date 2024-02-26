@@ -10,7 +10,7 @@ import fr.arosaje.nosithouss.models.MessageRequestGuard;
 import fr.arosaje.nosithouss.models.User;
 import fr.arosaje.nosithouss.repositories.MessageGuardRepository;
 import fr.arosaje.nosithouss.repositories.MessageRepository;
-import org.springframework.security.core.context.SecurityContextHolder;
+import fr.arosaje.nosithouss.utils.Utils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class MessageService {
     public Message createMessage(MessageReq messageReq, String userIdentifier) {
         Message message = messageReq.toMessage();
         message.setCreatedAt(now());
-        message.setSender(authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName())); //todo global method
+        message.setSender(authService.getUser(Utils.getCurrentUserName()));
         message.setReceiver(authService.getUser(userIdentifier));
         contactService.safeSaveContact(Contact.builder()
                                                .user(message.getSender())
@@ -50,7 +50,7 @@ public class MessageService {
     }
 
     public List<Message> getMessagesByReceiver(String userIdentifier) {
-        User currentUser = authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        User currentUser = authService.getUser(Utils.getCurrentUserName());
         return Stream.concat(
                         messageRepository.findAllByReceiverAndSender(currentUser, authService.getUser(userIdentifier)).stream(),
                         messageRepository.findAllByReceiverAndSender(authService.getUser(userIdentifier), currentUser).stream())
@@ -63,7 +63,7 @@ public class MessageService {
                                             .createdAt(now())
                                             .content(messageGuardReq.getContent())
                                             .receiver(authService.getUser(userIdentifier))
-                                            .sender(authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName()))
+                                            .sender(authService.getUser(Utils.getCurrentUserName()))
                                             .build());
     }
 

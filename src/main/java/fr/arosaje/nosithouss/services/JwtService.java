@@ -4,9 +4,9 @@ import fr.arosaje.nosithouss.models.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -17,10 +17,13 @@ import java.util.Map;
 import java.util.function.Function;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Service
 public class JwtService {
 
-    private final String ENCRIPTION_KEY = "4735c48302328b72972935d4ed9c3b777ccf98bf094a40926e6134a104f9b7a3"; //todo properties file / .env most safe...
+    @Value("${spring.security.encryption.key}")
+    private String ENCRYPTION_KEY;
+
     private UserService userService;
 
     public Map<String, String> generate(String username) {
@@ -64,7 +67,7 @@ public class JwtService {
     }
 
     private Key getKey() {
-        return new SecretKeySpec(Base64.getDecoder().decode(ENCRIPTION_KEY),
+        return new SecretKeySpec(Base64.getDecoder().decode(ENCRYPTION_KEY),
                           SignatureAlgorithm.HS256.getJcaName());
     }
 }

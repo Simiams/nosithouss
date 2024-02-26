@@ -4,14 +4,10 @@ import fr.arosaje.nosithouss.dtos.responses.ContactRes;
 import fr.arosaje.nosithouss.models.Contact;
 import fr.arosaje.nosithouss.models.User;
 import fr.arosaje.nosithouss.repositories.ContactRepository;
-import org.springframework.security.core.context.SecurityContextHolder;
+import fr.arosaje.nosithouss.utils.Utils;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class ContactService {
@@ -32,7 +28,7 @@ public class ContactService {
     }
 
     public List<ContactRes> getAllContact() {
-        User user = authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName()); //todo global method
+        User user = authService.getUser(Utils.getCurrentUserName());
         return contactRepository.findAllByUserOrContactUser(user, user).stream().map(contact -> ContactRes.builder()
                 .userName((contact.getContactUser().equals(user) ? contact.getUser() : contact.getContactUser()).getUsername())
                 .lastChat(contact.getLastChat())

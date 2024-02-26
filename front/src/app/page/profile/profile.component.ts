@@ -5,6 +5,7 @@ import {defaultIProfileGet, IProfileGet} from 'src/app/_interfaces/user';
 import {FavoriteService} from 'src/app/_service/favorite.service';
 import {UserService} from 'src/app/_service/user.service';
 import {printTimestamp} from "../../_utils/utils";
+import {environment} from "../../../environments/environments";
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,7 @@ import {printTimestamp} from "../../_utils/utils";
 })
 
 export class ProfileComponent implements OnInit {
-  assetsBaseUrl = "http://localhost:8080/api/assets/" //todo global
+  assetsBaseUrl = environment.assetsBaseUrl;
   favorites: IPostRes[] = [];
   posts: IPostRes[] = [];
   postsGuarding: IPostRes[] = [];

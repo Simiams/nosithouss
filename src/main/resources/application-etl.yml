@@ -2,3 +2,6 @@ spring:
   main:
     web-application-type: none
     etl: true
+
+etl:
+  limit: 0

@@ -6,6 +6,7 @@ import {now, printTimestamp} from 'src/app/_utils/utils';
 import {IPostReq, IPostRes} from 'src/app/_interfaces/post';
 import {EPostType} from "../../_interfaces/ennums";
 import {ChatService} from "../../_service/chat.service";
+import {environment} from "../../../environments/environments";
 
 type Post = {
   id: string;
@@ -23,7 +24,7 @@ type Post = {
 
 export class HomeComponent implements OnInit {
   posts: IPostRes[] = [];
-  assetsBaseUrl = "http://localhost:8080/api/assets/" //todo global
+  assetsBaseUrl = environment.assetsBaseUrl;
   currentPost: IPostReq = {
     number: 25,
     createdAt: now(),

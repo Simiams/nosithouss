@@ -7,15 +7,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
 @Component
 public class FileManager {
-//    private static String uploadPath = "uploads"; //todo properties file
+//    private static String uploadPath = "uploads";
     private final ImageRepository imageRepository;
 
     public FileManager(ImageRepository imageRepository) {this.imageRepository = imageRepository;}

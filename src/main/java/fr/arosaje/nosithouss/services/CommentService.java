@@ -4,10 +4,9 @@ import fr.arosaje.nosithouss.dtos.requests.CommentReq;
 import fr.arosaje.nosithouss.models.Comment;
 import fr.arosaje.nosithouss.models.Post;
 import fr.arosaje.nosithouss.repositories.CommentRepository;
-import org.springframework.security.core.context.SecurityContextHolder;
+import fr.arosaje.nosithouss.utils.Utils;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 import static fr.arosaje.nosithouss.utils.Utils.now;
@@ -27,7 +26,7 @@ public class CommentService {
 
     public Comment createComment(CommentReq commentReq) {
         Comment comment = commentReq.toComment();
-        comment.setAuthor(authService.getUser(SecurityContextHolder.getContext().getAuthentication().getName())); //todo global method
+        comment.setAuthor(authService.getUser(Utils.getCurrentUserName()));
         comment.setPost(postService.getPost(commentReq.getPostId()));
         comment.setCreatedAt(now());
         return commentRepository.save(comment);

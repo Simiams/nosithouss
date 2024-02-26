@@ -21,9 +21,14 @@ spring:
     user:
       name: ${SPRING_SECURITY_USER}
       password: ${SPRING_SECURITY_PWD}
+    encryption:
+      key: ${SPRING_SECURITY_ENCRYPTION_KEY}
 
 debug: false
 
 logging:
   level:
     web: DEBUG
+
+etl:
+  first-plant-page: "/api/v1/plants?page=1"

@@ -18,7 +18,8 @@ public class CommandLineApp implements CommandLineRunner {
 
     @Value("${spring.main.etl}")
     private Boolean ETL;
-    private int defaultEtlLimit = 0; //todo env
+    @Value("${etl.limit:0}")
+    private int defaultEtlLimit;
     public CommandLineApp(TrefleService trefleService) {this.trefleService = trefleService;}
 
     @Override
